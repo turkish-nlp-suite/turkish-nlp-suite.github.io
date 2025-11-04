@@ -1,0 +1,11 @@
+current directory: /Users/daltinok/Work/turkish-work/turkish-nlp-suite.github.io/vendor/bundle/ruby/2.6.0/gems/wdm-0.2.0/ext/wdm
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20251104-63118-5yms4y.rb extconf.rb
+
+current directory: /Users/daltinok/Work/turkish-work/turkish-nlp-suite.github.io/vendor/bundle/ruby/2.6.0/gems/wdm-0.2.0/ext/wdm
+make "DESTDIR=" clean
+
+current directory: /Users/daltinok/Work/turkish-work/turkish-nlp-suite.github.io/vendor/bundle/ruby/2.6.0/gems/wdm-0.2.0/ext/wdm
+make "DESTDIR="
+
+current directory: /Users/daltinok/Work/turkish-work/turkish-nlp-suite.github.io/vendor/bundle/ruby/2.6.0/gems/wdm-0.2.0/ext/wdm
+make "DESTDIR=" install

@@ -2,7 +2,7 @@
 #-------------------------------
 # General Site Settings
 
-title: Kross
+title: Turkish NLP Suite
 logo:
 author: themefisher
 description: this is meta description
@@ -14,7 +14,7 @@ copyright: Copyright &copy; 2020 Designed by [Themefisher](https://themefisher.c
 menu:
   - { name: About, link: "/about" }
   - { name: Blog, link: "/blog" }
-  - { name: Portfolio, link: "/portfolio" }
+  - { name: Publications, link: "/portfolio" }
   - { name: Contact, link: "/contact" }
 
 #-------------------------------
@@ -27,22 +27,6 @@ menu:
 
 google-analytics: # UA-XXXXXX-X
 
-#-------------------------------
-# Comment Section (Disqus)
-
-disqus-identifier: # Add your shortname for Disqus Comment. For example mr-brown
-
-#-------------------------------
-# Hero Section
-
-hero:
-  hero-title: Hi! I’m <br> Christoher <br> UX designer
-
-social:
-  - { icon: "ti-facebook", link: "#" }
-  - { icon: "ti-instagram", link: "#" }
-  - { icon: "ti-dribbble", link: "#" }
-  - { icon: "ti-twitter", link: "#" }
 
 #-------------------------------
 # About (Section and Page)
