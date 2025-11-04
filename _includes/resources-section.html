@@ -1,5 +1,5 @@
 {% if site.data.settings.resources-home-items %}
-<!-- portfolio -->
+<!-- resources -->
 <section class="section">
   <div class="container">
     <div class="row">
@@ -8,10 +8,10 @@
       </div>
     </div>
     <div class="row shuffle-wrapper">
-      {% for item in site.data.settings.portfolio-home-items %}
+      {% for item in site.data.settings.resource-home-items %}
       <div class="col-lg-4 col-6 mb-4 shuffle-item">
         <div class="position-relative rounded hover-wrapper">
-          <img src="{{ site.baseurl }}/{{ item.image }}" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
+          <img src="{{ site.baseurl }}/{{ item.image }}" alt="resource-image" class="img-fluid rounded w-100 d-block">
           <div class="hover-overlay">
             <div class="hover-content">
               <a class="btn btn-light btn-sm" href="{{ item.url }}">view project</a>
@@ -23,5 +23,5 @@
     </div>
   </div>
 </section>
-<!-- /portfolio -->
+<!-- /resources -->
 {% endif %}
