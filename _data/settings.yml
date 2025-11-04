@@ -160,32 +160,35 @@ portfolio-items:
 
 # Resources Home Section
 portfolio-home-items:
-  - image: "assets/images/resources/item-1.png"
+  - image: "assets/images/resources/bella.png"
     url: "#"
-  - image: "assets/images/resources/item-2.png"
+  - image: "assets/images/resources/havadis.png"
     url: "#"
-  - image: "assets/images/resources/item-3.png"
+  - image: "assets/images/resources/ozenli.png"
     url: "#"
-  - image: "assets/images/resources/item-4.png"
+  - image: "assets/images/resources/akademik.png"
     url: "#"
-  - image: "assets/images/resources/item-5.png"
+  - image: "assets/images/resources/temiz-oscar.png"
     url: "#"
-  - image: "assets/images/resources/item-6.png"
+  - image: "assets/images/resources/temiz-mC4.png"
     url: "#"
-  - image: "assets/images/resources/item-7.png"
+  - image: "assets/images/resources/sentiturca.png"
     url: "#"
-  - image: "assets/images/resources/item-8.png"
+  - image: "assets/images/resources/tuhama.png"
+    url: "#"
+  - image: "assets/images/resources/musteri.png"
+    url: "#"
+  - image: "assets/images/resources/trspacy.png"
     url: "#"
 
 
 # Resources Page
 portfolio-label:
   - { title: "Model", type: "model" }
-  - { title: "Dataset", type: "dataset" }
   - { title: "Corpus", type: "corpus" }
 
 portfolio-items:
-  - image: "assets/images/resources/item-1.png"
+  - image: "assets/images/resources/bella.png"
     url: "#"
     portfolio-type:
       - type: "corpus"
