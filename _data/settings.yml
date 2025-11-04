@@ -190,7 +190,7 @@ resource-label:
   - { title: "Corpus", type: "corpus" }
   - { title: "Dataset", type: "dataset" }
 
-portfolio-items:
+resource-items:
   - image: "assets/images/resources/havadis.png"
     url: "https://huggingface.co/datasets/turkish-nlp-suite/Havadis"
     resource-type:
