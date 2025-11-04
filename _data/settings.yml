@@ -153,3 +153,27 @@ portfolio-items:
     portfolio-type:
       - type: "medium"
 
+
+
+#-------------------------------
+# Resources (Section and Page)
+
+# Resources Home Section
+portfolio-home-items:
+  - image: "assets/images/resources/item-1.png"
+    url: "#"
+
+
+# Resources Page
+portfolio-label:
+  - { title: "Model", type: "model" }
+  - { title: "Dataset", type: "dataset" }
+  - { title: "Corpus", type: "corpus" }
+
+portfolio-items:
+  - image: "assets/images/resources/item-1.png"
+    url: "#"
+    portfolio-type:
+      - type: "corpus"
+
+
