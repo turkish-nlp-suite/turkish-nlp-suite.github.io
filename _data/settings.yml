@@ -3,12 +3,9 @@
 # General Site Settings
 
 title: Turkish NLP Suite
-logo:  /assets/images/logo/tnlplogo.png 
+logo:  
 author: themefisher
 description: this is meta description
-email: duygu dot altinok12 at gmail.com
-github: https://github.com/turkish-nlp-suite
-linkedin: https://www.linkedin.com/in/duygu-altinok-4021389a/
 copyright: Copyright &copy; 2020 Designed by [Themefisher](https://themefisher.com) & Developed by [Getjekyllthemes](https://getjekyllthemes.com)
 
 menu:
@@ -16,7 +13,6 @@ menu:
   - { name: Blog, link: "/blog" }
   - { name: Resources, link: "/resources" }
   - { name: Publications, link: "/portfolio" }
-  - { name: Contact, link: "/contact" }
 
 #-------------------------------
 # Google Analytics Section
@@ -60,88 +56,100 @@ skills:
 # Publications Home Section
 portfolio-home-items:
   - image: "assets/images/portfolio/item-1.png"
-    url: "#"
+    url: "https://link.springer.com/chapter/10.1007/978-3-031-09909-0_12"
 
   - image: "assets/images/portfolio/item-2.png"
-    url: "#"
+    url: "https://aclanthology.org/2023.acl-long.768/"
 
   - image: "assets/images/portfolio/item-3.png"
-    url: "#"
+    url: "https://aclanthology.org/2024.gebnlp-1.13.pdf"
 
   - image: "assets/images/portfolio/item-4.png"
-    url: "#"
+    url: "https://link.springer.com/chapter/10.1007/978-3-031-70563-2_16"
 
   - image: "assets/images/portfolio/item-5.png"
-    url: "#"
+    url: "https://medium.com/p/2b33e694dd78"
+
+  - image: "assets/images/portfolio/item-6.png"
+    url: "https://medium.com/p/ce65ece62aea"
+
+  - image: "assets/images/portfolio/item-7.png"
+    url: "https://medium.com/p/ce65ece62aea"
+
+  - image: "assets/images/portfolio/item-8.png"
+    url: "https://medium.com/p/fc83ca3c95df"
+
+  - image: "assets/images/portfolio/item-9.png"
+    url: "https://medium.com/google-developer-experts/brand-new-spacy-turkish-models-304da649eacc"
+
+  - image: "assets/images/portfolio/item-10.png"
+    url: "https://medium.com/google-developer-experts/quick-recipes-with-spacy-turkish-how-is-your-infection-doing-4ee1421b2443"
+
+  - image: "assets/images/portfolio/item-11.png"
+    url: "https://medium.com/google-developer-experts/instructurca-an-open-source-instruction-tuning-dataset-for-turkish-18c37b0e99b9"
 
 # Publications Page
 portfolio-label:
-  - { title: "Model", type: "design" }
-  - { title: "Dataset", type: "design" }
-  - { title: "Corpus", type: "branding" }
-  - { title: "Research", type: "illustration" }
+  - { title: "Model", type: "model" }
+  - { title: "Dataset", type: "dataset" }
+  - { title: "Corpus", type: "corpus" }
+  - { title: "Research", type: "research" }
+  - { title: "Medium Blog Post", type: "medium" }
 
 portfolio-items:
   - image: "assets/images/portfolio/item-1.png"
-    url: "#"
+    url: "https://link.springer.com/chapter/10.1007/978-3-031-09909-0_12"
     portfolio-type:
-      - type: "design"
-      - type: "illustration"
+      - type: "research"
 
   - image: "assets/images/portfolio/item-2.png"
-    url: "#"
+    url: "https://aclanthology.org/2023.acl-long.768/"
     portfolio-type:
-      - type: "branding"
+      - type: "dataset"
+      - type: "model"
 
   - image: "assets/images/portfolio/item-3.png"
-    url: "#"
+    url: "https://aclanthology.org/2024.gebnlp-1.13.pdf"
     portfolio-type:
-      - type: "illustration"
+      - type: "research"
 
   - image: "assets/images/portfolio/item-4.png"
-    url: "#"
+    url: "https://link.springer.com/chapter/10.1007/978-3-031-70563-2_16"
     portfolio-type:
-      - type: "design"
-      - type: "branding"
+      - type: "corpus"
 
   - image: "assets/images/portfolio/item-5.png"
-    url: "#"
+    url: "https://medium.com/p/2b33e694dd78"
     portfolio-type:
-      - type: "illustration"
+      - type: "medium"
 
   - image: "assets/images/portfolio/item-6.png"
-    url: "#"
+    url: "https://medium.com/p/ce65ece62aea"
     portfolio-type:
-      - type: "design"
+      - type: "medium"
 
   - image: "assets/images/portfolio/item-7.png"
-    url: "#"
+    url: "https://medium.com/p/ce65ece62aea"
     portfolio-type:
-      - type: "branding"
+      - type: "medium"
 
   - image: "assets/images/portfolio/item-8.png"
-    url: "#"
+    url: "https://medium.com/p/fc83ca3c95df"
     portfolio-type:
-      - type: "design"
-      - type: "illustration"
-      - type: "branding"
+      - type: "medium"
 
   - image: "assets/images/portfolio/item-9.png"
-    url: "#"
+    url: "https://medium.com/google-developer-experts/brand-new-spacy-turkish-models-304da649eacc"
     portfolio-type:
-      - type: "illustration"
+      - type: "medium"
 
   - image: "assets/images/portfolio/item-10.png"
-    url: "#"
+    url: "https://medium.com/google-developer-experts/quick-recipes-with-spacy-turkish-how-is-your-infection-doing-4ee1421b2443"
     portfolio-type:
-      - type: "illustration"
+      - type: "medium"
 
   - image: "assets/images/portfolio/item-11.png"
-    url: "#"
+    url: "https://medium.com/google-developer-experts/instructurca-an-open-source-instruction-tuning-dataset-for-turkish-18c37b0e99b9"
     portfolio-type:
-      - type: "illustration"
+      - type: "medium"
 
-#-------------------------------
-
-contact-title: Contact Info
-contact-email: duygu.altinok12@gmail.com
