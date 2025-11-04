@@ -162,6 +162,20 @@ portfolio-items:
 portfolio-home-items:
   - image: "assets/images/resources/item-1.png"
     url: "#"
+  - image: "assets/images/resources/item-2.png"
+    url: "#"
+  - image: "assets/images/resources/item-3.png"
+    url: "#"
+  - image: "assets/images/resources/item-4.png"
+    url: "#"
+  - image: "assets/images/resources/item-5.png"
+    url: "#"
+  - image: "assets/images/resources/item-6.png"
+    url: "#"
+  - image: "assets/images/resources/item-7.png"
+    url: "#"
+  - image: "assets/images/resources/item-8.png"
+    url: "#"
 
 
 # Resources Page
