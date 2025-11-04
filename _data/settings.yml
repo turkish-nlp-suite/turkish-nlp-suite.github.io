@@ -185,3 +185,53 @@ resource-home-items:
 
 
 # Resources Page
+resource-label:
+  - { title: "Model", type: "model" }
+  - { title: "Corpus", type: "corpus" }
+  - { title: "Dataset", type: "dataset" }
+
+portfolio-items:
+  - image: "assets/images/resources/havadis.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/Havadis"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/bella.png"
+    url: "https://huggingface.co/datasets/BayanDuygu/BellaTurca"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/ozenli.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/OzenliDerlem"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/akademik.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/AkademikDerlem"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/temiz-oscar.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/temiz-OSCAR"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/temiz-mc4.png"
+    url: "huggingface.co/datasets/turkish-nlp-suite/temiz-mC4"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/sentiturca.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/SentiTurca"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/tuhama.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/TurkishHateMap"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/musteri.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/MusteriYorumlari"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/instructurca.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/InstrucTurca"
+    resource-type:
+      - type: "dataset"
+  - image: "assets/images/resources/trspacy.png"
+    url: "https://huggingface.co/collections/turkish-nlp-suite/turkish-spacy-models"
+    resource-type:
+      - type: "model"
