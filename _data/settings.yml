@@ -3,12 +3,12 @@
 # General Site Settings
 
 title: Turkish NLP Suite
-logo:
+logo: /assets/images/logo/tnlplogo.png
 author: themefisher
 description: this is meta description
-email: steve.fruits@email.com
-phone: +880 2544 658 256
-address: 125/A, CA Commercial Area, California, USA
+email: duygu dot altinok12 at gmail.com
+github: https://github.com/turkish-nlp-suite
+linkedin: https://www.linkedin.com/in/duygu-altinok-4021389a/
 copyright: Copyright &copy; 2020 Designed by [Themefisher](https://themefisher.com) & Developed by [Getjekyllthemes](https://getjekyllthemes.com)
 
 menu:
@@ -29,9 +29,12 @@ google-analytics: # UA-XXXXXX-X
 
 
 #-------------------------------
-# About Section
+# About (Section and Page)
 
-blurb: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Turkish NLP Suite is a nonprofit organization that aims to deliver resources for Turkish NLP, including corpus, pretrained models, benchmarking resources and much more. We aim to bring excellence to the Turlish language and speech research by publishing and open-sourcig for all areas of Turkish processing including morphology, language modelling, subword modelling, corpora building and more.
+The organization is run by Duygu, your research scientist (originally )from Istanbul, (currently) living in Berlin and San Diego, CA. 
+
+# About Page
 
 blurb-btn-link: "/about"
 blurb-btn-name: know more
@@ -43,9 +46,8 @@ skills-title: Skills
 skills:
   - { name: Large-scale Turkish Corpus, color: "#fdb157", value: "99%" }
   - { name: Pretrained Turkish Models, color: "#9473e6", value: "99%" }
-  - { name: spaCy Turkish Models, color: "#bdecf6", value: "99%" }
-  - { name: Publications, color: "#ffbcaa", value: "99%" }
-  - { name: Educational Material, color: "#f7c488", value: "99%" }
+  - { name: Publications, color: "#bdecf6", value: "99%" }
+  - { name: Educational Material, color: "#ffbcaa", value: "99%" }
 
 
 #-------------------------------
