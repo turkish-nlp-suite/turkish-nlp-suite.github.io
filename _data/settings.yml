@@ -159,7 +159,7 @@ portfolio-items:
 # Resources (Section and Page)
 
 # Resources Home Section
-portfolio-home-items:
+resource-home-items:
   - image: "assets/images/resources/havadis.png"
     url: "https://huggingface.co/datasets/turkish-nlp-suite/Havadis"
   - image: "assets/images/resources/bella.png"
@@ -182,17 +182,5 @@ portfolio-home-items:
     url: "https://huggingface.co/datasets/turkish-nlp-suite/InstrucTurca"
   - image: "assets/images/resources/trspacy.png"
     url: "https://huggingface.co/collections/turkish-nlp-suite/turkish-spacy-models"
-
-
-# Resources Page
-portfolio-label:
-  - { title: "Model", type: "model" }
-  - { title: "Corpus", type: "corpus" }
-
-portfolio-items:
-  - image: "assets/images/resources/bella.png"
-    url: "#"
-    portfolio-type:
-      - type: "corpus"
 
 
