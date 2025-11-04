@@ -159,11 +159,11 @@ portfolio-items:
 # Resources (Section and Page)
 
 # Resources Home Section
-resource-home-items:
+resources-home-items:
   - image: "assets/images/resources/havadis.png"
     url: "https://huggingface.co/datasets/turkish-nlp-suite/Havadis"
   - image: "assets/images/resources/bella.png"
-    url: "https://huggingface.co/datasets/BayanDuygu/BellaTurca"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca"
   - image: "assets/images/resources/ozenli.png"
     url: "https://huggingface.co/datasets/turkish-nlp-suite/OzenliDerlem"
   - image: "assets/images/resources/akademik.png"
