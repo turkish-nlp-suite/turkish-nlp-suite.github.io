@@ -67,25 +67,25 @@ portfolio-home-items:
   - image: "assets/images/portfolio/bella.png"
     url: "https://link.springer.com/chapter/10.1007/978-3-031-70563-2_16"
 
-  - image: "assets/images/portfolio/item-5.png"
+  - image: "assets/images/portfolio/gentle.png"
     url: "https://medium.com/p/2b33e694dd78"
 
-  - image: "assets/images/portfolio/item-6.png"
+  - image: "assets/images/portfolio/phonetics.png"
     url: "https://medium.com/p/ce65ece62aea"
 
-  - image: "assets/images/portfolio/item-7.png"
+  - image: "assets/images/portfolio/yasak.png"
     url: "https://medium.com/p/ce65ece62aea"
 
-  - image: "assets/images/portfolio/item-8.png"
+  - image: "assets/images/portfolio/brandnew.png"
     url: "https://medium.com/p/fc83ca3c95df"
 
-  - image: "assets/images/portfolio/item-9.png"
+  - image: "assets/images/portfolio/spacy.png"
     url: "https://medium.com/google-developer-experts/brand-new-spacy-turkish-models-304da649eacc"
 
-  - image: "assets/images/portfolio/item-10.png"
+  - image: "assets/images/portfolio/corona.png"
     url: "https://medium.com/google-developer-experts/quick-recipes-with-spacy-turkish-how-is-your-infection-doing-4ee1421b2443"
 
-  - image: "assets/images/portfolio/item-11.png"
+  - image: "assets/images/portfolio/instruct.png"
     url: "https://medium.com/google-developer-experts/instructurca-an-open-source-instruction-tuning-dataset-for-turkish-18c37b0e99b9"
 
 # Publications Page
