@@ -2,7 +2,6 @@
 layout: page
 title: Publications
 ---
-<!-- portfolio -->
 <section class="section">
   <div class="container">
 
@@ -10,11 +9,10 @@ title: Publications
     <div class="row mb-5">
       <div class="col-12">
         <p class="lead text-left">
-          Explore our publications. Click on any entry to view the full details.
+          Explore our latest publications, including research papers, datasets, and blog posts. Each publication is displayed with its details below.
         </p>
       </div>
     </div>
-    <!-- /Opening Text -->
 
     <!-- Filter Buttons -->
     <div class="row mb-5">
@@ -31,32 +29,28 @@ title: Publications
         </div>
       </div>
     </div>
-    <!-- /Filter Buttons -->
 
-    <!-- Publications Items -->
+    <!-- Publication Items -->
     <div class="row shuffle-wrapper">
       {% for item in site.data.settings.portfolio-items %}
-      <div class="col-lg-6 col-md-6 col-12 mb-4 shuffle-item" data-groups="[{% for portfolio in item.portfolio-type %}{% if forloop.first == true %}{% else %},{% endif %}&quot;{{ portfolio.type }}&quot;{% endfor %}]">
-        <div class="d-flex align-items-start">
+      <div class="col-12 mb-4 shuffle-item" data-groups="[{% for portfolio in item.portfolio-type %}{% if forloop.first == true %}{% else %},{% endif %}&quot;{{ portfolio.type }}&quot;{% endfor %}]">
+        <div class="d-flex align-items-center">
           <!-- Image -->
-          <img src="{{ site.baseurl }}/{{ item.image }}" alt="publication-image" class="img-fluid rounded w-25 mr-3">
+          <img src="{{ site.baseurl }}/{{ item.image }}" alt="publication-image" class="img-fluid rounded w-25 mr-4">
 
           <!-- Text -->
           <div class="publication-text">
-            <h5 class="font-weight-bold">
+            <h5 class="font-weight-bold mb-2">
               <a href="{{ item.url }}" target="_blank" class="text-dark">{{ item.title }}</a>
             </h5>
-            <p class="text-muted mb-2">
-              {{ item.description }}
-            </p>
+            <p class="text-muted mb-3">{{ item.description }}</p>
             <a class="btn btn-primary btn-sm" href="{{ item.url }}" target="_blank">View Publication</a>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-    <!-- /Publications Items -->
+    <!-- /Publication Items -->
 
   </div>
 </section>
-<!-- /portfolio -->
