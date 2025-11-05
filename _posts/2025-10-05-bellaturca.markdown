@@ -5,58 +5,74 @@ date:   2025-10-05 10:05:55 +0300
 image:  /assets/images/blog/pile.png
 additional_image: /assets/images/blog/categories.png
 author: Duygu
-tags:   corpus, research
+tags:   Corpus, Research
 ---
 
-**We proudly introduce BellaTurca, the ultimate Turkish large corpora, providing diversity and high-quality to fight dullness and blandness in Turkish language modelling. We offer around 250GB of text and 30B words, from four different subsets, all high-quality, carefully cleaned and crafted. All are yours, freely available on Hugging Face.**
+**We proudly introduce BellaTurca, the ultimate Turkish large corpus, bringing diversity and high quality to fight the dullness and blandness in Turkish language modeling. We're talking about 250GB of text and over 30 billion words from six different subsets, all high-quality, cleaned, and carefully crafted. And guess what? They’re all freely available on Hugging Face. Yep, all yours!**
 
 
-Long long time ago, in the far away computing times, there were not much diversity in the corpus world. Though BookCorpus made a breakthrough in 2015 (then sent away due to licencing issues), it was only 6GB in size, which was enough for comparably "small" models. However when one searches for large amounts of data to train their models, first source comes to mind is surely Web data. Then OSCAR and mC4 projects published their huge corpora, measured in treabytes, on 2019 and gave birth to quite many models including "small models" such as BERT to midsize models such as GPT-2 and RoBERTa, then large models such as T5 and GPT-2. Up to this point, almost all models were trained 
-n Web data, quite boring and bland indeed. Then came the glorious Pile in 2020, not only introducing an impressive 825GBs of data, but also provide diversity with text of different genres, 22 subsets, from medicine to law, Github code to Arxiv papers.
+A long, long time ago, in the early days of computing, there wasn’t much diversity in the corpus world. Sure, BookCorpus made waves back in 2015 (before getting booted due to licensing issues), but it was only 6GB — decent for "small" models back then. But when people started needing big data for big models, the first thing that came to mind was web data.
+
+Then came OSCAR and mC4 in 2019, with their giant web-based corpora measured in terabytes. These powered a lot of models — from smaller ones like BERT, to midsize ones like GPT-2 and RoBERTa, and even bigger ones like T5. But let’s be real — almost all of these datasets were just... web data. Boring. Repetitive. Bland.
+
+In 2020, The Pile changed everything. Not only did it introduce a whopping 825GB of data, but it also brought diversity — text from 22 different subsets, covering everything from medicine to law, GitHub code to Arxiv papers. It showed the world that diversity matters in corpora.
+
+Now, coming to Turkish... oh boy. It was even worse. All we had were two corpora — mC4 and OSCAR, which were just Turkish splits from those bigger projects on Hugging Face. And let’s be honest, no one really knew how good or bad they were. No one studied their stats, no one checked their quality. How much of it was usable? How much was filtered out? How many duplicates were there? No answers.
+
+Even worse, if you wanted to use those datasets, you had to clean them yourself. That meant everyone was writing the same cleaning scripts, wasting time, and duplicating effort across different projects.
+
+To fight all this dullness and blandness, we proudly introduce BellaTurca, a large-scale, diverse, and high-quality Turkish corpus collection. The collection includes six distinct subsets, each with its own unique flavor:
+
+* ÖzenliDerlem (CraftedCrawl): Curated web text from high-quality websites on topics like culture, literature, fairy tales, stories, and travel.
+* AkademikDerlem (AcademicalCrawl): Academic papers and theses, mostly crawled from DergiPark.
+* Kitaplar (Books): A books corpus collected from free sources on the internet. (Note: Excluded in the final version due to concerns about licensed material.)
+* ForumSohbetleri (ForumChats): Text from online forums, preserving conversational Turkish and emoticons while normalizing the text.
+* Temiz OSCAR (Clean OSCAR): A heavily cleaned version of the Turkish OSCAR dataset.
+* Temiz mC4 (Clean mC4): A cleaned version of the Turkish mC4 dataset.
+
+The final collection size is around 250GB. You can find the stats for each subset on the [Bella Turca HF repo](https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca). Each subset also has its own dedicated Hugging Face repo.
+
+There’s one subset that deserves special mention: [Havadis](https://huggingface.co/datasets/turkish-nlp-suite/Havadis). It’s the first large-scale Turkish news corpus, featuring text from major news outlets like Hürriyet, Milliyet, Star, and Posta. If you’re into playing with news data, this is the one to check out. (We’ll write more about it in another blog post soon!)
 
 
-Coming to Turkish, it's even more boring and bland. Literally there were only 2 corpora, mC4 and OSCAR, lying around as splits of those projects in Hugging Face. Also corpus statistics of those datasets and quality is not well-researched. Though some models including a BERT and some GP models were trained on those datasets, no one ever published about quality of those datasets, how much percent is usable, how much percent is filtered and how many dupliactes in the data. Moreover when one wanna use those data, they need to the cleaning by themselves, hence lots of code replication and time loss accross different work. 
+## Cleaning BellaTurca
 
-To fight all the dullness and blandness, we introduce BellaTurca, a large-scale , diverse and high-quality Turkish corpus collection. The collection has 5 distinct subsets:
+Cleaning the datasets was no easy task. Each subset had its own challenges, so we used different methods depending on the type of data. Here’s a quick summary:
 
+### Web Data (OSCAR, mC4)
+- **Language Filtering:** Removed non-Turkish content (and random languages like Chinese or Korean). 
+- **Deduplication:** Removed duplicate paragraphs and documents using hashing.
+- **Content Filtering:** Cleaned low-quality text like SEO pages, ads, and adult content.
 
-* ÖzenliDerlem
-* AkademikDerlem
-* Kitaplar 
-* ForumSohbetleri
-* Temiz OSCAR
-* Temiz mC4
+### Academic Papers
+- Extracted text from PDFs using **OCR** (yes, there are some OCR mistakes, we’re only human!).
+- Removed non-text content like tables and figures.
+- Cleaned abstracts (both Turkish and English).
 
-Each subset has its own characteristics. ÖzenliDerlem (CraftedCrawl) includes web text according to curated topics such as culture, literature, fairy tales, stories, travelling and more, from curated websites. AkademikDerlem (AcademicalCrawl) includes theses and papers published, mostly crawled from DergiPark. Kitaplar (Books) is our books corpus, collected from several .zips on the internet including free books. Temiz OSCAR and Temiz mC4 are extensively cleaned versions of OSCAR and mC4 Turkish splits. We excluded Kitaplar in the final version of the collection due to suspicion of including licenced material. The final collection size is around 250GB. Subcorpus sizes can be found under [Bella Turca HF repo](https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca). Each subcorpus has its own dedicated HF repo as well, can be found under the main repo link.
+### Books
+- Books were the hardest. We used a **ByT5 model** for OCR correction. 
+- First, we trained it on a small, high-quality seed set of books. 
+- Then, we ran the model on the rest of the books, corrected the text, and retrained the model in a self-reinforcing loop. 
+- Rinse and repeat until we got clean text.
 
-There's also a subcorpus deserves mentioning, [Havadis](https://huggingface.co/datasets/turkish-nlp-suite/Havadis) - first big size Turkish news corpus, part of ÖzenliDerlem. This corpus includes text from news websites, including Hürriyet, Milliyet, Star, Posta and more. If you wanna play with Havadis, check out the [blog post]().
+### ForumSohbetleri
+- Kept conversational Turkish and emoticons intact while normalizing the text for better usability.
 
+### ÖzenliDerlem
+- Used a **self-reinforcing autotrain loop**:
+  - Started with a small set of high-quality pages.
+  - Crawled similar pages using a sentence encoder and grouped them into clusters.
+  - Built an n-gram model from the high-quality pages and scored the remaining pages.
+  - Added the high-scoring pages to the dataset.
+  - Repeated the process until the dataset hit a stable point.
 
-Cleaning of BellaTurca sets took place in different ways due to the needs of the dataset nature. For the cleaning of OSCAR and mC4 - Web data can include duplicates, low quality content (such as SEO optimized websites), ads, adult content and similar. We first made language filtering to web data. We also cleaned Chinese and Korean characters as well. We also run dedup on paragraph level and document level with local hashing methods. We made several steps of cleaning to web data to ensure quality.
+This iterative approach helped us build a diverse, high-quality set of web pages without needing an external quality dataset.
 
+-------------------------------------------------
 
-Coming to academic papers, we collect the text from PDFs via an OCR, hence there will be some OCR mistakes surely. Another thing with papers is one needs to parse out and normalize non-text content such as tables and figures. In this subset , we focused on paper parsing. We cut the abstracts (and placed them into their own subset), clean English abstract if exists and clean some English parts.
-
-Books took most the effort by requiring huge OCR correction. For this task we used ByT5 model. First we hold a small but quality subset of books that is collected by hand. Then made a pass with this model on the rest of the books, grab the corrected text and merge it with the seed text. Retrain ByT5 , and repeat the process so its a self-feeding autotrain loop.
-
-ForumSohbetleri wnt through carefully text cleaning, we wanted to reserve the daily spoken language in text together with emoticons but still wanted to normalize the text. 
-
-
-ÖzenliDerlem also took some stages of cleaning, again in an auto-train loop. In this subset, we started with a small number of homepages per selected topic whose quality we knew. Then, we crawled these pages and collected more page addresses. To determine quality, we converted all the pages to vectors using a sentence encoder and grouped them. We kept the pages at the center of the groups as the core set. We built an n-gram model based on the core set, ran this model over the remaining pages, and added the pages with good scores to the high-scoring set. In this way, we ran a small autotrain loop. In each round, we built the model from the high-quality pages, assigned a score to the remaining pages, and added the high-scoring pages to the high-scoring set. With each round, the dataset grew, the model improved, and it became more confident. We continued this process until the scores reached a stable point.
-
-When you look at The Pile and similar examples, you'll see that the reverse is done: first, the pages are collected, then a quality model and a topic model are created from another set of known quality, and the remaining pages are filtered accordingly. Since we didn't have such sets of known quality, we used this method as a self-reinforcing approach. This is one of the creation goals of Bella Turca, to be a core dataset for larger datasets that will be produced as a collection of known quality and topics.
-
-
-
-The below image offers the cleaning process of BellaTurca at a glance:
-
-
-
-
+BellaTurca isn’t just another corpus. It’s designed to be a core dataset for Turkish NLP, offering a foundation for building even larger, high-quality collections. Think of it as the start of something much bigger. With BellaTurca, you don’t just get data — you get diversity, quality, and the tools to take Turkish NLP to the next level.
 
 
+BellaTurca is available under a commercially permissive license. You can grab the full dataset and its subsets on the [HF repo](https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca) repo or explore the [full collection](https://huggingface.co/collections/turkish-nlp-suite/large-scale-turkish-corpora)
 
-
-
-
-BellaTurca is available under a commercial permissive licence under its dedicated [HF repo](https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca). Subsets are also available under the [HF collection](https://huggingface.co/collections/turkish-nlp-suite/large-scale-turkish-corpora).
+So go ahead, download it, and start building something awesome, happy modelling!
