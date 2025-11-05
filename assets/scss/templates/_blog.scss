@@ -17,14 +17,9 @@ blockquote > p {
   line-height: inherit;
 }
 
-
-/* Content Styling */
 .content {
-  p,
-  ul,
-  ol,
-  blockquote {
-    margin-bottom: 20px; /* Add spacing to text elements */
+  * {
+    margin-bottom: 20px;
   }
 
   strong {
@@ -32,48 +27,7 @@ blockquote > p {
     font-size: 22px;
     font-weight: normal;
     color: $text-color-dark;
+    display: inherit;
     line-height: 1.5;
-    display: block; /* Ensure strong behaves like a block element */
-    margin-bottom: 10px; /* Add spacing below */
-  }
-}
-
-/* Main Image Styling (First Image) */
-img.main-image {
-  max-width: 800px; /* Set a max width for larger screens */
-  width: 100%; /* Ensure responsiveness */
-  height: auto; /* Maintain aspect ratio */
-  margin-bottom: 20px; /* Add spacing below the image */
-  margin-right: 20px; /* Add spacing to the right */
-  border-radius: 8px; /* Add rounded corners for a sleek look */
-  float: left; /* Align the image to the left */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-}
-
-/* Additional Images Styling */
-img.additional-image {
-  max-width: 600px; /* Set a smaller max width for additional images */
-  width: 100%; /* Ensure responsiveness */
-  height: auto; /* Maintain aspect ratio */
-  margin-bottom: 20px; /* Add spacing below the image */
-  margin-right: 20px; /* Add spacing to the right */
-  border-radius: 8px; /* Add rounded corners */
-  float: left; /* Align the image to the left */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-
-  /* Desktop-specific adjustments */
-  @media (min-width: 1024px) {
-    max-width: 700px; /* Larger size for desktops */
-  }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  img.main-image,
-  img.additional-image {
-    float: none; /* Disable floating for smaller screens */
-    margin-right: 0; /* Remove right margin */
-    margin-bottom: 20px; /* Keep bottom margin for spacing */
-    max-width: 100%; /* Make images full-width */
   }
 }
