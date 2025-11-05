@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Exploring Turkish Syntax in Fairy Tales /  A Linguistic Journey with spaCy Turkish
-date:   2025-10-05 10:05:55 +0300
+date:   2025-09-28 10:05:55 +0300
 image:  /assets/images/blog/post-2.jpg
 author: Duygu
 tags:   spaCy Turkish models
