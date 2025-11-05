@@ -7,7 +7,7 @@ author: Duygu
 tags:   Research
 ---
 
-**Gender bias in language models is nothing new, but here’s the catch: most of the research out there focuses on English. So what about other languages — like Turkish? That’s where our work comes in. In this blog post, we’ll take you through the highlights of our research on gender bias in Turkish word embeddings. Spoiler alert: it’s everywhere — in syntax, semantics, and even the smallest building blocks of Turkish, like suffixes.**
+--Gender bias in language models is nothing new, but here’s the catch: most of the research out there focuses on English. So what about other languages — like Turkish? That’s where our work comes in. In this blog post, we’ll take you through the highlights of our research on gender bias in Turkish word embeddings. Spoiler alert: it’s everywhere — in syntax, semantics, and even the smallest building blocks of Turkish, like suffixes.--
 
 We all know Turkish is unique. Unlike English, Turkish is an agglutinative language, meaning words are built by adding tons of suffixes. A single word can tell you everything about tense, plurality, possession, and more. This rich morphology makes Turkish super fascinating but also really tricky for language models.
 
@@ -15,15 +15,15 @@ Now, here's the problem: Most studies on gender bias stick to English or a handf
 
 We wanted to change that by looking at:
 
-* How biased are Turkish word embeddings?
-* How does Turkish morphology affect gender bias?
+- How biased are Turkish word embeddings?
+- How does Turkish morphology affect gender bias?
 
 ---
 To answer these questions, we trained Floret embeddings (an extension of fastText) on three different datasets:
 
-* Temiz mC4: Cleaned version of Turkish part of CulturaX, a part of BellaTurca.
-* Academic Texts: Research papers and abstracts from sources, coming from AkademikDerlem, a part of BellaTurca.
-* Medical Texts: Journals focused on healthcare and medicine, coming from AkademikDerlem again.
+- Temiz mC4: Cleaned version of Turkish part of CulturaX, a part of BellaTurca.
+- Academic Texts: Research papers and abstracts from sources, coming from AkademikDerlem, a part of BellaTurca.
+- Medical Texts: Journals focused on healthcare and medicine, coming from AkademikDerlem again.
 
 We trained embeddings with a 300-dimensional vector size, capturing both word- and subword-level features to preserve the suffix semantics.
 
@@ -31,45 +31,45 @@ We trained embeddings with a 300-dimensional vector size, capturing both word- a
 #### The Shocking Results
 
 Here’s what we found:
-1. Masculine Defaults Everywhere
+##### Masculine Defaults Everywhere
 
 Across all datasets, most words were associated with masculinity. For example, in the web crawl corpus, 87% of the vocabulary leaned masculine, while only 13% was feminine. And it’s not just nouns — verbs, adjectives, and even adverbs showed similar trends.
 
 Examples of feminine words:
 
-*    Beauty-related: güzellik (beauty), makyaj (makeup), çiçek (flower).
-*    Domestic words: ev (home), temizlik (cleaning).
-*    Proper nouns: Female names like Fatma and Mary.
+- Beauty-related: güzellik (beauty), makyaj (makeup), çiçek (flower).
+- Domestic words: ev (home), temizlik (cleaning).
+- Proper nouns: Female names like Fatma and Mary.
 
 Examples of masculine words:
 
-*    Professions: doktor (doctor), mühendis (engineer), yönetici (manager).
-*    Sports: tenis (tennis), voleybol (volleyball).
-*    Abstract concepts: bilim (science), liderlik (leadership).
+- Professions: doktor (doctor), mühendis (engineer), yönetici (manager).
+- Sports: tenis (tennis), voleybol (volleyball).
+- Abstract concepts: bilim (science), liderlik (leadership).
 
 Sadly, these biases reflect real-world stereotypes, where men dominate professions, leadership roles, and sports, while women are associated with beauty, family, and domesticity.
 
-2. Gender Bias in Syntax
+##### Gender Bias in Syntax
 We also looked at different parts of speech and found gender bias everywhere.
 
-*    Verbs: Masculine verbs were common, covering general actions like gitmek (to go) and yapmak (to do). Feminine verbs were few and often tied to stereotypical roles, like süslenmek (to dress up) and güzelleşmek (to become beautiful).
-*    Nouns: Feminine nouns were mostly proper names or words like tanrıça (goddess) and kraliçe (queen). In contrast, masculine nouns spanned professions, technology, and abstract concepts.
+- Verbs: Masculine verbs were common, covering general actions like gitmek (to go) and yapmak (to do). Feminine verbs were few and often tied to stereotypical roles, like süslenmek (to dress up) and güzelleşmek (to become beautiful).
+- Nouns: Feminine nouns were mostly proper names or words like tanrıça (goddess) and kraliçe (queen). In contrast, masculine nouns spanned professions, technology, and abstract concepts.
 
-3. The Role of Suffixes
+##### The Role of Suffixes
 Here’s where it gets even more interesting: Turkish suffixes can change a word’s gender!
 
-* Plural Suffix (-lAr): Often shifts masculine words to feminine. For example, kitap (book, masculine) becomes kitaplar (books, feminine).
-* Negative Marker (-mA): Can flip the gender of verbs. For example, üretmek (to produce, feminine) becomes üretmemek (not to produce, masculine).
-* Copular Markers (-dIr): When added to nouns, these can create gendered verbs. For example, gözlerdir (they are eyes, feminine).
+- Plural Suffix (-lAr): Often shifts masculine words to feminine. For example, kitap (book, masculine) becomes kitaplar (books, feminine).
+- Negative Marker (-mA): Can flip the gender of verbs. For example, üretmek (to produce, feminine) becomes üretmemek (not to produce, masculine).
+- Copular Markers (-dIr): When added to nouns, these can create gendered verbs. For example, gözlerdir (they are eyes, feminine).
 
 This shows that morphology plays a huge role in gender bias for Turkish, making it unique compared to English.
 
-4. Domain Differences
+##### Domain Differences
 The level of gender bias varied depending on the dataset:
 
-*  Web Crawl Data: The most biased dataset, with strong masculine associations.
-*  Academic Texts: Slightly more balanced, thanks to scientific and formal vocabulary.
-*  Medical Texts: Had more feminine words, like jinekolojik (gynecological) and klinik (clinic), but still leaned masculine overall.
+- Web Crawl Data: The most biased dataset, with strong masculine associations.
+- Academic Texts: Slightly more balanced, thanks to scientific and formal vocabulary.
+- Medical Texts: Had more feminine words, like jinekolojik (gynecological) and klinik (clinic), but still leaned masculine overall.
 
 
 ---
@@ -78,8 +78,8 @@ Gender bias in word embeddings isn’t just an academic problem, it can have rea
 ##### What’s Next?
 Our study is just the beginning. Here’s what we hope to see in future research:
 
-* Bias Mitigation: Developing techniques to reduce gender bias in Turkish embeddings.
-* Linguistic Studies: Exploring how morphology influences bias in other agglutinative languages.
-* Better Datasets: Building gender-balanced corpora for training fairer models.
+- Bias Mitigation: Developing techniques to reduce gender bias in Turkish embeddings.
+- Linguistic Studies: Exploring how morphology influences bias in other agglutinative languages.
+- Better Datasets: Building gender-balanced corpora for training fairer models.
 
 If you’re curious about our full methodology or want to play with the embeddings yourself, check out [our GitHub repo](https://github.com/turkish-nlp-suite/GeBNLP-2024-Gender-Bias-Turkish-Word-Embeddings) and even better read [the publication](https://aclanthology.org/2024.gebnlp-1.13.pdf).
