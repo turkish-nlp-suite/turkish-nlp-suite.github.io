@@ -3,7 +3,6 @@ layout: post
 title:  Big, Bold and Badass: BellaTurca, the First Large-Scale, Diverse and High-Quality Turkis Corpus Collection Ever
 date:   2025-10-05 10:05:55 +0300
 image:  /assets/images/blog/pile.png
-additional_image: /assets/images/blog/pile.png
 author: Duygu
 tags:   corpus, research
 ---
