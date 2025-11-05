@@ -26,12 +26,27 @@ layout: default
     <div class="row">
       <div class="col-lg-12">
         <h3 class="font-tertiary mb-5">{{ page.title | escape }}</h3>
-        <p class="font-secondary">Published on {{ page.date | date: '%b %d, %Y' }} by <span class="text-primary">{{ page.author }}</span
-            class="text-primary"> on {% for tag in page.tags %}<span>{{ tag }} </span>{% endfor %}</p>
+        <p class="font-secondary">
+          Published on {{ page.date | date: '%b %d, %Y' }} by 
+          <span class="text-primary">{{ page.author }}</span>
+          {% for tag in page.tags %}
+            <span class="text-primary">{{ tag }}</span>
+          {% endfor %}
+        </p>
         <div class="content">
-          <img src="{{page.image | relative_url }}" class="img-fluid rounded float-left mr-5 mb-4" alt="{{page.title}}">
-          {{ content }}
-          <img src="{{page.additional_image | relative_url }}" class="img-fluid rounded float-left mr-5 mb-4" alt="Additional Image">
+          <!-- Display the main image at the top -->
+          <img src="{{ page.image | relative_url }}" class="img-fluid rounded float-left mr-5 mb-4" alt="{{ page.title }}">
+
+          <!-- Split content into paragraphs and dynamically insert the second image after the second paragraph -->
+          {% assign paragraphs = content | split: '</p>' %}
+          {% for paragraph in paragraphs %}
+            {{ paragraph }}</p>
+            
+            <!-- Insert the second image after the second paragraph -->
+            {% if forloop.index == 2 %}
+              <img src="{{ page.additional_image | relative_url }}" class="img-fluid rounded additional-image" alt="Additional Image">
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>

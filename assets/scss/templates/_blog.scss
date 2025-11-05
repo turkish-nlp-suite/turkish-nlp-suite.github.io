@@ -30,4 +30,18 @@ blockquote > p {
     display: inherit;
     line-height: 1.5;
   }
+
+  /* Add new styles for the second image */
+  p:nth-of-type(2) {
+    position: relative;
+  }
+
+  img.additional-image {
+    display: block;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 }
