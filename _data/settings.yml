@@ -55,16 +55,16 @@ skills:
 
 # Publications Home Section
 portfolio-home-items:
-  - image: "assets/images/portfolio/item-1.png"
+  - image: "assets/images/portfolio/morph.png"
     url: "https://link.springer.com/chapter/10.1007/978-3-031-09909-0_12"
 
-  - image: "assets/images/portfolio/item-2.png"
+  - image: "assets/images/portfolio/diverse.png"
     url: "https://aclanthology.org/2023.acl-long.768/"
 
-  - image: "assets/images/portfolio/item-3.png"
+  - image: "assets/images/portfolio/gender.png"
     url: "https://aclanthology.org/2024.gebnlp-1.13.pdf"
 
-  - image: "assets/images/portfolio/item-4.png"
+  - image: "assets/images/portfolio/bella.png"
     url: "https://link.springer.com/chapter/10.1007/978-3-031-70563-2_16"
 
   - image: "assets/images/portfolio/item-5.png"
