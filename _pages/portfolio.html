@@ -10,12 +10,13 @@ title: Publications
     <div class="row mb-5">
       <div class="col-12">
         <p class="lead text-left">
-          Please click onto the icons below to reach the publication page.
+          Explore our publications. Click on any entry to view the full details.
         </p>
       </div>
     </div>
     <!-- /Opening Text -->
 
+    <!-- Filter Buttons -->
     <div class="row mb-5">
       <div class="col-12">
         <div class="btn-group btn-group-toggle justify-content-center d-flex" data-toggle="buttons">
@@ -30,21 +31,32 @@ title: Publications
         </div>
       </div>
     </div>
+    <!-- /Filter Buttons -->
+
+    <!-- Publications Items -->
     <div class="row shuffle-wrapper">
       {% for item in site.data.settings.portfolio-items %}
-      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[{% for portfolio in item.portfolio-type %}{% if forloop.first == true %}{% else %},{% endif %}&quot;{{ portfolio.type }}&quot;{% endfor %}]">
-        <div class="position-relative rounded hover-wrapper">
-          <img src="{{ site.baseurl }}/{{ item.image }}" alt="portfolio-image" class="img-fluid rounded w-100 d-block">
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="{{ item.url }}">view project</a>
-            </div>
+      <div class="col-lg-6 col-md-6 col-12 mb-4 shuffle-item" data-groups="[{% for portfolio in item.portfolio-type %}{% if forloop.first == true %}{% else %},{% endif %}&quot;{{ portfolio.type }}&quot;{% endfor %}]">
+        <div class="d-flex align-items-start">
+          <!-- Image -->
+          <img src="{{ site.baseurl }}/{{ item.image }}" alt="publication-image" class="img-fluid rounded w-25 mr-3">
+
+          <!-- Text -->
+          <div class="publication-text">
+            <h5 class="font-weight-bold">
+              <a href="{{ item.url }}" target="_blank" class="text-dark">{{ item.title }}</a>
+            </h5>
+            <p class="text-muted mb-2">
+              {{ item.description }}
+            </p>
+            <a class="btn btn-primary btn-sm" href="{{ item.url }}" target="_blank">View Publication</a>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
+    <!-- /Publications Items -->
+
   </div>
 </section>
 <!-- /portfolio -->
-
