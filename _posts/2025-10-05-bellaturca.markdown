@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Big, Bold and Badass -- BellaTurca, the First Large-Scale, Diverse and High-Quality Turkis Corpus Collection Ever
+title:  Big, Bold and Badass / BellaTurca, the First Large-Scale, Diverse and High-Quality Turkis Corpus Collection Ever
 date:   2025-10-05 10:05:55 +0300
 image:  /assets/images/blog/pile.png
 author: Duygu
@@ -16,7 +16,7 @@ n Web data, quite boring and bland indeed. Then came the glorious Pile in 2020, 
 
 Coming to Turkish, it's even more boring and bland. Literally there were only 2 corpora, mC4 and OSCAR, lying around as splits of those projects in Hugging Face. Also corpus statistics of those datasets and quality is not well-researched. Though some models including a BERT and some GP models were trained on those datasets, no one ever published about quality of those datasets, how much percent is usable, how much percent is filtered and how many dupliactes in the data. Moreover when one wanna use those data, they need to the cleaning by themselves, hence lots of code replication and time loss accross different work. 
 
-To fight all the dullness and blandness, we introduce BellaTurca
+To fight all the dullness and blandness, we introduce BellaTurca, a large-scale 
 
 
 * Havadis
@@ -24,6 +24,9 @@ To fight all the dullness and blandness, we introduce BellaTurca
 * AkademikDerlem
 * Temiz OSCAR
 * Temiz mC4
+
+
+Cleaning of BellaTurca sets took place in different ways due to the needs of the dataset nature. Web data can include duplicates, low quality content (such as SEO optimized websites), ads, adult content and similar. Coming to academic papers, we collect the text from PDFs via an OCR, hence there will be some OCR mistakes. 
 
 
 BellaTurca is available under a commercial permissive licence under its dedicated [HF repo](https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca). Subsets are also available under the [HF collection](https://huggingface.co/collections/turkish-nlp-suite/large-scale-turkish-corpora).
