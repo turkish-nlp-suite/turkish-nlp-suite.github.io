@@ -3,6 +3,7 @@ layout: post
 title:  Big, Bold and Badass / BellaTurca, the First Large-Scale, Diverse and High-Quality Turkis Corpus Collection Ever
 date:   2025-10-05 10:05:55 +0300
 image:  /assets/images/blog/pile.png
+additional_image: /assets/images/blog/categories.png
 author: Duygu
 tags:   corpus, research
 ---
@@ -22,11 +23,13 @@ To fight all the dullness and blandness, we introduce BellaTurca, a large-scale
 * Havadis
 * ÖzenliDerlem
 * AkademikDerlem
+* Books (excluded in the final corpus due to licence issues)
 * Temiz OSCAR
 * Temiz mC4
 
 
-Cleaning of BellaTurca sets took place in different ways due to the needs of the dataset nature. Web data can include duplicates, low quality content (such as SEO optimized websites), ads, adult content and similar. Coming to academic papers, we collect the text from PDFs via an OCR, hence there will be some OCR mistakes. 
+
+Cleaning of BellaTurca sets took place in different ways due to the needs of the dataset nature. Web data can include duplicates, low quality content (such as SEO optimized websites), ads, adult content and similar. Coming to academic papers, we collect the text from PDFs via an OCR, hence there will be some OCR mistakes surely. Another thing with papers is one needs to parse out and normalize non-text content such as tables and figures. Coming to the Books, OCR corrections took place. 
 
 
 BellaTurca is available under a commercial permissive licence under its dedicated [HF repo](https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca). Subsets are also available under the [HF collection](https://huggingface.co/collections/turkish-nlp-suite/large-scale-turkish-corpora).
