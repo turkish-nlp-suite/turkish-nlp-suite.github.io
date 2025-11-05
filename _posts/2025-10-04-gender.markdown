@@ -7,7 +7,7 @@ author: Duygu
 tags:   Research
 ---
 
---Gender bias in language models is nothing new, but here’s the catch: most of the research out there focuses on English. So what about other languages — like Turkish? That’s where our work comes in. In this blog post, we’ll take you through the highlights of our research on gender bias in Turkish word embeddings. Spoiler alert: it’s everywhere — in syntax, semantics, and even the smallest building blocks of Turkish, like suffixes.--
+**Gender bias in language models is nothing new, but here’s the catch: most of the research out there focuses on English. So what about other languages — like Turkish? That’s where our work comes in. In this blog post, we’ll take you through the highlights of our research on gender bias in Turkish word embeddings. Spoiler alert: it’s everywhere — in syntax, semantics, and even the smallest building blocks of Turkish, like suffixes.**
 
 We all know Turkish is unique. Unlike English, Turkish is an agglutinative language, meaning words are built by adding tons of suffixes. A single word can tell you everything about tense, plurality, possession, and more. This rich morphology makes Turkish super fascinating but also really tricky for language models.
 
