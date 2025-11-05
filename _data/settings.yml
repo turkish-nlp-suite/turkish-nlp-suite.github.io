@@ -98,69 +98,58 @@ portfolio-label:
 
 portfolio-items:
   - image: "assets/images/portfolio/morph.png"
-    description: "A Statistical Approach to Analyzing Turkish Morphology"
     url: "https://link.springer.com/chapter/10.1007/978-3-031-09909-0_12"
     portfolio-type:
       - type: "research"
 
   - image: "assets/images/portfolio/diverse.png"
     url: "https://aclanthology.org/2023.acl-long.768/"
-    description: "A Diverse Set of Freely Available Linguistic Resources for Turkish"
     portfolio-type:
       - type: "dataset"
       - type: "model"
 
   - image: "assets/images/portfolio/gender.png"
     url: "https://aclanthology.org/2024.gebnlp-1.13.pdf"
-    description: "Gender Bias in Turkish Word Embeddings: A Comprehensive Study of Syntax, Semantics and Morphology Across Domains"
     portfolio-type:
       - type: "research"
 
   - image: "assets/images/portfolio/bella.png"
-    description: "BellaTurca:A Large-Scale Dataset of Diverse Text Sources for Turkish Language Modeling"
     url: "https://link.springer.com/chapter/10.1007/978-3-031-70563-2_16"
     portfolio-type:
       - type: "corpus"
 
   - image: "assets/images/portfolio/gentle.png"
-    description: "Turkish NLP, A Gentle Introduction"
     url: "https://medium.com/p/2b33e694dd78"
     portfolio-type:
       - type: "medium"
 
   - image: "assets/images/portfolio/phonetics.png"
     url: "https://medium.com/p/ce65ece62aea"
-    description: "Turkish Phonetics, A Quick Intro"
     portfolio-type:
       - type: "medium"
 
   - image: "assets/images/portfolio/yasak.png"
     url: "https://medium.com/p/ce65ece62aea"
-    description: "Neden yasaklandı? Depremle ilgili Ekşi Sözlük yorumlarına NLP gözüyle bakış"
     portfolio-type:
       - type: "medium"
 
   - image: "assets/images/portfolio/brandnew.png"
     url: "https://medium.com/p/fc83ca3c95df"
-    description: "A collection of new datasets for Turkish NLP"
     portfolio-type:
       - type: "medium"
 
   - image: "assets/images/portfolio/spacy.png"
     url: "https://medium.com/google-developer-experts/brand-new-spacy-turkish-models-304da649eacc"
-    description: "Brand new spaCy Turkish models"
     portfolio-type:
       - type: "medium"
 
   - image: "assets/images/portfolio/corona.png"
     url: "https://medium.com/google-developer-experts/quick-recipes-with-spacy-turkish-how-is-your-infection-doing-4ee1421b2443"
-    description: "Quick recipes with spaCy Turkish: How is your infection doing"
     portfolio-type:
       - type: "medium"
 
   - image: "assets/images/portfolio/instruct.png"
     url: "https://medium.com/google-developer-experts/instructurca-an-open-source-instruction-tuning-dataset-for-turkish-18c37b0e99b9"
-    description: "InstrucTurca:An open source instruction tuning dataset for Turkish"
     portfolio-type:
       - type: "medium"
 
