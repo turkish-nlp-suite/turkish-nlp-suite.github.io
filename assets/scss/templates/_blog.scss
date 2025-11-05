@@ -30,18 +30,29 @@ blockquote > p {
     display: inherit;
     line-height: 1.5;
   }
-  
-  img.image-styled {
-    max-width: 500px; // Increase the maximum width to make images larger
-    width: 100%; // Keeps the image responsive
-    height: auto; // Maintains the original aspect ratio
-    margin-bottom: 20px; // Space below the image
-    margin-right: 20px; // Space to the right of the image
-    float: left; // Aligns the image to the left
-    border-radius: 8px; // Optional: Rounded corners for aesthetics
+
+  img.main-image {
+    max-width: 800px; // Large size for the first image
+    width: 100%; // Keep it responsive
+    height: auto; // Maintain aspect ratio
+    margin-bottom: 20px; // Add spacing below
+    margin-right: 20px; // Add spacing to the right
+    float: left; // Align it to the left
+    border-radius: 8px;
+  }
+
+  /* Styling for the second (additional) image */
+  img.additional-image {
+    max-width: 600px; // Larger size for the second image
+    width: 100%; // Keep it responsive
+    height: auto; // Maintain aspect ratio
+    margin-bottom: 20px; // Add spacing below
+    margin-right: 20px; // Add spacing to the right
+    float: left; // Align it to the left
+    border-radius: 8px;
 
     @include desktop {
-      max-width: 600px; // Allow slightly larger images for desktop screens
+      max-width: 700px; // Slightly larger on desktop screens
     }
   }
 }

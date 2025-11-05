@@ -29,9 +29,9 @@ layout: default
         <p class="font-secondary">Published on {{ page.date | date: '%b %d, %Y' }} by <span class="text-primary">{{ page.author }}</span
             class="text-primary"> on {% for tag in page.tags %}<span>{{ tag }} </span>{% endfor %}</p>
         <div class="content">
-          <img src="{{page.image | relative_url }}" class="img-fluid rounded float-left image-styled mr-4 mb-3" alt="{{page.title}}">
+          <img src="{{page.image | relative_url }}" class="img-fluid main-image" alt="{{page.title}}">
           {{ content }}
-          <img src="{{page.additional_image | relative_url }}" class="img-fluid rounded float-left image-styled mr-4 mb-3" alt="Additional Image">
+          <img src="{{page.additional_image | relative_url }}" class="img-fluid additional-image" alt="Additional Image">
         </div>
       </div>
     </div>
