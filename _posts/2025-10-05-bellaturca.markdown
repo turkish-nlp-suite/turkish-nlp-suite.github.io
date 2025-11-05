@@ -23,12 +23,12 @@ Even worse, if you wanted to use those datasets, you had to clean them yourself.
 
 To fight all this dullness and blandness, we proudly introduce BellaTurca, a large-scale, diverse, and high-quality Turkish corpus collection. The collection includes six distinct subsets, each with its own unique flavor:
 
-* ÖzenliDerlem (CraftedCrawl): Curated web text from high-quality websites on topics like culture, literature, fairy tales, stories, and travel.
-* AkademikDerlem (AcademicalCrawl): Academic papers and theses, mostly crawled from DergiPark.
-* Kitaplar (Books): A books corpus collected from free sources on the internet. (Note: Excluded in the final version due to concerns about licensed material.)
-* ForumSohbetleri (ForumChats): Text from online forums, preserving conversational Turkish and emoticons while normalizing the text.
-* Temiz OSCAR (Clean OSCAR): A heavily cleaned version of the Turkish OSCAR dataset.
-* Temiz mC4 (Clean mC4): A cleaned version of the Turkish mC4 dataset.
+- ÖzenliDerlem (CraftedCrawl): Curated web text from high-quality websites on topics like culture, literature, fairy tales, stories, and travel.
+- AkademikDerlem (AcademicalCrawl): Academic papers and theses, mostly crawled from DergiPark.
+- Kitaplar (Books): A books corpus collected from free sources on the internet. (Note: Excluded in the final version due to concerns about licensed material.)
+- ForumSohbetleri (ForumChats): Text from online forums, preserving conversational Turkish and emoticons while normalizing the text.
+- Temiz OSCAR (Clean OSCAR): A heavily cleaned version of the Turkish OSCAR dataset.
+- Temiz mC4 (Clean mC4): A cleaned version of the Turkish mC4 dataset.
 
 The final collection size is around 250GB. You can find the stats for each subset on the [Bella Turca HF repo](https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca). Each subset also has its own dedicated Hugging Face repo.
 
@@ -40,17 +40,17 @@ There’s one subset that deserves special mention: [Havadis](https://huggingfac
 Cleaning the datasets was no easy task. Each subset had its own challenges, so we used different methods depending on the type of data. Here’s a quick summary:
 
 ##### Web Data (OSCAR, mC4)
-- **Language Filtering:** Removed non-Turkish content (and random languages like Chinese or Korean). 
-- **Deduplication:** Removed duplicate paragraphs and documents using hashing.
-- **Content Filtering:** Cleaned low-quality text like SEO pages, ads, and adult content.
+- Language Filtering: Removed non-Turkish content (and random languages like Chinese or Korean). 
+- Deduplication: Removed duplicate paragraphs and documents using hashing.
+- Content Filtering: Cleaned low-quality text like SEO pages, ads, and adult content.
 
 ##### Academic Papers
-- Extracted text from PDFs using **OCR** (yes, there are some OCR mistakes, we’re only human!).
+- Extracted text from PDFs using OCR (as expected).
 - Removed non-text content like tables and figures.
 - Cleaned abstracts (both Turkish and English).
 
 ##### Books
-- Books were the hardest. We used a **ByT5 model** for OCR correction. 
+- Books were the hardest. We used a ByT5 model for OCR correction. 
 - First, we trained it on a small, high-quality seed set of books. 
 - Then, we ran the model on the rest of the books, corrected the text, and retrained the model in a self-reinforcing loop. 
 - Rinse and repeat until we got clean text.
@@ -59,7 +59,7 @@ Cleaning the datasets was no easy task. Each subset had its own challenges, so w
 - Kept conversational Turkish and emoticons intact while normalizing the text for better usability.
 
 ##### ÖzenliDerlem
-- Used a **self-reinforcing autotrain loop**:
+- Used a self-reinforcing autotrain loop:
 - Started with a small set of high-quality pages.
 - Crawled similar pages using a sentence encoder and grouped them into clusters.
 - Built an n-gram model from the high-quality pages and scored the remaining pages.
