@@ -64,6 +64,7 @@
 }
 
 /* Portfolio Section Styles */
+/* Portfolio Section Styles */
 .shuffle-wrapper {
   display: flex;
   flex-direction: column; /* Ensure items stack vertically */
@@ -82,10 +83,10 @@
   border-bottom: none; /* Remove separator for the last item */
 }
 
-/* Image Styling */
+/* Bigger Image Styling */
 .shuffle-item img {
-  width: 25%; /* Image takes 25% of the width */
-  max-width: 200px; /* Optional: Limit the max size of the image */
+  width: 35%; /* Increase width to 35% for larger images */
+  max-width: 300px; /* Optional: Limit the max size of the image */
   height: auto; /* Maintain aspect ratio */
   object-fit: cover; /* Ensure the image scales proportionally */
   margin-right: 30px; /* Add space between the image and the text */
@@ -136,6 +137,7 @@
   .shuffle-item img {
     width: 100%; /* Make image full-width on smaller screens */
     max-width: 100%; /* Remove max-width restriction */
+    margin-right: 0; /* Remove right margin */
     margin-bottom: 15px; /* Add spacing below the image */
   }
 
