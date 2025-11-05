@@ -39,7 +39,7 @@ Examples of feminine words:
 
 - Beauty-related: güzellik (beauty), makyaj (makeup), çiçek (flower).
 - Domestic words: ev (home), temizlik (cleaning).
-- Proper nouns: Female names like Fatma and Mary.
+- Proper nouns: Female names like Burcu, Ayşen  and Maria.
 
 Examples of masculine words:
 
@@ -53,7 +53,7 @@ Sadly, these biases reflect real-world stereotypes, where men dominate professio
 We also looked at different parts of speech and found gender bias everywhere.
 
 - Verbs: Masculine verbs were common, covering general actions like gitmek (to go) and yapmak (to do). Feminine verbs were few and often tied to stereotypical roles, like süslenmek (to dress up) and güzelleşmek (to become beautiful).
-- Nouns: Feminine nouns were mostly proper names or words like tanrıça (goddess) and kraliçe (queen). In contrast, masculine nouns spanned professions, technology, and abstract concepts.
+- Nouns: Feminine nouns were mostly proper names or gendered loan words like tanrıça (goddess) and kraliçe (queen). In contrast, masculine nouns spanned professions, technology, and abstract concepts.
 
 ##### The Role of Suffixes
 Here’s where it gets even more interesting: Turkish suffixes can change a word’s gender!

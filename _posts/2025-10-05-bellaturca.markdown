@@ -65,7 +65,7 @@ Cleaning the datasets was no easy task. Each subset had its own challenges, so w
 - Added the high-scoring pages to the dataset.
 - Repeated the process until the dataset hit a stable point.
 
-This iterative approach helped us build a diverse, high-quality set of web pages without needing an external quality dataset.
+This iterative approach helped us build a diverse, high-quality set of web pages without needing an external quality dataset. We cleaned some portion per each dataset, especially for web data we throwed away a good portion of the dataset. For exact numbers please visit the publication.
 
 ---
 
