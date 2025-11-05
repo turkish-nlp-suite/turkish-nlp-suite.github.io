@@ -43,7 +43,7 @@ layout: default
             {{ paragraph }}</p>
             
             <!-- Insert the second image after the second paragraph -->
-            {% if forloop.index == 2 %}
+            {% if forloop.index == 6 %}
               <img src="{{ page.additional_image | relative_url }}" class="img-fluid rounded additional-image" alt="Additional Image">
             {% endif %}
           {% endfor %}
