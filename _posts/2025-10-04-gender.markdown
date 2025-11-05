@@ -2,7 +2,7 @@
 layout: post
 title:  How Syntax, Semantics, and Morphology Shape Language Inequality
 date:   2025-10-04 10:05:55 +0300
-image:  /assets/images/blog/post-2.jpg
+image:  /assets/images/blog/gender-vectors.png
 author: Duygu
 tags:   Research
 ---
