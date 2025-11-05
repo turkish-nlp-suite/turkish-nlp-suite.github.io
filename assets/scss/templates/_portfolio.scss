@@ -1,3 +1,4 @@
+/* Page Title Section */
 .page-title {
   padding: 250px 0 150px;
 
@@ -51,6 +52,7 @@
   }
 }
 
+/* Filter Controls */
 .filter-controls {
   li {
     cursor: pointer;
@@ -58,5 +60,86 @@
     &.active {
       font-weight: bold;
     }
+  }
+}
+
+/* Portfolio Section Styles */
+.shuffle-wrapper {
+  display: flex;
+  flex-direction: column; /* Ensure items stack vertically */
+  gap: 30px; /* Add space between publication items */
+}
+
+.shuffle-item {
+  display: flex;
+  align-items: center; /* Vertically align image and text */
+  border-bottom: 1px solid #e6e6e6; /* Add a separator between items */
+  padding-bottom: 20px; /* Space below each item */
+  padding-top: 20px; /* Space above each item */
+}
+
+.shuffle-item:last-of-type {
+  border-bottom: none; /* Remove separator for the last item */
+}
+
+/* Image Styling */
+.shuffle-item img {
+  width: 25%; /* Image takes 25% of the width */
+  max-width: 200px; /* Optional: Limit the max size of the image */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image scales proportionally */
+  margin-right: 30px; /* Add space between the image and the text */
+  border-radius: 10px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+/* Text Content Styling */
+.publication-text {
+  flex: 1; /* Allow the text to take the remaining space */
+}
+
+.publication-text h5 {
+  font-size: 18px; /* Adjust title font size */
+  font-weight: bold; /* Make the title bold */
+  margin-bottom: 10px; /* Add space below the title */
+  color: #333; /* Darker text color for better readability */
+}
+
+.publication-text h5 a {
+  color: inherit; /* Inherit color from heading */
+  text-decoration: none; /* Remove underline */
+}
+
+.publication-text h5 a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.publication-text p {
+  font-size: 14px; /* Adjust text size for the description */
+  color: #666; /* Use a muted color for the description */
+  margin-bottom: 15px; /* Add space below the description */
+  line-height: 1.6; /* Improve readability with line height */
+}
+
+.publication-text .btn-primary {
+  font-size: 14px; /* Button text size */
+  padding: 8px 12px; /* Adjust padding for smaller buttons */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .shuffle-item {
+    flex-direction: column; /* Stack image and text vertically */
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .shuffle-item img {
+    width: 100%; /* Make image full-width on smaller screens */
+    max-width: 100%; /* Remove max-width restriction */
+    margin-bottom: 15px; /* Add spacing below the image */
+  }
+
+  .publication-text {
+    text-align: left; /* Ensure text is left-aligned on small screens */
   }
 }
