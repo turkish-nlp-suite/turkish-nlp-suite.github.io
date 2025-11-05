@@ -35,40 +35,40 @@ The final collection size is around 250GB. You can find the stats for each subse
 There’s one subset that deserves special mention: [Havadis](https://huggingface.co/datasets/turkish-nlp-suite/Havadis). It’s the first large-scale Turkish news corpus, featuring text from major news outlets like Hürriyet, Milliyet, Star, and Posta. If you’re into playing with news data, this is the one to check out. (We’ll write more about it in another blog post soon!)
 
 
-## Cleaning BellaTurca
+#### Cleaning BellaTurca
 
 Cleaning the datasets was no easy task. Each subset had its own challenges, so we used different methods depending on the type of data. Here’s a quick summary:
 
-### Web Data (OSCAR, mC4)
+##### Web Data (OSCAR, mC4)
 - **Language Filtering:** Removed non-Turkish content (and random languages like Chinese or Korean). 
 - **Deduplication:** Removed duplicate paragraphs and documents using hashing.
 - **Content Filtering:** Cleaned low-quality text like SEO pages, ads, and adult content.
 
-### Academic Papers
+##### Academic Papers
 - Extracted text from PDFs using **OCR** (yes, there are some OCR mistakes, we’re only human!).
 - Removed non-text content like tables and figures.
 - Cleaned abstracts (both Turkish and English).
 
-### Books
+##### Books
 - Books were the hardest. We used a **ByT5 model** for OCR correction. 
 - First, we trained it on a small, high-quality seed set of books. 
 - Then, we ran the model on the rest of the books, corrected the text, and retrained the model in a self-reinforcing loop. 
 - Rinse and repeat until we got clean text.
 
-### ForumSohbetleri
+##### ForumSohbetleri
 - Kept conversational Turkish and emoticons intact while normalizing the text for better usability.
 
-### ÖzenliDerlem
+##### ÖzenliDerlem
 - Used a **self-reinforcing autotrain loop**:
-  - Started with a small set of high-quality pages.
-  - Crawled similar pages using a sentence encoder and grouped them into clusters.
-  - Built an n-gram model from the high-quality pages and scored the remaining pages.
-  - Added the high-scoring pages to the dataset.
-  - Repeated the process until the dataset hit a stable point.
+- Started with a small set of high-quality pages.
+- Crawled similar pages using a sentence encoder and grouped them into clusters.
+- Built an n-gram model from the high-quality pages and scored the remaining pages.
+- Added the high-scoring pages to the dataset.
+- Repeated the process until the dataset hit a stable point.
 
 This iterative approach helped us build a diverse, high-quality set of web pages without needing an external quality dataset.
 
--------------------------------------------------
+---
 
 BellaTurca isn’t just another corpus. It’s designed to be a core dataset for Turkish NLP, offering a foundation for building even larger, high-quality collections. Think of it as the start of something much bigger. With BellaTurca, you don’t just get data — you get diversity, quality, and the tools to take Turkish NLP to the next level.
 
