@@ -12,13 +12,13 @@ tags:   spaCy Turkish models
 
 Turkish morphology is like LEGO for linguists: click-click-click and suddenly one word is carrying tense, person, case, possessive, mood, polarity, and whether your neighbor merely heard the news or actually saw it. Most NLP write-ups jump straight to NER and dependency parsing. Not today. We’re going full minimalist: just morphology. No NER, no syntax trees—just suffix magic, a few normalization tricks, and plots that actually tell you something.
 
-** What’s the point?**
+**What’s the point?**
 
 - See how much structure you can squeeze out of raw Turkish news using only spaCy’s morphological features.
 - Build tiny, useful tools: case-aware search, possessive and pronoun summaries, verb-morph timelines, and a softening audit (hello p/ç/t/k → b/c/d/ğ).
 - Keep it practical: a handful of functions, a few plots, zero dependency parsing anxiety.
 
-** Why morphology-only?**
+**Why morphology-only?**
 
 Because Turkish gives you VIP access to meaning via suffixes. Case tells you who’s going where, possessives hint at who owns what, tense/mood/evidentiality sketch the timeline and “how sure are we?” stance. You can do real analytics without touching NER. Seriously.
 
