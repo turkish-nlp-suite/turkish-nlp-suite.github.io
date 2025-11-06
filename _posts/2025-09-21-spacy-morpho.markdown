@@ -13,13 +13,11 @@ tags:   spaCy Turkish models
 Turkish morphology is like LEGO for linguists: click-click-click and suddenly one word is carrying tense, person, case, possessive, mood, polarity, and whether your neighbor merely heard the news or actually saw it. Most NLP write-ups jump straight to NER and dependency parsing. Not today. We’re going full minimalist: just morphology. No NER, no syntax trees—just suffix magic, a few normalization tricks, and plots that actually tell you something.
 
 **What’s the point?**
-
 - See how much structure you can squeeze out of raw Turkish news using only spaCy’s morphological features.
 - Build tiny, useful tools: case-aware search, possessive and pronoun summaries, verb-morph timelines, and a softening audit (hello p/ç/t/k → b/c/d/ğ).
 - Keep it practical: a handful of functions, a few plots, zero dependency parsing anxiety.
 
 **Why morphology-only?**
-
 Because Turkish gives you VIP access to meaning via suffixes. Case tells you who’s going where, possessives hint at who owns what, tense/mood/evidentiality sketch the timeline and “how sure are we?” stance. You can do real analytics without touching NER. Seriously.
 
 Setup (quick and painless)
@@ -254,7 +252,7 @@ Question particles (mi/mı/mu/mü): 7
 ```
 
 First the verbs, most of the verbs are in past tense. In news the current events are narrated hence it's totally expected past tense to occur most.Coming to the evidentiality, the result is also expected as news are usually in non-evident form i.e. "gitti" vs "gitmis". Most of the verbs are positive as well, negation isn't used much. Coming to the mood, almost all moods are used, imperative, conditional (-sA), potential mood (-AbIl) and more.
-Coming to the nouns and pronouns, nominative case is the winner. Consonant softening composes 5.2% of all suffixation and there were 7 questions entences in the first 100 documents. 
+Coming to the nouns and pronouns, nominative case is the winner. For the possession, 3rd person marker is the winner as first or second person possession doesn't really suit news language (imagine evim, evimiz, eviniz, evin in the newspaper articles!!). Consonant softening composes 5.2% of all suffixation and there were 7 questions entences in the first 100 documents. 
 
 ---
 
