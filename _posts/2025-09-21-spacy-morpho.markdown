@@ -252,7 +252,7 @@ Question particles (mi/mı/mu/mü): 7
 ```
 
 First the verbs, most of the verbs are in past tense. In news the current events are narrated hence it's totally expected past tense to occur most.Coming to the evidentiality, the result is also expected as news are usually in non-evident form i.e. "gitti" vs "gitmis". Most of the verbs are positive as well, negation isn't used much. Coming to the mood, almost all moods are used, imperative, conditional (-sA), potential mood (-AbIl) and more.
-Coming to the nouns and pronouns, nominative case is the winner. For the possession, 3rd person marker is the winner as first or second person possession doesn't really suit news language (imagine evim, evimiz, eviniz, evin in the newspaper articles!!). Consonant softening composes 5.2% of all suffixation and there were 7 questions entences in the first 100 documents. 
+Coming to the nouns and pronouns, nominative case is the winner. For the possession, 3rd person marker is the winner as first or second person possession doesn't really suit news language (imagine evim, evimiz, eviniz, evin in the newspaper articles!!). Consonant softening composes 5.2% of all suffixation and there were 7 questions entences in the first 100 documents. All statistics are exhibited in the above figure, please look up :blush:
 
 ---
 
