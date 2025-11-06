@@ -8,8 +8,7 @@ author: Duygu
 tags:   spaCy Turkish models
 ---
 
-**Turkish morphollogy is fascinating and even more fascinating when you process it with spaCy Turkish models. In this article, quantify and characterize Turkish morphological info in news using spaCy Turkish by building practical morphological-only utilities: normalization, case/possessive/verb-morph analytics and suffix-aware search. Zero NER, zero parsing, maximum suffix joy.
-**
+**Turkish morphollogy is fascinating and even more fascinating when you process it with spaCy Turkish models. In this article, quantify and characterize Turkish morphological info in news using spaCy Turkish by building practical morphological-only utilities: normalization, case/possessive/verb-morph analytics and suffix-aware search. Zero NER, zero parsing, maximum suffix joy.**
 
 Turkish morphology is like LEGO for linguists: click-click-click and suddenly one word is carrying tense, person, case, possessive, mood, polarity, and whether your neighbor merely heard the news or actually saw it. Most NLP write-ups jump straight to NER and dependency parsing. Not today. We’re going full minimalist: just morphology. No NER, no syntax trees—just suffix magic, a few normalization tricks, and plots that actually tell you something.
 
@@ -24,11 +23,10 @@ Turkish morphology is like LEGO for linguists: click-click-click and suddenly on
 Because Turkish gives you VIP access to meaning via suffixes. Case tells you who’s going where, possessives hint at who owns what, tense/mood/evidentiality sketch the timeline and “how sure are we?” stance. You can do real analytics without touching NER. Seriously.
 
 Setup (quick and painless)
-
 ```
 Python 3.9+
 spaCy 3.7+
-tr_core_news_lg, the official large spaCy Turkish model
+tr_core_news_trf, the official spaCy Turkish model
 pandas and matplotlib for a bit of visualization
 Havadis, your ultimate Turkish news corpus
 ```
@@ -49,7 +47,20 @@ dataset = load_dataset("turkish-nlp-suite/Havadis", split="train")
 texts = dataset["text"] # the dataset only has a single field, text
 ```
 
-Before we start, we'll warm up to the morphological tags of the package. `.morph` feature holds the morphological tags of a token just like:
+Each instance of the Havadis includes a news article. An instance looks like:
+```
+1 Karat Kaç Gramdır? Bir Karat Kaç Gram?
+Değerli madenleri ölçmek için kullanılan bir ölçü birimi olarak karat ifade edilmektedir. Özellikle elmas başta olmak üzere pek çok değerli madeni ölçmek amaçlı önemli bir yere sahiptir. Bu doğrultuda karat ölçüm birimi aynı zamanda gram üzerinden de dönüşüm şansı vermektedir.
+Bu dönüşüm üzerinden bakıldığında ise bir karat 0,2 grama denk gelir. Böylece değerli taş madenlerin kütleleri hesabı yapılmak suretiyle buna uygun şekilde fiyatlandırması çıkarılır. Özellikle de güncel piyasa konusunda önemli yere sahiptir....
+```
+
+Next we load the spacy model into out Python shell:
+
+```Python
+nlp = spacy.load("tr_core_news_trf")
+```
+
+Before the dataset mining, we'll warm up to the morphological tags of the package. `.morph` feature holds the morphological tags of a token just like:
 
 ```
 doc = nlp("Ekip İstanbul'dan Ankara'ya hareket etti; açıklama dün yayımlandı mı?")
@@ -74,7 +85,7 @@ When we look at the noun "Ekip", we see it's in nominative case and singular in 
 
 If you're curious about the origins of the tags (namely BOUN treebank), please visit [the previous post about the package making](https://turkish-nlp-suite.github.io/2025/09/15/introducing-spacy-tr/).
 
-This corpus is cleaned and normalized for some characters includign apostrophe, so we won't do much of text cleaning. We are gonna collect the morphological tags and simply count them. We start with question clitics `mI` :
+This corpus is cleaned and normalized for some characters includign apostrophe, so we won't do much of text cleaning. We are gonna collect the morphological tags and simply count them. We start with question clitics `-mI` :
 
 
 ```
@@ -202,7 +213,7 @@ def plot_counter(title, counter, topn):
     plt.show()
 ```
 
-then run our shiny code on the Havadis data. All dataset is couple of GBs, hence we'll process the first 100 documents from the dataset. each document is a newspaper article and contains enough data for counting purposes.
+then run our shiny code on the Havadis data. All dataset is couple of GBs, hence we'll process the first 100 documents from the dataset. Remember each document is a newspaper article and contains enough number of words for counting purposes.
 
 ```
 
