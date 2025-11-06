@@ -8,11 +8,16 @@ tags:   spaCy Turkish models
 ---
 
 
-***
-Bir varmış; bir yokmuş
-Evvel zaman içinde
-Kalbur saman içinde
-Develer tellal iken
-Pireler berber iken
+**
+Bir varmış; bir yokmuş  
+
+Evvel zaman içinde  
+
+Kalbur saman içinde  
+
+Develer tellal iken  
+
+Pireler berber iken  
+
 Ben dedemin beşiğini tıngır mıngır sallarken...
-***
+**

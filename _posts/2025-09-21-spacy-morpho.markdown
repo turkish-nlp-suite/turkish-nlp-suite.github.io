@@ -2,13 +2,13 @@
 layout: post
 title:  Turkish Morphology / No NER, No Parsing, No Problem
 date:   2025-09-21 10:05:55 +0300
-image:  /assets/images/blog/post-2.jpg
-additional_image:  /assets/images/blog/post-2.jpg
+image:  /assets/images/blog/morph1.png
+additional_image:  /assets/images/blog/morph2.png
 author: Duygu
 tags:   spaCy Turkish models
 ---
 
-**Turkish morphollogy is fascinating and even more fascinating when you process it with spaCy Turkish models. In this article, quantify and characterize Turkish morphological info in news using spaCy Turkish by building practical morphological-only utilities: normalization, case/possessive/verb-morph analytics and suffix-aware search. Zero NER, zero parsing, maximum suffix joy.**
+**Turkish morphology is fascinating and even more fascinating when you process it with spaCy Turkish models. In this article, quantify and characterize Turkish morphological info in news using spaCy Turkish by building practical morphological-only utilities: normalization, case/possessive/verb-morph analytics and suffix-aware search. Zero NER, zero parsing, maximum suffix joy.**
 
 Turkish morphology is like LEGO for linguists: click-click-click and suddenly one word is carrying tense, person, case, possessive, mood, polarity, and whether your neighbor merely heard the news or actually saw it. Most NLP write-ups jump straight to NER and dependency parsing. Not today. We’re going full minimalist: just morphology. No NER, no syntax trees—just suffix magic, a few normalization tricks, and plots that actually tell you something.
 
@@ -237,3 +237,25 @@ plot_counter("Verb Tense distribution", stats["verb_tense"])
 plot_counter("Verb Evidentiality distribution", stats["verb_evident"])
 plot_counter("Verb Polarity distribution", stats["verb_polarity"])
 ```
+
+Here are the results:
+
+```
+— Stats —
+Case on NOUNs: Counter({'Nom': 5201, 'Loc': 1052, 'Gen': 839, 'Dat': 706, 'Acc': 555, 'Abl': 307, 'Ins': 208})
+Case on PRONs: Counter({'Nom': 79, 'Dat': 28, 'Gen': 28, 'Acc': 9, 'Loc': 9, 'Ins': 7, 'Abl': 7})
+Possessive on NOUNs: Counter({'3': 3247, '1': 74, '2': 6})
+Verb Tense: Counter({'Past': 1620, 'Pres': 1178, 'Fut': 266})
+Verb Mood: Counter({'Imp': 169, 'Cnd': 86, 'Pot': 76, 'Ind': 37, 'Nec': 14, 'Des': 4, 'Opt': 3, 'Gen': 2})
+Verb Evident: Counter({'Fh': 894, 'Nfh': 85})
+Verb Polarity: Counter({'Pos': 4002, 'Neg': 153})
+Accusative softening rate: 29/555 = 5.2%
+Question particles (mi/mı/mu/mü): 7
+```
+
+First the verbs, most of the verbs are in past tense. In news the current events are narrated hence it's totally expected past tense to occur most.Coming to the evidentiality, the result is also expected as news are usually in non-evident form i.e. "gitti" vs "gitmis". Most of the verbs are positive as well, negation isn't used much. Coming to the mood, almost all moods are used, imperative, conditional (-sA), potential mood (-AbIl) and more.
+Coming to the nouns and pronouns, nominative case is the winner. Consonant softening composes 5.2% of all suffixation and there were 7 questions entences in the first 100 documents. 
+
+---
+
+We made a small morphological parsing practice, more of spaCy Turkish models do not stop and jump onto the next article for [syntax in fairy tales](https://turkish-nlp-suite.github.io/2025/09/28/spacy-syntax/). Joy of processing Turkish always exist in our blog pages, you just need to keep going and read!
