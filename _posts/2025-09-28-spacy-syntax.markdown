@@ -2,8 +2,8 @@
 layout: post
 title:  Exploring Turkish Syntax in Fairy Tales /  A Linguistic Journey with spaCy Turkish
 date:   2025-09-28 10:05:55 +0300
-image:  /assets/images/blog/masal1.jpeg
-additional_image:  /assets/images/blog/masal1.jpeg
+image:  /assets/images/blog/dep.png
+additional_image:  /assets/images/blog/dep.png
 author: Duygu
 tags:   spaCy Turkish models
 ---
@@ -43,6 +43,8 @@ After making the pips,  now we can go ahead and download our dataset MasalMasal 
 from datasets import load_dataset
 dataset = load_dataset("turkish-nlp-suite/OzenliDerlem", "MasalMasal", split="train")
 texts = dataset["text"] # the dataset only has a single field, text
+len(texts)
+2621
 ```
 
 Also let's import spaCy and load our Turkish spaCy model:
@@ -55,8 +57,6 @@ nlp = spacy.load("tr_core_news_trf")
 The first linguistic phenomena for us is  clause chaining and parataxis. Clause chaining and parataxis are the turbo boost of Turkish storytelling: instead of nesting clauses under one another, the prose lines up full events back-to-back—çıktı, kapadı, bekledi—letting commas, ve, and markers like sonra do the pacing. Each clause stands on its own feet, sharing subjects by context (thanks, pro-drop) and keeping the narrative sprinting. This is different from subordination, where a clause bends to another’s purpose—gelince, -meden, -ken—to explain when, why, or how. In chaining, clauses are peers; in subordination, they’re satellites. For fairy tales, that peer-to-peer rhythm delivers clear beats and a spoken, drumlike cadence.
 
 Here's an example for us, the sentence "Keloğlan çıktı, kapıyı kapadı, sonra sessizce bekledi.". Let's look for clues of chaining in the dependency tree:
-
-
 
 
 ```
@@ -79,7 +79,13 @@ bekledi conj çıktı
 ```
 
 Here for every token we printed the syntactic head in the dependency tree and the dependency relation in between. 
-Looks like some chaining happening, for more understanding let's visualize the dependency tree with `displaCy`. 
+Looks like some chaining happening, for more understanding let's visualize the dependency tree with `displaCy`. Here is the code and the dependency tree generated is displayed in the first figure:
+
+```
+from spacy import displacy
+
+displacy.render(doc, style='dep', jupyter=True, options={'distance': 90})
+```
 
 Looking at the dependency tree , the main verb "cikti" is chained to "kapadi" and "bekledi" by the relation "conj", which is conjunction. Conjunction can be made by commas or conjuncts such as `ve`. We're also looking for some discourse connectors such as `once`, `sonra`. let's make the code and dissect it afterwards:
 
@@ -169,6 +175,18 @@ for sent in doc.sents:
 
 There's no chain in this flat sentence, compared it to the first sentence. So the rule is simple, if the length of the chain is greater than 1, we have a chaining sentence. Let's count how many of those sentences in our corpus:
 
+```
+def count_chained_sentences(texts) -> int:
+    count = 0
+    for doc in nlp.pipe(texts, disable=[]):
+        for sent in doc.sents:
+            chains = verb_chain_features(sent)
+            if any(len(c["verbs"]) > 1 for c in chains):
+                count += 1
+    return count
+
+count_chained_sentences(texts)
+```
 
 
 subordination
