@@ -2,7 +2,8 @@
 layout: post
 title:  Introducing spaCy Turkish Models / A Friendly Hello, Then Straight into the Tags
 date:   2025-09-15 12:05:55 +0300
-image:  /assets/images/blog/intro-dep.png
+image:  /assets/images/blog/intro-ner.png
+additional_image:  /assets/images/blog/intro-dep.png
 author: Duygu
 tags:   spaCy Turkish models
 ---
@@ -279,18 +280,16 @@ How to read these then?  Here is an explanation token by token:
         Person=1, Number=Plur: Agreement suffix -k/-k(ız) patterns; here "-uk" encodes 1PL "we."
 ```
 
-Now that we’ve grounded how UD Turkish‑BOUN features surface in spaCy (pos_, tag_, morph, dep_, lemma_), we can move up the stack from grammatical form to semantic labels. Named Entity Recognition (NER) complements POS/morphology by identifying and categorizing real‑world mentions like people, locations, organizations, dates, and more. In Turkish, accurate NER benefits directly from the analyses you’ve seen:
+Now that we've grounded how UD Turkish‑BOUN features surface in spaCy (pos_, tag_, morph, dep_, lemma_), we can move up the stack from grammatical form to semantic labels. Named Entity Recognition (NER) complements POS/morphology by identifying and categorizing real‑world mentions like people, locations, organizations, dates, and more. In Turkish, accurate NER benefits directly from the analyses you've seen:
 
-- Proper names with attached case suffixes remain single tokens, so entity spans like “Ankara’dan” still resolve to the lemma “Ankara.”
+- Proper names with attached case suffixes remain single tokens, so entity spans like "Ankara'dan" still resolve to the lemma "Ankara."
 - Case features (e.g., Case=Abl/Dat/Loc) help distinguish roles without breaking entity boundaries.
 - Dependency cues (obl, nmod, appos) and non‑finite markers (VerbForm=Conv/Part) provide syntactic context that improves entity disambiguation.
 
-Next, we’ll look at spaCy’s Turkish NER tags: what label set is used, how entities are segmented despite suffixes and apostrophes, and how to interpret typical labels (e.g., `PERSON`, `LOC`, `ORG`, `GPE`, `DATE`) on real examples.
+Next, we'll look at spaCy's Turkish NER tags: what label set is used, how entities are segmented despite suffixes and apostrophes, and how to interpret typical labels (e.g., `PERSON`, `LOC`, `ORG`, `GPE`, `DATE`) on real examples.
 ##### NER tags
+spaCy Turkish models' NER layer is built on your professionally annotated [WikiNER](https://huggingface.co/datasets/turkish-nlp-suite/turkish-wikiNER) dataset, using a rich, modern tagset that covers both classic and fine-grained categories: `PERSON`, `ORG`, `GPE/LOC`, `NORP`, and `TITLE` for people and affiliations; `FAC`, `PRODUCT`, `WORK_OF_ART`, `EVENT`, and `LAW` for named objects and cultural items; `DATE`, `TIME`, durations like `QUANTITY`, `ORDINAL`, `CARDINAL`, `MONEY`, and `PERCENT` for numerics; plus `LANGUAGE` to capture mentions like "Türkçe." In spaCy, these labels sit on top of the UD-informed pipeline: proper nouns with suffixes remain intact spans (e.g., "Ankara'dan" → GPE with lemma Ankara), and morphological/dependency context helps disambiguate roles without fragmenting entities. The result is a high-coverage Turkish NER system whose labels align with widely used ontologies while remaining faithful to Turkish orthography and morphology. The first picture of the page exhibits named entities of an example sentence.
 
 
-### Further reading
-- UD Turkish‑BOUN README for language‑specific decisions and examples.
-- UD guidelines on agglutinative morphology, non‑finite verbs, and adposition/case.
-- spaCy training docs for CoNLL‑U ingestion, morphologizer configuration, and lemmatizer lookups for Turkish.
-
+---
+That's a wrap! We connected UD Turkish‑BOUN analyses to spaCy's Turkish pipeline and then bridged up to your WikiNER-based NER layer with its rich label set. With pos_, tag_, morph, dep_, and high‑quality entity tags working together, you've got a transparent, extensible foundation for Turkish NLP at both syntactic and semantic levels. Thanks for the collaboration—feel free to reach out when you're ready to iterate on models, expand labels, or explore evaluation and deployment. Görüşmek üzere!
