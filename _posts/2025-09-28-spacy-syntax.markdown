@@ -186,7 +186,7 @@ Looking for the clues, let's visualize the dependency tree as exhibited in the s
 
 ```
 SPEECH_LEMMAS = {
-    "de", "söylemek", "sormak", "yanıtla", "cevapla",
+    "de", "söyle", "sor", "yanıtla", "cevapla",
     "fısılda", "bağır", "seslen", 
     "açıkla", "anlat"
 }
