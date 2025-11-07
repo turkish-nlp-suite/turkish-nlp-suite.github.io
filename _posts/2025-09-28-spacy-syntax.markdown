@@ -440,16 +440,8 @@ def extract_speech_events(sent):
 
     return events
 
-# Demo on your example
-text = '"Kapıyı aç," dedi dede; Keloğlan cevap verdi: "Tamam".'
-doc = nlp(text)
-for sent in doc.sents:
-    evs = extract_speech_events(sent)
-    for e in evs:
-        print(e)
-
 ```
- and then:
+ and then comes our example sentence:
 ```
 text = '"Kapıyı aç," dedi dede; Keloğlan cevap verdi: "Tamam".'
 doc = nlp(text)
