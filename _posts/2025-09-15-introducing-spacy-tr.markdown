@@ -2,7 +2,7 @@
 layout: post
 title:  Introducing spaCy Turkish Models / A Friendly Hello, Then Straight into the Tags
 date:   2025-09-15 12:05:55 +0300
-image:  /assets/images/blog/post-4.jpg
+image:  /assets/images/blog/intro-dep.png
 author: Duygu
 tags:   spaCy Turkish models
 ---
@@ -88,4 +88,209 @@ spaCy's annotation stack is designed to align cleanly with UD. When you load a U
 
 ---
 
-Now we understood the UD basics and treebanks, now 
+Now we understood the UD basics and treebanks, we're ready to dive into Turkish treebanks and tags.
+
+##### UD Turkish‑BOUN at a glance
+[The Turkish‑BOUN](https://github.com/UniversalDependencies/UD_Turkish-BOUN) treebank is one of the main UD resources for modern Turkish. Curated by researchers at Boğaziçi University, it targets contemporary standard Turkish across diverse genres (news, web, literature excerpts), with careful attention to tokenization, morphology, and clausal structure. It follows UD v2 guidelines while encoding Turkish‑specific phenomena—agglutinative morphology, productive derivation, participles, and clitics—in a way that remains comparable cross‑lingually.
+
+- Size and scope: tens of thousands of sentences and tokens, with periodic updates in UD releases.
+- Register and sources: written Turkish with a bias toward news/editorial prose; occasional colloquial forms and loanwords appear.
+- Licensing and versioning: distributed via UD releases (CoNLL‑U format), with versioned tags and GUIDELINES notes per release.
+
+##### Tokenization and orthographic conventions
+Turkish‑BOUN follows UD tokenization principles but adopts choices that make downstream morphology and syntax consistent:
+
+- Proper nouns and suffixes: proper names plus case/possessive suffixes are a single token (e.g., İstanbul'a), with lemma=İstanbul and FEATS carrying Case=Dat. Apostrophes are preserved in FORM, not split into extra tokens.
+- Clitics: enclitic particles like "-ki" (as a relativizer/particle) and question particle "mi/mı/mu/mü" are generally tokenized as separate tokens when they are syntactically independent; when they are orthographic clitics inside the word, tokenization follows UD guidance and BOUN's consistency rules.
+- Multiword tokens: contractions and fused forms (rare in Turkish) use the multiword token lines (e.g., 3-4) when required by UD; most Turkish writing keeps tokens morphologically transparent, so MWTs are uncommon.
+- Numbers, punctuation, and abbreviations: decimal separators, percent signs, and date formats are tokenized to keep numerals intact; punctuation receives PUNCT with case/mark attachments per UD.
+
+##### Morphological features: what BOUN encodes
+Because Turkish is agglutinative, BOUN's FEATS column is rich. Expect compact, compositional bundles that expose grammar directly. Common features include:
+
+- Case: Nom, Acc, Dat, Loc, Abl, Gen, Ins, and sometimes Equ or Voc if present in sources. Case appears on nouns, pronouns, proper nouns, and nominalized verbs.
+- Number: Sing, Plur.
+- Person: Person=1|2|3 for agreement; possessors use Person[psor]=1|2|3 on nouns to mark possessive suffixes; likewise Number[psor] for plural possessors.
+- PronType, NumType, Definite, Reflex: used on pronouns/determiners where relevant (e.g., PronType=Prs, Dem, Int).
+- Tense/Aspect/Mood (TAM): Tense=Past|Pres|Fut; Aspect=Prog|Hab|Perf where appropriate; Mood=Ind|Imp|Des|Nec|Pot|Cnd, etc., depending on morphological evidence.
+- Voice: Act, Pass, Caus, Recip; Turkish voice morphology is productive and frequently annotated (e.g., Voice=Pass|Caus).
+- Polarity: Pos or Neg for negation morphology (e.g., -ma/-me).
+- Evident: Nfh (non‑firsthand) where the -miş paradigm carries evidentiality; otherwise Evident=Fh/Nfh as applicable.
+- VerbForm: Fin for finite forms; Part for participles; Conv for converbs (e.g., -ken, -ınca); Vnoun for verbal nouns (e.g., -mek/-ma nominalizations).
+- Case on nominalizations: UD encourages carrying case on derived nominals; BOUN annotates case even when the head is a verbal noun or participle functioning nominally.
+
+##### Lemmatization strategy
+
+- Lemmas reflect dictionary base forms: verbs to infinitive stem (gitmek → lemma=git), nouns to nominative singular (öğrenciler → öğrenci).
+- For proper nouns with suffixes, apostrophes do not affect lemmas (Ankara'ya → Ankara).
+- Derivational morphology that changes part of speech yields lemmas appropriate to the derived category (e.g., öğretmenlik → öğretmenlik as a noun lemma; participles keep the verb lemma with VerbForm=Part capturing the derivation).
+
+##### Dependency relations: Turkish‑specific attachment habits
+BOUN uses the standard UD relation set but with attachment choices informed by Turkish syntax and head‑final tendencies:
+
+- Subjects and objects: nsubj marks nominal subjects; obj marks direct objects; iobj for true indirect objects (often dative arguments in ditransitives). Case features often disambiguate roles (Acc vs Dat).
+- Obliques and adpositions: Turkish postpositions are annotated with case=ADP tokens attaching to their nominal complements, and the nominal gets obl; the adposition itself takes relation case to the nominal. Case suffixes on nominals do not introduce separate tokens but are captured in FEATS; hence many oblique arguments appear as obl with Case in FEATS.
+- Clausal modifiers: acl for noun‑modifying clauses, especially participial modifiers; advcl for adverbial clauses (including converbial forms -ken, -ınca).
+- Complements: ccomp for clausal complements with their own subjects; xcomp for subject/control/raising complements without an overt subject (often non‑finite).
+- Copula and predication: Turkish has a null/auxiliary copula paradigm. BOUN typically treats the lexical predicate as head with cop or aux attachments for copular markers or auxiliaries, per UD conventions. Predicative nominals/adjectives often head the clause with nsubj attached.
+- Coordination: conj for coordinated dependents; cc for the coordinator; head is usually the first conjunct.
+- Negation, question particles, and focus markers: negation affixes yield Polarity=Neg; when standalone particles occur (e.g., mı), they are PART with the appropriate dependency (often dep or discourse/advmod depending on context) per BOUN guidelines.
+
+#### POS tags (UPOS) and frequent patterns in Turkish
+BOUN assigns the universal UPOS set; a few patterns are especially common:
+
+- VERB vs AUX: main lexical verbs get VERB; auxiliary/tam markers or certain copular elements may be AUX depending on analysis; many TAM categories are expressed as suffixes, so AUX is less frequent than in periphrastic languages.
+ - NOUN vs PROPN: capitalized names, institutions, and places as PROPN; suffixes do not change UPOS, they change FEATS.
+ - ADP: postpositions (göre, kadar, için) are ADP; case suffixes are not separate tokens.
+ - PART: enclitic question particle (mı) and other function particles when tokenized.
+ - SCONJ: subordinators like çünkü, ki (when used as a subordinator rather than clitic), eğer, diye (context‑dependent).
+ - CCONJ: ve, veya, ya da.
+
+##### Participles, converbs, and nominalizations
+A hallmark of Turkish is the heavy use of non‑finite verb forms:
+
+- Participles (VerbForm=Part): often head relative‑like modifiers with acl; they inherit verbal features (Voice, Polarity, Tense/Aspect) while functioning adjectivally.
+- Converbs (VerbForm=Conv): mark adverbial subordination (advcl), typically with suffixes such as -ken, -ınca/-ince, -ip.
+- Verbal nouns (VerbForm=Vnoun): behave as NOUN/VERB hybrids; in UD, they typically keep UPOS=VERB or NOUN depending on guidelines and treebank practice. In BOUN, the common practice is to keep UPOS=VERB for non‑finite forms that retain argument structure and mark syntactic role via relations and features; fully lexicalized forms are NOUN.
+
+
+##### Common edge cases and how BOUN handles them
+
+- Proper names with attached case: single token; lemma without suffix; Case feature holds the information.
+- Quotatives and reported speech: evidential -miş annotated as Evident=Nfh in FEATS; syntactic relation remains based on clause structure.
+- Light verb constructions: nominal or verbal elements combining with etmek/yapmak may appear with the lexical component as head, and the light verb attaching as aux or compound:svc depending on BOUN's adopted convention; check release notes for specifics used in the current version.
+- Code‑mixed tokens: Language of FEATS is not used; instead, tokens keep UPOS based on function; foreign proper names are PROPN; language detection is outside UD scope.
+- Punctuation and headlines: PUNCT attaches to the nearest syntactic head; ellipses and dashes are normalized; telegraphic headlines still receive UD relations as available.
+
+##### A compact, illustrative CoNLL‑U snippet
+This demonstrates BOUN‑style annotations without going deep into any one phenomenon.
+
+```
+# sent_id = 1
+# text = Ankara'dan İstanbul'a giderken Bolu'da durduk.
+1	Ankara'dan	Ankara	PROPN	Prop	Case=Abl|Number=Sing	3	obl	_	_
+2	İstanbul'a	İstanbul	PROPN	Prop	Case=Dat|Number=Sing	3	obl	_	_
+3	giderken	git	VERB	Verb	VerbForm=Conv	5	advcl	_	_
+4	Bolu'da	Bolu	PROPN	Prop	Case=Loc|Number=Sing	5	obl	_	_
+5	durduk	dur	VERB	Verb	Mood=Ind|Tense=Past|VerbForm=Fin|Person=1|Number=Plur	0	root	_	_
+6	.	.	PUNCT	Punc	_	5	punct	_	_
+```
+ We wait a moment to read this sentence. We'll now move onto the details of how all these comes together for spaCy Turkish models, then read this sentence again:
+
+##### How UD Turkish‑BOUN tags come to life in spaCy's Turkish models
+
+spaCy's Turkish pipelines are trained on UD treebanks like Turkish‑BOUN. During training, spaCy reads CoNLL‑U and learns to predict:
+
+- pos_ = UPOS (universal POS)
+- morph = FEATS (morphological features such as Case, Number, Person, Tense, Aspect, Mood, Voice, Polarity, Evident, VerbForm, possessives)
+- lemma_ = LEMMA (dictionary base)
+- dep_ and heads = UD dependency relations and attachments
+- tag_ = language‑specific POS (XPOS). For BOUN, this is typically a minimal set mirroring UPOS (e.g., Verb, Prop, Punc) because BOUN encodes detail in FEATS rather than a rich XPOS inventory.
+
+###### Training flow (BOUN → spaCy)
+
+- Tokenization: BOUN's choices (e.g., proper nouns with suffixes as single tokens) are preserved. spaCy's Turkish tokenizer is configured to keep apostrophe‑joined suffixes inside the token (Ankara'dan).
+- UPOS (pos_): The tagger learns the universal classes (NOUN, VERB, ADJ, PROPN, etc.).
+- FEATS (morph): The morphologizer learns attribute bundles (e.g., Case=Abl|Number=Sing; for verbs, VerbForm=Fin|Tense=Past|Person=1|Number=Plur).
+- Lemmata: Learned via rules + supervision; crucial for agglutinative stripping (İstanbul'a → İstanbul; durduk → dur).
+- Dependencies: The parser learns Turkish‑specific attachments: obliques for case‑marked arguments, advcl for converbs, acl for participles, copular structures headed by the lexical predicate, postpositions as ADP with case, etc.
+- XPOS (tag_): Because UD‑Turkish relies on FEATS, BOUN's XPOS is minimal; spaCy exposes it as token.tag_. Fine‑grained distinctions live in token.morph rather than tag_.
+
+###### tag_ vs pos_ in Turkish
+
+- pos_ (UPOS): Cross‑lingual, coarse category. Examples: PROPN, NOUN, VERB, ADJ, ADV, ADP, PUNCT.
+- tag_ (XPOS): Language‑specific. In BOUN‑based Turkish models, it's often:
+- Prop for proper nouns (mirrors PROPN)
+- Noun for nouns, Verb for verbs, Adj for adjectives, Adv for adverbs, Punc for punctuation, etc.
+- It typically does NOT encode case, TAM, voice, polarity, or possessive features. Those are in token.morph.
+- Practical takeaway: Use pos_ for coarse class, token.morph for Turkish‑specific detail. Use tag_ only if you need the treebank's native minimal labels. If you want a fine‑grained "Turkish tag," compose it: f"{pos_}|{morph}".
+
+
+Now we come to our example sentence again: `Ankara'dan İstanbul'a giderken Bolu'da durduk.` Here's the output from the following code:
+
+```
+>>> doc = nlp(sentence)
+>>> for token in doc:
+...   token, token.pos_, token.tag_, token.lemma_, token.dep_, token.head_
+... 
+(Ankara'dan, 'PROPN', 'Prop', 'Ankara', 'obl', giderken)
+(İstanbul'a, 'PROPN', 'Prop', 'İstanbul', 'obl', giderken)
+(giderken, 'VERB', 'Verb', 'gider', 'advcl', durduk)
+(Bolu'da, 'PROPN', 'Prop', 'Bolu', 'obl', durduk)
+(durduk, 'VERB', 'Verb', 'dur', 'ROOT', durduk)
+(., 'PUNCT', 'Punc', '.', 'punct', durduk)
+```
+
+How to read these then?  Here is an explanation token by token:
+```
+    Ankara'dan
+
+    UPOS (pos_): PROPN — proper noun.
+    XPOS (tag_): Prop — minimal, language-specific label mirroring PROPN.
+    Lemma: Ankara — bare form; the suffixes are not part of the lemma.
+    Dependency: obl → head=giderken — an oblique argument of the going event (source).
+    Morphology (FEATS): Case=Abl | Number=Sing
+        Case=Abl: Ablative case marked by -dan/-den ("from"), signaling source/origin.
+        Number=Sing: Proper names are singular by default.
+    Why it matters: In Turkish UD, motion sources/goals/paths are usually obliques with case features. The ablative tells you it's a source, which can be crucial for IE/NLP tasks (e.g., extracting "from" locations).
+
+    İstanbul'a
+
+    UPOS: PROPN
+    XPOS: Prop
+    Lemma: İstanbul
+    Dependency: obl → head=giderken — oblique argument (goal).
+    Morphology: Case=Dat | Number=Sing
+        Case=Dat: Dative -a/-e ("to"), signaling destination/goal of motion.
+        Number=Sing: Proper name in singular.
+    Why it matters: The dative distinguishes destination from location/source. In many tasks you'll detect goals by Case=Dat.
+
+    giderken
+
+    UPOS: VERB
+    XPOS: Verb
+    Lemma: git (some pipelines may surface "gider"; UD typically uses the dictionary base "git")
+    Dependency: advcl → head=durduk — adverbial clause modifying the main predicate.
+    Morphology: VerbForm=Conv (and sometimes additional features depending on the treebank)
+        VerbForm=Conv: Converb (non-finite adverbial verb form). The suffix -ken expresses "while V‑ing".
+        Why no tense/person here? Converbs are non-finite; TAM/person agreement lives on finite verbs. The -ken form typically doesn't carry person/number.
+    Why it matters: VerbForm is the key to Turkish non-finites. Recognizing converbs (Conv), participles (Part), and verbal nouns (Vnoun) lets you distinguish clausal modifiers (advcl), adjectival clauses (acl), and nominalizations (obj/nsubj as needed).
+
+    Bolu'da
+
+    UPOS: PROPN
+    XPOS: Prop
+    Lemma: Bolu
+    Dependency: obl → head=durduk — oblique location of the stopping event.
+    Morphology: Case=Loc | Number=Sing
+        Case=Loc: Locative -da/-de ("in/at/on"), signaling location.
+    Why it matters: Location arguments typically surface as obl with Case=Loc. This helps downstream tasks (e.g., event-place extraction).
+
+    durduk
+
+    UPOS: VERB
+    XPOS: Verb
+    Lemma: dur — dictionary base "to stop."
+    Dependency: root — head of the clause.
+    Morphology: VerbForm=Fin | Mood=Ind | Tense=Past | Person=1 | Number=Plur
+        VerbForm=Fin: Finite verb (it carries agreement/TAM and can head a clause).
+        Mood=Ind: Indicative mood (plain statement).
+        Tense=Past: Past time reference signaled by -di/-dı/-du/-dü allomorphs (here folded into -duk).
+        Person=1, Number=Plur: Agreement suffix -k/-k(ız) patterns; here "-uk" encodes 1PL "we."
+```
+
+Now that we’ve grounded how UD Turkish‑BOUN features surface in spaCy (pos_, tag_, morph, dep_, lemma_), we can move up the stack from grammatical form to semantic labels. Named Entity Recognition (NER) complements POS/morphology by identifying and categorizing real‑world mentions like people, locations, organizations, dates, and more. In Turkish, accurate NER benefits directly from the analyses you’ve seen:
+
+- Proper names with attached case suffixes remain single tokens, so entity spans like “Ankara’dan” still resolve to the lemma “Ankara.”
+- Case features (e.g., Case=Abl/Dat/Loc) help distinguish roles without breaking entity boundaries.
+- Dependency cues (obl, nmod, appos) and non‑finite markers (VerbForm=Conv/Part) provide syntactic context that improves entity disambiguation.
+
+Next, we’ll look at spaCy’s Turkish NER tags: what label set is used, how entities are segmented despite suffixes and apostrophes, and how to interpret typical labels (e.g., `PERSON`, `LOC`, `ORG`, `GPE`, `DATE`) on real examples.
+##### NER tags
+
+
+### Further reading
+- UD Turkish‑BOUN README for language‑specific decisions and examples.
+- UD guidelines on agglutinative morphology, non‑finite verbs, and adposition/case.
+- spaCy training docs for CoNLL‑U ingestion, morphologizer configuration, and lemmatizer lookups for Turkish.
+
