@@ -19,14 +19,14 @@ Before we dive into dragons and dialog, a quick map of the forest: Turkish parse
 
 So how do we bottle that chaos into structure? We start by tracing clause chains—the verb-to-verb railways that power fairy-tale tempo—then peel off their satellites with subordination to see what happened, when, and why. From there, we zoom into embeddings: ccomp and xcomp that tuck plans, promises, and prophecies inside larger sentences. Because plot is mostly people talking, we’ll wire up quotation and speech patterns, matching every "dedi" to an actual speaker. Lists are the drumbeat of masals, so we’ll map coordination patterns to catch the famous "üç" rhythm in nouns and verbs alike. Finally, we’ll merge epithets with names via apposition and renaming—so "Şahmaran, yılanların şahı" is one entity, not two—before exporting everything into clean, queryable structures.
 
-Before all the code, we'll do some pips to prepare our setup:
+Before all the code, we'll do some pips to prepare our setup. The second line is gonna install the spaCy model `tr_core_news_trf` from [the official spaCy Turkish models Hugging Face repo](https://huggingface.co/collections/turkish-nlp-suite/turkish-spacy-models):
 ```bash
 pip install -U spacy pandas matplotlib
-pip install https://huggingface.co/turkish-nlp-suite/tr_core_news_lg/resolve/main/tr_core_news_trf-1.0-py3-none-any.whl
+pip install https://huggingface.co/turkish-nlp-suite/tr_core_news_trf/resolve/main/tr_core_news_trf-1.0-py3-none-any.whl
 pip install datasets
 ```
 
-After making the pips,  now we can go ahead and download our dataset MasalMasal from [HF](https://huggingface.co/datasets/turkish-nlp-suite/OzenliDerlem):
+After making the pips,  now we can go ahead and download our dataset MasalMasal from [Turkish NLP Suite HF repo](https://huggingface.co/datasets/turkish-nlp-suite/OzenliDerlem):
 ```python
 from datasets import load_dataset
 dataset = load_dataset("turkish-nlp-suite/OzenliDerlem", "MasalMasal", split="train")

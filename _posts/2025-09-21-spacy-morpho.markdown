@@ -29,15 +29,15 @@ pandas and matplotlib for a bit of visualization
 Havadis, your ultimate Turkish news corpus
 ```
 
-First we install the requirements:
+First we install the requirements. The second line is gonna install the spaCy model `tr_core_news_trf` from [the official spaCy Turkish models Hugging Face repo](https://huggingface.co/collections/turkish-nlp-suite/turkish-spacy-models):
 
 ```bash
 pip install -U spacy pandas matplotlib
-pip install https://huggingface.co/turkish-nlp-suite/tr_core_news_lg/resolve/main/tr_core_news_trf-1.0-py3-none-any.whl
+pip install https://huggingface.co/turkish-nlp-suite/tr_core_news_trf/resolve/main/tr_core_news_trf-1.0-py3-none-any.whl
 pip install datasets
 ```
 
-After making the pips,  now we can go ahead and download our dataset Havadis from [HF](https://huggingface.co/datasets/turkish-nlp-suite/Havadis):
+After making the pips,  now we can go ahead and download our dataset Havadis from [the official Havadis HF repo](https://huggingface.co/datasets/turkish-nlp-suite/Havadis):
 
 ```python
 from datasets import load_dataset
