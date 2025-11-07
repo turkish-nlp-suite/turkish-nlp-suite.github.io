@@ -2,8 +2,8 @@
 layout: post
 title:  Exploring Turkish Syntax in Fairy Tales /  A Linguistic Journey with spaCy Turkish
 date:   2025-09-28 10:05:55 +0300
-image:  /assets/images/blog/dep2.png
-additional_image:  /assets/images/blog/dep.png
+image:  /assets/images/blog/dep.png
+additional_image:  /assets/images/blog/dep2.png
 author: Duygu
 tags:   spaCy Turkish models
 ---
@@ -20,7 +20,6 @@ Before we dive into dragons and dialog, a quick map of the forest: Turkish parse
 So how do we bottle that chaos into structure? We start by tracing clause chains—the verb-to-verb railways that power fairy-tale tempo—then peel off their satellites with subordination to see what happened, when, and why. From there, we zoom into embeddings: ccomp and xcomp that tuck plans, promises, and prophecies inside larger sentences. Because plot is mostly people talking, we’ll wire up quotation and speech patterns, matching every "dedi" to an actual speaker. Lists are the drumbeat of masals, so we’ll map coordination patterns to catch the famous "üç" rhythm in nouns and verbs alike. Finally, we’ll merge epithets with names via apposition and renaming—so "Şahmaran, yılanların şahı" is one entity, not two—before exporting everything into clean, queryable structures.
 
 Before all the code, we'll do some pips to prepare our setup:
-
 ```bash
 pip install -U spacy pandas matplotlib
 pip install https://huggingface.co/turkish-nlp-suite/tr_core_news_lg/resolve/main/tr_core_news_trf-1.0-py3-none-any.whl
@@ -28,7 +27,6 @@ pip install datasets
 ```
 
 After making the pips,  now we can go ahead and download our dataset MasalMasal from [HF](https://huggingface.co/datasets/turkish-nlp-suite/OzenliDerlem):
-
 ```python
 from datasets import load_dataset
 dataset = load_dataset("turkish-nlp-suite/OzenliDerlem", "MasalMasal", split="train")
@@ -40,7 +38,6 @@ texts[50]
 ```
 
 Also let's import spaCy and load our Turkish spaCy model:
-
 ```
 import spacy
 nlp = spacy.load("tr_core_news_trf")
@@ -79,7 +76,7 @@ from spacy import displacy
 displacy.render(doc, style='dep', jupyter=True, options={'distance': 90})
 ```
 
-Looking at the dependency tree , the main verb "cikti" is chained to "kapadi" and "bekledi" by the relation "conj", which is conjunction. Conjunction can be made by commas or conjuncts such as `ve`. We're also looking for some discourse connectors such as `once`, `sonra`. Let's make the code and dissect it afterwards:
+Looking at the dependency tree , the main verb "çıktı" is chained to "kapadı" and "bekledi" by the relation "conj", which is conjunction. Conjunction can be made by commas or conjuncts such as `ve`. We're also looking for some discourse connectors such as `önce`, `sonra`. Let's make the code and dissect it afterwards:
 
 ```
 DISCOURSE_MARKERS = {"sonra", "derken", "nihayet", "o", "ondan", "meğer"}  # we can expand more
@@ -182,10 +179,10 @@ count_chained_sentences(texts)
 53
 ```
 
-Great, right? We told you fairy tales are full of syntactic sugar. Next phenomena of this article is quotation and speech constructions, as in the sentence `"Kapıyı aç," dedi dede; Keloğlan cevap verdi: "Tamam.". Quotation and speech constructions encode who says what and how, using a quoted segment plus a reporting clause with a speech verb. In Turkish, direct speech is typically enclosed in quotes and anchored by verbs like demek, söylemek, sormak, fısıldamak, bağırmak, often with adverbs or manner cues, and the speaker as a noun phrase: "Kapıyı aç," dedi dede. The reporting clause can precede, follow, or split the quote; punctuation and intonation carry much of the structure. You’ll also see diye introducing quoted content or intentions ("Korkmasın diye fısıldadı") and ki after demek for content clauses ("Dedi ki kapı kilitli"). In dependency terms, treat the quoted span as a content unit attached to the SAY-verb (ccomp/parataxis depending on the parser), link the speaker NP to the verb (nsubj), and watch for multiple quotes coordinated to one reporting verb. This mapping lets you attribute lines reliably, even with pro-drop and free-ish word order.
+Great, right? We told you fairy tales are full of syntactic sugar. Next phenomena of this article is quotation and speech constructions, as in the sentence `"Kapıyı aç," dedi dede; Keloğlan cevap verdi: "Tamam."`. Quotation and speech constructions encode who says what and how, using a quoted segment plus a reporting clause with a speech verb. In Turkish, direct speech is typically enclosed in quotes and anchored by verbs like demek, söylemek, sormak, fısıldamak, bağırmak, often with adverbs or manner cues, and the speaker as a noun phrase: "Kapıyı aç," dedi dede. The reporting clause can precede, follow, or split the quote; punctuation and intonation carry much of the structure. You’ll also see diye introducing quoted content or intentions ("Korkmasın diye fısıldadı") and ki after demek for content clauses ("Dedi ki kapı kilitli"). In dependency terms, treat the quoted span as a content unit attached to the SAY-verb (ccomp/parataxis depending on the parser), link the speaker NP to the verb (nsubj), and watch for multiple quotes coordinated to one reporting verb. This mapping lets you attribute lines reliably, even with pro-drop and free-ish word order.
 
 
-Looking for the clues, let's visualize the dependency tree as exhibited in the above figure. In this example, the parser gives us two reporting anchors and two quoted contents, tied together by coordination and punctuation. The first anchor is dedi (ROOT) with the speaker dede as its nsubj. Its content is the clause headed by aç, attached via ccomp, and that clause is clearly delimited by opening and closing quote tokens plus a following comma: "Kapıyı aç,". Notice that Kapıyı is the obj of aç, and the leading quote mark is (somewhat noisily) attached as obj to aç as well, while the trailing quote and comma are punct dependents—typical quirks you should tolerate. After the first speech event, a semicolon punct attaches to dedi but simply separates two coordinated reporting clauses. The second anchor is cevap, which is a conj dependent of dedi: this captures the narrative sequence "dedi; … cevap verdi." The speaker here is Keloğlan (nsubj of cevap), and the light verb verdi appears as compound under cevap—so normalize this as the multiword speech verb cevap vermek. A colon punct on cevap cues that its quote follows. Indeed, the second quoted content is the single-word Tamam, tokenized as a conj attached to cevap, wrapped by quote marks recognized as punct on either side; in practice, you can treat the quoted span beginning at the opening quote before Tamam and ending at the closing quote after Tamam as the content of cevap. Putting it together: event 1 = {speaker: dede, verb: dedi, quote: "Kapıyı aç"}; event 2 = {speaker: Keloğlan, verb: cevap verdi, quote: "Tamam"}. The key signals you’d generalize from this tree are: (1) a speech verb head (demek or a compound like cevap+vermek) with an nsubj speaker; (2) a content clause linked by ccomp or, for very short quotes, a nearby span enclosed by quotation marks and attached via ccomp/conj; (3) tolerance for intervening punctuation (, ; :) and coordination (conj) connecting multiple reporting verbs into one sequence. Below goes the code snippet, and we feed our example sentence:
+Looking for the clues, let's visualize the dependency tree as exhibited in the second figure of the page. In this example, the parser gives us two reporting anchors and two quoted contents, tied together by coordination and punctuation. The first anchor is dedi (ROOT) with the speaker dede as its nsubj. Its content is the clause headed by aç, attached via ccomp, and that clause is clearly delimited by opening and closing quote tokens plus a following comma: "Kapıyı aç,". Notice that Kapıyı is the obj of aç, and the leading quote mark is (somewhat noisily) attached as obj to aç as well, while the trailing quote and comma are punct dependents—typical quirks you should tolerate. After the first speech event, a semicolon punct attaches to dedi but simply separates two coordinated reporting clauses. The second anchor is cevap, which is a conj dependent of dedi: this captures the narrative sequence "dedi; … cevap verdi." The speaker here is Keloğlan (nsubj of cevap), and the light verb verdi appears as compound under cevap—so normalize this as the multiword speech verb cevap vermek. A colon punct on cevap cues that its quote follows. Indeed, the second quoted content is the single-word Tamam, tokenized as a conj attached to cevap, wrapped by quote marks recognized as punct on either side; in practice, you can treat the quoted span beginning at the opening quote before Tamam and ending at the closing quote after Tamam as the content of cevap. Putting it together: event 1 = {speaker: dede, verb: dedi, quote: "Kapıyı aç"}; event 2 = {speaker: Keloğlan, verb: cevap verdi, quote: "Tamam"}. The key signals you’d generalize from this tree are: (1) a speech verb head (demek or a compound like cevap+vermek) with an nsubj speaker; (2) a content clause linked by ccomp or, for very short quotes, a nearby span enclosed by quotation marks and attached via ccomp/conj; (3) tolerance for intervening punctuation (, ; :) and coordination (conj) connecting multiple reporting verbs into one sequence. Below goes the code snippet, and we feed our example sentence:
 
 ```
 SPEECH_LEMMAS = {
