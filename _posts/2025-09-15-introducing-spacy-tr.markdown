@@ -113,7 +113,7 @@ Because Turkish is agglutinative, BOUN's FEATS column is rich. Expect compact, c
 - Number: Sing, Plur.
 - Person: Person=1|2|3 for agreement; possessors use Person[psor]=1|2|3 on nouns to mark possessive suffixes; likewise Number[psor] for plural possessors.
 - PronType, NumType, Definite, Reflex: used on pronouns/determiners where relevant (e.g., PronType=Prs, Dem, Int).
-- Tense/Aspect/Mood (TAM): Tense=Past|Pres|Fut; Aspect=Prog|Hab|Perf where appropriate; Mood=Ind|Imp|Des|Nec|Pot|Cnd, etc., depending on morphological evidence.
+- Tense/Aspect/Mood (TAM): Tense=Past\|Pres\|Fut; Aspect=Prog\|Hab\|Perf where appropriate; Mood=Ind\|Imp\|Des\|Nec\|Pot\|Cnd, etc., depending on morphological evidence.
 - Voice: Act, Pass, Caus, Recip; Turkish voice morphology is productive and frequently annotated (e.g., Voice=Pass|Caus).
 - Polarity: Pos or Neg for negation morphology (e.g., -ma/-me).
 - Evident: Nfh (non‑firsthand) where the -miş paradigm carries evidentiality; otherwise Evident=Fh/Nfh as applicable.
@@ -233,7 +233,6 @@ How to read these then?  Here is an explanation token by token:
     Morphology (FEATS): Case=Abl | Number=Sing
         Case=Abl: Ablative case marked by -dan/-den ("from"), signaling source/origin.
         Number=Sing: Proper names are singular by default.
-    Why it matters: In Turkish UD, motion sources/goals/paths are usually obliques with case features. The ablative tells you it's a source, which can be crucial for IE/NLP tasks (e.g., extracting "from" locations).
 
     İstanbul'a
 
@@ -244,7 +243,6 @@ How to read these then?  Here is an explanation token by token:
     Morphology: Case=Dat | Number=Sing
         Case=Dat: Dative -a/-e ("to"), signaling destination/goal of motion.
         Number=Sing: Proper name in singular.
-    Why it matters: The dative distinguishes destination from location/source. In many tasks you'll detect goals by Case=Dat.
 
     giderken
 
@@ -255,7 +253,7 @@ How to read these then?  Here is an explanation token by token:
     Morphology: VerbForm=Conv (and sometimes additional features depending on the treebank)
         VerbForm=Conv: Converb (non-finite adverbial verb form). The suffix -ken expresses "while V‑ing".
         Why no tense/person here? Converbs are non-finite; TAM/person agreement lives on finite verbs. The -ken form typically doesn't carry person/number.
-    Why it matters: VerbForm is the key to Turkish non-finites. Recognizing converbs (Conv), participles (Part), and verbal nouns (Vnoun) lets you distinguish clausal modifiers (advcl), adjectival clauses (acl), and nominalizations (obj/nsubj as needed).
+    Attention: VerbForm is the key to Turkish non-finites. Recognizing converbs (Conv), participles (Part), and verbal nouns (Vnoun) lets you distinguish clausal modifiers (advcl), adjectival clauses (acl), and nominalizations (obj/nsubj as needed).
 
     Bolu'da
 
@@ -265,7 +263,6 @@ How to read these then?  Here is an explanation token by token:
     Dependency: obl → head=durduk — oblique location of the stopping event.
     Morphology: Case=Loc | Number=Sing
         Case=Loc: Locative -da/-de ("in/at/on"), signaling location.
-    Why it matters: Location arguments typically surface as obl with Case=Loc. This helps downstream tasks (e.g., event-place extraction).
 
     durduk
 
