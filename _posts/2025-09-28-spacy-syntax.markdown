@@ -318,16 +318,6 @@ def nearest_quoted_span_for_tok(tok, doc):
     return None
 
 
-QUOTE_CHARS = {
-    '"', '“', '”', '„', '‟', '«', '»', '‚', '‘', '’', "'", '`', '´'
-}
-
-from typing import Optional
-
-QUOTE_CHARS = {
-    '"', '“', '”', '„', '‟', '«', '»', '‚', '‘', '’', "'", '`', '´'
-}
-
 def get_quote_for_reporting_verb(rv):
     sent = rv.sent
     doc = rv.doc
