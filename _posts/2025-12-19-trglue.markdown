@@ -100,7 +100,7 @@ A familiar, strong baseline helps ground expectations. Here’s how BERTurk perf
 | TrQQP   | Accuracy / F1                  | 95.4 / 94.3 |
 | TrMNLI  | Matched / Mismatched accuracy  | 87.9 / 90.8 |
 | TrQNLI  | Accuracy                       | 90.6        |
-| TrRTE   | Accuracy                       | —           |
+| TrRTE   | Accuracy                       | 92.2           |
 
 Let’s read these numbers like practitioners, not just scoreboard watchers.
 
