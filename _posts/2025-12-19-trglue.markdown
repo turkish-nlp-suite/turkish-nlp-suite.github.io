@@ -10,7 +10,7 @@ tags:   Benchmarking, Research
 
 For a long time, Turkish models climbed leaderboards written somewhere else—translated datasets, English‑first assumptions, noisy web scrapes. Useful, yes. Representative of real Turkish? Not quite. TrGLUE is our answer: a native, human‑verified GLUE‑style benchmark purpose‑built for Turkish. In this post, we’ll say a friendly hello, then go straight into the tags: what’s in the suite, how we built and verified it, how we cleaned it, and how a strong baseline (BERTurk) actually fares. If you evaluate Turkish models, this is designed to be something you can trust—and replicate.
 
-## Design principles
+### Design principles
 Let’s start with the philosophy. We mirrored what works from GLUE but made calls that respect Turkish as it is written and read.
 
 Native by default. Wherever possible, inputs come from human‑written Turkish sources. Not machine‑translated, not “cross‑lingual if you squint,” but genuinely Turkish. The goal is that examples feel natural to Turkish speakers and surface morphology and pragmatics in a way translated datasets can't.
@@ -21,7 +21,7 @@ Transparent, task‑appropriate metrics. Every task declares its metric(s) up fr
 
 Clean data and repeatable hygiene. Deduplication, leakage checks, and morphology‑aware preprocessing aren’t “nice to have”—they’re the foundation. Turkish tokenization gets special handling (e.g., apostrophes in proper names plus suffixes). You should be able to rerun the pipeline and get the same hashes.
 
-## Task suite at a glance
+### Task suite at a glance
 TrGLUE groups tasks into the usual families, but with Turkish‑specific care in sourcing and labeling. Here’s how to think about them:
 
 **Single‑sentence tasks**
@@ -39,12 +39,27 @@ Inference
 - **TrQNLI (QA/NLI):** Question understanding reframed as NLI. It’s a good proxy for how well your model connects world knowledge with Turkish syntax.
 - **TrRTE (NLI):** Recognizing textual entailment at a smaller scale, with fully human‑written hypotheses. Accuracy is the headline, but the examples are crafted to be diagnostic.
 
-Here are your examples from the above datasets:
+Below are some examples from the above datasets:
 
 ```
+Soluklu [ph] ve Soluksuz [p] sesleri Türkçede serbest dağılım içindedir sözcük sonunda. / unacceptable CoLA
+
+İnandırıcılıktan oldukça uzak yapay bir fotoğraf sanatçılığı üzerine kurulmuş senaryosuyla, üçlü lezbiyen ilişkiyi kötü oyunculukla anlatamayan oldukça sıradan bir film. 2/10  / negative   SST-2
+
+Meme kanseri ile ilgili merak edilen 5 soru / Kadınlarda sık görülen meme kanseri, erkeklerde de görülebiliyor / not equivalent MRPC
+
+Adam ata biniyor. / Bir adam ata biniyor. / 5 STS-B
+
+Burçlar ne kadar aşıkmış? / Kedim çok hasta, ne yapmalıyım? / not duplicate QQP
+
+Egomanyak kadinin teki hic giresim gelmiyor. / Pizzalar harika görünüyor! / neutral / MNLI
+
+Londra'da ve Barselona'da İstanbul'a kıyasla kaç müze var? / Kültür ve Turizm Bakanlığı, 2009'da İstanbul'da 69 müze olduğunu tahmin ediyor, bu sayı Londra'da 76 ve Barselona'da 51'dir. / entailment / QNLI
+
+Yayımlanmış çok sayıda eseri ile sayısız ödüle layık görüldü. / Yazar birçok ödül almıştır. entailment / RTE
 ```
 
-## Construction notes and exceptions
+### Construction notes and exceptions
 We didn't blindly mirror GLUE—there are places where Turkish needed a different touch.
 
 TrRTE is entirely human‑written on the hypothesis side, following linguist‑designed guidelines. That matters when subtle entailments, negations, or evidentials (‑miş) make or break the label. Linguists also adjudicated disagreements, so borderline examples don’t slip through.
@@ -55,7 +70,7 @@ TrSST‑2 labels come from ratings with human spot‑checks. That keeps the labe
 
 TrSTS‑B uses a translate‑then‑edit approach. Humans corrected MT outputs to sound naturally Turkish and culturally appropriate, while preserving the intended similarity label. Because the set is small (by design—quality over quantity), we do not release a test split yet. Evaluations are conducted on the dev split. Plan for some variance; we’ll expand this to a full test set as it grows.
 
-## Labeling and verification workflow
+### Labeling and verification workflow
 Here’s the high‑level loop we run, and why it helps you trust the result. 
 
 Source and weak labeling: We pull native Turkish sources or construct pairs according to task guidelines. Where it makes sense, our LLM provide weak labels to speed up triage—especially helpful for large pools where human time is precious. Throughout our work, LLM of our choice is Snowflake Arctic due to its permissive licencing.
@@ -64,7 +79,7 @@ Human verification via Co-one: Professional annotators review labels with explic
 
 Finalization and splits: We deduplicate aggressively (near‑dupes included), run leakage checks across train/dev/test, and format splits with unambiguous metadata. For TrSTS‑B, we stop at dev to avoid over‑promising reliability on a tiny test.
 
-## Preprocessing and tools
+#### Preprocessing and tools
 We kept preprocessing practical, but mindful of Turkish specifics.
 
 spaCy Turkish for lemmatization and morphosyntax: We lean on the Morphologizer for statistical morphological tagging. It’s not magic, but it’s a consistent baseline and helps with audits and sanity checks.
@@ -73,7 +88,7 @@ Turkish‑aware tokenization: Proper names with suffixes (İstanbul'a, Ankara'n�
 
 Deduplication and leakage audits: We remove exact and near duplicates, strip off‑language stragglers, and verify that nothing sneaks across splits. The aim is that evaluation is about your model, not our leakage.
 
-## Baseline results of BERTurk
+### Baseline results of BERTurk
 A familiar, strong baseline helps ground expectations. Here’s how BERTurk performs out of the box on TrGLUE:
 
 | Task    | Metric(s)                      | Score       |
@@ -108,7 +123,7 @@ Case‑marked named entities: Tokens like “İstanbul’a” bundle an entity w
 
 Register shifts: Colloquial phrasing vs formal rewrites can change entailment strength without obvious lexical overlap. If your training data is style‑narrow, you’ll feel the pain here.
 
-## How to use TrGLUE
+### How to use TrGLUE
 Getting started should be dull—in the best way, use our official evaluation script in [TrGLUE Github repo](https://github.com/turkish-nlp-suite/TrGLUE).
 
 Load a split, run the right metric, report results. Each task clearly states its metric(s). For TrSTS‑B, report on dev (no public test yet) and include your random seed strategy.
@@ -122,9 +137,6 @@ If you’ve been evaluating Turkish models on translated or generic web data, Tr
 ## Acknowledgments
 Huge thanks to our annotators and to Co‑one for professional verification and uncertainty‑aware evaluation support. It takes care—and people—to build a benchmark that respects Turkish. Second place goes to Snowflake, kudos to them for offering Arctic freely.  Community feedback, error reports, and contributions are very welcome.
 
-
-## How we built it
-We mirrored GLUE’s design where it makes sense—and avoided plain translation. Inputs come from native, human‑written Turkish sources whenever possible. Labels were produced with LLM assistance and verified by professional annotators. Verification and spot‑checks were conducted with the data annotation company [Co‑one](https://www.co-one.co)’s evaluation workflow, emphasizing explainable checks and uncertainty visibility. For TrRTE and TrCoLA, linguists led authorship and adjudication. For TrSTS‑B, we used a translate‑then‑edit approach where humans corrected MT outputs for naturalness and cultural fit, while keeping labels consistent. Our LLM of choice is Snowflake Arctic due to permissive licencing (yes, you can generate as much data you want and use them commercially! :blink:). 
 
 
 
