@@ -2,8 +2,8 @@
 layout: post
 title:  TrGLUE, Native and No‑Nonsense: A Turkish Benchmark You Can Trust
 date:   2025-12-19 10:05:55 +0300
-image:  /assets/images/blog/pile.png
-additional_image:  /assets/images/blog/merged.png
+image:  /assets/images/blog/glue-tasks.png
+additional_image:  /assets/images/blog/glue-logo.png
 author: Duygu
 tags:   Benchmarking, Research
 ---
