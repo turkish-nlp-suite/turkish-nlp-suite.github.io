@@ -76,5 +76,3 @@ BellaTurca isn’t just another corpus. It’s designed to be a core dataset for
 BellaTurca is available under a commercially permissive license. You can grab the full dataset and its subsets on the [HF repo](https://huggingface.co/datasets/turkish-nlp-suite/BellaTurca) repo or explore the [full collection](https://huggingface.co/collections/turkish-nlp-suite/large-scale-turkish-corpora)
 
 So go ahead, download it, and start building something awesome, happy modelling!
-additional image is /assets/images/blog/categories.png
-more image is /assets/images/blog/bcleaning.png
