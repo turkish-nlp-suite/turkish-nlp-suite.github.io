@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  TrGLUE, Native and No‑Nonsense: A Turkish Benchmark You Can Trust
+title:  TrGLUE, Native and No‑Nonsense \ A Turkish Benchmark You Can Trust
 date:   2025-12-19 10:05:55 +0300
 image:  /assets/images/blog/glue-tasks.png
 additional_image:  /assets/images/blog/glue-logo.png
@@ -133,6 +133,9 @@ Start with BERTurk, swap your model. BERTurk gives a realistic anchor for Turkis
 Share results and artifacts. We keep a community leaderboard and welcome PRs with configs, seeds, and checkpoints. If you catch an annotation edge case, open an issue—we’d rather fix it than hide it.
 
 If you’ve been evaluating Turkish models on translated or generic web data, TrGLUE is your upgrade path. It’s native, human‑verified, and built to reflect how Turkish is actually used. Try the suite, share your numbers, and let’s push Turkish NLP forward together.
+
+For the full dataset construction details you can always visit the [full research paper]().
+
 
 ## Acknowledgments
 Huge thanks to our annotators and to Co‑one for professional verification and uncertainty‑aware evaluation support. It takes care—and people—to build a benchmark that respects Turkish. Second place goes to Snowflake, kudos to them for offering Arctic freely.  Community feedback, error reports, and contributions are very welcome.
