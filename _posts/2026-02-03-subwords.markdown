@@ -8,51 +8,51 @@ author: Duygu
 tags:   Subwords, Morphology, Research
 ---
 
-** We proudly present the first part of our Turkish subword manifesto: how Turkish language modeling benefits from morphology. In this article, we compare character-, word-, and morphology-aware subword tokenization, where subwords are created by following the language’s natural morphological structure. Unsurprisingly, the best results come from morphology-aligned subwords. Character-level models are competitive, while word-level vocabularies perform poorly. Let’s dive into Turkish subwords together. **
+**We proudly present the first part of our Turkish subword manifesto: how Turkish language modeling benefits from morphology. In this article, we compare character-, word-, and morphology-aware subword tokenization, where subwords are created by following the language’s natural morphological structure. Unsurprisingly, the best results come from morphology-aligned subwords. Character-level models are competitive, while word-level vocabularies perform poorly. Let’s dive into Turkish subwords together.**
 
 Turkish is an agglutinative language: new words are formed by attaching multiple suffixes to a root. This structure is both elegant and powerful, but it also challenges “vanilla” tokenization approaches. To model Turkish effectively, we must design vocabularies around its true building blocks—morphological units—rather than whole words alone.
 
 Our recent work, “Optimal Turkish Subword Strategies at Scale: Systematic Evaluation of Data–Vocabulary–Morphology Interplay,” offers a principled way to dissect Turkish into tokens and to build optimal vocabularies. We examine two broad eras:
 
-* Pre-transformer tokenization approaches
-* Transformer-era tokenization with WordPiece-style vocabularies
+- Pre-transformer tokenization approaches
+- Transformer-era tokenization with WordPiece-style vocabularies
 This post focuses on the pre-transformer era. If you’re interested in WordPiece + Turkish, see Part 2 of the blog [link to be added]. We proceed from lower to higher compute: character-level and word-level vocabularies, then morphology-aware subword vocabularies.
 
 We evaluate across three tracks: our new TrGLUE benchmark, Named Entity Recognition (NER), and POS–Dependency–Morphology tagging on a treebank.
 
-* TrGLUE tasks selected: CoLA (acceptability), MRPC (semantic equivalence), MNLI (entailment), SST-2 (sentiment analysis), and STS-B (semantic similarity).
-* NER: WikiNER (Turkish).
-* Treebank: BOUN treebank for POS, dependency, and morphological tagging.
+- TrGLUE tasks selected: CoLA (acceptability), MRPC (semantic equivalence), MNLI (entailment), SST-2 (sentiment analysis), and STS-B (semantic similarity).
+- NER: WikiNER (Turkish).
+- Treebank: BOUN treebank for POS, dependency, and morphological tagging.
 
 ## Pre-Tranformer Tokenization
 To ground the discussion, consider how different vocabularies segment the Turkish word “gittim” (“I went”):
 
-* Character-level: `g #i #t #t #i #m`
-* Word-level: `gittim`
-* Morphology-aware subwords: `git #ti #m`
+- Character-level: `g #i #t #t #i #m`
+- Word-level: `gittim`
+- Morphology-aware subwords: `git #ti #m`
 
 Character-level offers maximal granularity but long sequences; word-level is compact yet brittle to inflection; morphology-aligned subwords strike a balance by respecting the language’s productive suffixation.
 
 ### Modelling
 To isolate vocabulary effects, we kept architectures comparable across setups.
 
-**TrGLUE tasks**:
+TrGLUE tasks:
 
-* Char-level: CNN encoder over character embeddings (no external pretraining).
-* Word/subword: BiLSTM over embeddings initialized with Google word2vec; embeddings remain trainable.
+- Char-level: CNN encoder over character embeddings (no external pretraining).
+- Word/subword: BiLSTM over embeddings initialized with Google word2vec; embeddings remain trainable.
 
-**NER**:
+NER:
 
-* BiLSTM with a token-classification head.
-* Word-level prediction per word: direct word token or pooled subword/char states.
-* Subwords: only the first subword receives B-/I- tags; others are masked/forced O.
-* Characters: BIO per character; contiguous spans merged back to words for F1.
+- BiLSTM with a token-classification head.
+- Word-level prediction per word: direct word token or pooled subword/char states.
+- Subwords: only the first subword receives B-/I- tags; others are masked/forced O.
+- Characters: BIO per character; contiguous spans merged back to words for F1.
 
-**POS–Dep–Morph**:
+POS–Dep–Morph:
 
-* Joint multi-task over a shared BiLSTM.
-* UPOS: linear head. Dependencies: deep-biaffine arcs/relations. Morphology: per-attribute classifiers (incl. NONE).
-* For subword/char inputs, word representations are pooled or composed; all predictions/evaluation stay at the word level.
+- Joint multi-task over a shared BiLSTM.
+- UPOS: linear head. Dependencies: deep-biaffine arcs/relations. Morphology: per-attribute classifiers (incl. NONE).
+- For subword/char inputs, word representations are pooled or composed; all predictions/evaluation stay at the word level.
 
 ### Character-level vocab
 
@@ -62,29 +62,29 @@ Despite their simplicity, character-level models hold up surprisingly well on se
 
 Surprisingly, TrGLUE performance is not bad at all. We can summarize the TrGLUE success as follows:
 
-* Strong on surface sentiment: SST-2 lands around 84% accuracy—polarity and intensifiers are well captured by local character n-grams.
-* Serviceable on inference: MNLI reaches ~67%—morphology signals help, but lack of longer context caps performance.
-* Weak on fine-grained structure/semantics: CoLA (MCC ~0.08) and STS-B (ρ ~0.12) remain challenging due to limited compositional depth and lexical grounding* Paraphrase (MRPC) sits in the middle at ~62% accuracy.
+- Strong on surface sentiment: SST-2 lands around 84% accuracy—polarity and intensifiers are well captured by local character n-grams.
+- Serviceable on inference: MNLI reaches ~67%—morphology signals help, but lack of longer context caps performance.
+- Weak on fine-grained structure/semantics: CoLA (MCC ~0.08) and STS-B (ρ ~0.12) remain challenging due to limited compositional depth and lexical grounding* Paraphrase (MRPC) sits in the middle at ~62% accuracy.
 
 Coming to NER task, char-level vocab
 
-* delivers an F1 around 0.70 with pure character inputs—no explicit tokenization needed.
-* is strong with suffix patterns, orthographic regularities, and consistent morphotactics help recover spans.
-* hiccups at boundary drift at span edges; confusions among close types (e.g., organization vs. location).
+- delivers an F1 around 0.70 with pure character inputs—no explicit tokenization needed.
+- is strong with suffix patterns, orthographic regularities, and consistent morphotactics help recover spans.
+- hiccups at boundary drift at span edges; confusions among close types (e.g., organization vs. location).
 
 POS–Dep–Morph success is whole another story.
 
-* POS accuracy ~91.6 and morphology micro-accuracy ~96.2, with uniformly high scores across attributes (e.g., Tense, Mood, Voice, Case).
-* Dependency parsing is the pinch point: UAS/LAS ~65/57, reflecting difficulty with long-distance attachments without strong token-level context.
+- POS accuracy ~91.6 and morphology micro-accuracy ~96.2, with uniformly high scores across attributes (e.g., Tense, Mood, Voice, Case).
+- Dependency parsing is the pinch point: UAS/LAS ~65/57, reflecting difficulty with long-distance attachments without strong token-level context.
 
 Character-level models trade syntactic attachment quality for morphological fidelity. Against BERTurk on the same treebank, token-based models achieve much higher UAS/LAS and slightly better POS, but trail dramatically on morphology. This contrast highlights complementary inductive biases: characters capture affixal and orthographic signals extremely well; pretrained token encoders better model head–dependent structure and broader semantics.
 
 **What to take away**
 
-Robust baseline: Character-level modeling is a clean floor for evaluation—gains from subwords can be attributed to segmentation and lexicalization rather than preprocessing.
-Strengths: Excellent morphological fidelity; competitive on surface-driven classification; resilient to OOVs and noisy text.
-Limits: Struggles with grammatical acceptability, graded similarity, and long-distance syntax—areas where morphology-aligned subwords and stronger contextual modeling help.
-When to use: Particularly attractive in agglutinative, low-resource, or noisy settings where vocabulary explosion and tokenization errors are costly.
+- Robust baseline: Character-level modeling is a clean floor for evaluation—gains from subwords can be attributed to segmentation and lexicalization rather than preprocessing.
+- Strengths: Excellent morphological fidelity; competitive on surface-driven classification; resilient to OOVs and noisy text.
+- Limits: Struggles with grammatical acceptability, graded similarity, and long-distance syntax—areas where morphology-aligned subwords and stronger contextual modeling help.
+- When to use: Particularly attractive in agglutinative, low-resource, or noisy settings where vocabulary explosion and tokenization errors are costly.
 
 
 Stepping up from characters to whole words trims sequence length, but what happens in downstream task success? We find out next.
@@ -107,9 +107,9 @@ gelmemezlikten 1
 and let's again assume we have `500` unique entries in the vocab and total of 10K words. Here if we take `K=2`, top-2 words will cover 10% of all corpus words. As a result the sentence `Oraya ben de gittim` will tokenize as `<UNK> ben de <UNK>`.
 
 As a result we define 3 notions: 
-* training coverage: the fraction of training tokens accounted for by the top-K types; 
-* test coverage: the fraction of test tokens covered by the same top-K types learned from training; 
-* the relationship between coverage (or K) and final task scores.
+- training coverage: the fraction of training tokens accounted for by the top-K types; 
+- test coverage: the fraction of test tokens covered by the same top-K types learned from training; 
+- the relationship between coverage (or K) and final task scores.
 
 
 Let's quickly go into the tasks and see what is net effect of choosing top-K words to form our vocabs. We start with TrGLUE tasks.
