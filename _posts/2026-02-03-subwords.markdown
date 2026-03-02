@@ -152,7 +152,7 @@ Now the accuracy curve. Performance jumps early—about 69% accuracy at 50% trai
   </div>
 </div>
 <div style="margin-top:12px; text-align:center;">
-  <img src="{{ 'assets/images/blog/subwords/word/word-sst2-explain.png' | relative_url }}" alt="Explainability" style="width:auto; max-width:900px; height:80%;">
+  <img src="{{ 'assets/images/blog/subwords/word/word-sst2-explain.png' | relative_url }}" alt="Explainability" style="width:30%; max-width:900px; height:auto">
 </div>
 
 Looking at the explainability snapshot (top-80% vocab), attributions cluster on sentiment-bearing words and predicate cues: “memnun etmedi,” “klişe,” “ağır,” “Sıkıldığım,” “tavsiye edemeyeceğim,” and “tercih/edebilir.” This matches the plateau story—the model keys off a small set of high-impact tokens. This model didn't model morphology, but it didn't need to anyway, distinguishing some sentiment indicating phrases were totally enough. 
