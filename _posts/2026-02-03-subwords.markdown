@@ -131,14 +131,14 @@ First we have a glance at CoLA's coverage and success-coverage graphics, togethe
 </div>
 
 
-First, the coverage plot. As you keep more of the word list (move right on K/|V|), test coverage shoots up quickly and flattens around the mid‑90% range, while train coverage climbs more slowly. Translation: plenty of tokens seen in training don’t transfer cleanly to the test set, so you need to keep a large chunk of the vocabulary just to cover train, even though test looks “covered” much earlier.
+First, the coverage plot. As you keep more of the word list (move right on `K/|V|`), test coverage shoots up quickly and flattens around the mid‑90% range, while train coverage climbs more slowly. Translation: plenty of tokens seen in training don’t transfer cleanly to the test set, so you need to keep a large chunk of the vocabulary just to cover train, even though test looks “covered” much earlier.
 
 Now the success plot. When we line up train token coverage against CoLA score (MCC), every point is below zero—and the curve gently slides downward as coverage grows. Rough numbers: around −10 MCC at 50% coverage and drifting to about −36 at full coverage. So, even with near‑complete coverage, the word‑level model still can’t judge acceptability well; the roadblock is representation, not how many words we keep.
 
 Finally, the explainability view (top‑80% vocab). The attributions are faint and blurry: out‑of‑vocabulary items barely register, and even forms like biçimbirime/biçimbirimler only get mild highlights. There’s no crisp morphosyntactic pattern—another hint that this setup is leaning on surface frequency and label priors rather than the grammatical cues CoLA requires.
 
 
-Next comes, SST-2, a completely different picture. In the below picture, we start with coverage. As you keep more of the word list (increase K/|V|), test coverage spikes quickly and levels off around 93–95%, while train coverage climbs more slowly. So the test set “looks covered” with a relatively small vocabulary, even though train still needs a larger slice to catch up.
+Next comes, SST-2, a completely different picture. In the below picture, we start with coverage. As you keep more of the word list (increase `K/|V|`), test coverage spikes quickly and levels off around 93–95%, while train coverage climbs more slowly. So the test set “looks covered” with a relatively small vocabulary, even though train still needs a larger slice to catch up.
 
 Now the accuracy curve. Performance jumps early—about 69% accuracy at 50% train coverage up to roughly 85% by the 75–80% mark—and then it plateaus. Past that elbow, adding rarer words doesn’t help: the model already has the key sentiment cues it needs. Think frequent polarity markers and phrases like “hiç,” “çok kötü,” “berbat,” “beğenmedim” on the negative side, and “mükemmel,” “harika,” “bayıldım” on the positive side. In other words, sentiment at the word level is powered by a compact lexicon of strong signals; once those are in, more tail types add little.
 
@@ -152,7 +152,7 @@ Now the accuracy curve. Performance jumps early—about 69% accuracy at 50% trai
   </div>
 </div>
 <div style="margin-top:12px; text-align:center;">
-  <img src="{{ 'assets/images/blog/subwords/word/word-sst2-explain.png' | relative_url }}" alt="Explainability" style="width:auto; max-width:900px; height:auto;">
+  <img src="{{ 'assets/images/blog/subwords/word/word-sst2-explain.png' | relative_url }}" alt="Explainability" style="width:auto; max-width:900px; height:80%;">
 </div>
 
 Looking at the explainability snapshot (top-80% vocab), attributions cluster on sentiment-bearing words and predicate cues: “memnun etmedi,” “klişe,” “ağır,” “Sıkıldığım,” “tavsiye edemeyeceğim,” and “tercih/edebilir.” This matches the plateau story—the model keys off a small set of high-impact tokens. This model didn't model morphology, but it didn't need to anyway, distinguishing some sentiment indicating phrases were totally enough. 
