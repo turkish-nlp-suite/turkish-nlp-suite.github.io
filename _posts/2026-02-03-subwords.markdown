@@ -27,9 +27,9 @@ We evaluate across three tracks: our new TrGLUE benchmark, Named Entity Recognit
 ## Pre-Tranformer Tokenization
 To ground the discussion, consider how different vocabularies segment the Turkish word “gittim” (“I went”):
 
-* Character-level: g #i #t #t #i #m
-* Word-level: gittim
-*Morphology-aware subwords: git #ti #m
+* Character-level: `g #i #t #t #i #m`
+* Word-level: `gittim`
+* Morphology-aware subwords: `git #ti #m`
 
 Character-level offers maximal granularity but long sequences; word-level is compact yet brittle to inflection; morphology-aligned subwords strike a balance by respecting the language’s productive suffixation.
 
@@ -89,6 +89,88 @@ When to use: Particularly attractive in agglutinative, low-resource, or noisy se
 
 Stepping up from characters to whole words trims sequence length, but what happens in downstream task success? We find out next.
 
+
+## Word-level vocab
+From one extreme to the other, now we keep all vocab words as they're, no way of decomposing further. Again we kept all words with their casing, we used cased-vocabs in our work . We cleaned all sentence punctuation as well. 
+
+Here, we first need to adapt some notation. Let V denote the full word vocabulary extracted from training and sorted by frequency, and let K be the size of the retained prefix (top-K types). Here is a quick example, let's say these are all the sorted corpus words by frequency:
+
+```
+ben 500
+de  500
+.
+.
+.
+gelmemezlikten 1
+```
+
+and let's again assume we have `500` unique entries in the vocab and total of 10K words. Here if we take `K=2`, top-2 words will cover 10% of all corpus words. As a result the sentence `Oraya ben de gittim` will tokenize as `<UNK> ben de <UNK>`.
+
+As a result we define 3 notions: 
+* training coverage: the fraction of training tokens accounted for by the top-K types; 
+* test coverage: the fraction of test tokens covered by the same top-K types learned from training; 
+* the relationship between coverage (or K) and final task scores.
+
+
+Let's quickly go into the tasks and see what is net effect of choosing top-K words to form our vocabs. We start with TrGLUE tasks.
+
+### TrGLUE tasks
+The below image offers coverage and success-coverage graphics for CoLA and SST-2 tasks.
+
+<table>
+  <tr>
+    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-cola-success.png' | relative_url }}" alt="Formula 1" width="100%"></td>
+    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-sst2-success.png' | relative_url }}" alt="Formula 2" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-cola-vocab.png' | relative_url }}" alt="Formula 3" width="100%"></td>
+    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-sst2-vocab.png' | relative_url }}" alt="Formula 4" width="100%"></td>
+  </tr>
+</table>
+
+
+## Morpho-subwords
+
+```
+gitmedim
+gitmemek
+gitmek
+gittim
+geldim
+gelmedim
+gelmemek
+gelmek
+bittim
+bitmedim
+bitmek
+bitmemek
+ghostluyorum
+.
+.
+.
+```
+
+Let's say we decomposed all the words and sorted the resulting morphs by frequency:
+
+```
+##mek
+##me
+##di
+##ti
+##uyor
+##m
+##um
+git
+gel
+bit
+.
+.
+.
+```
+If we take `K=1` , `##me` alone won't cover any vocab words. However if we take `K=8`, it'll cover the words `gitmek, gitmemek, gitmedim, gittim`. With `K=9` we move onto the next lemma `gel` and cover 4 more words.  Continuing in this fashion, we can advance `K` a bit, that might result in covering quite many vocab words.
+
+### TrGLUE results
+Now we start with TrGLUE
 
 
 
