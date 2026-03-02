@@ -152,7 +152,7 @@ Now the accuracy curve. Performance jumps early—about 69% accuracy at 50% trai
   </div>
 </div>
 <div style="margin-top:12px; text-align:center;">
-  <img src="{{ 'assets/images/blog/subwords/word/word-sst2-explain.png' | relative_url }}" alt="Explainability" style="width:70%; max-width:900px; height:auto;">
+  <img src="{{ 'assets/images/blog/subwords/word/word-sst2-explain.png' | relative_url }}" alt="Explainability" style="width:auto; max-width:900px; height:auto;">
 </div>
 
 Looking at the explainability snapshot (top-80% vocab), attributions cluster on sentiment-bearing words and predicate cues: “memnun etmedi,” “klişe,” “ağır,” “Sıkıldığım,” “tavsiye edemeyeceğim,” and “tercih/edebilir.” This matches the plateau story—the model keys off a small set of high-impact tokens. This model didn't model morphology, but it didn't need to anyway, distinguishing some sentiment indicating phrases were totally enough. 
@@ -161,6 +161,24 @@ Across MNLI, MRPC, and STS-B, test coverage saturates earlier than train, and pe
 
 ### POS-Dep-Morph
 Shifting from TRGLUE’s sentence-level tasks to token-level POS/DEP/MORPH changes the game: instead of judging sentence meaning or acceptability, the model has to label words and their relations, often relying on fine-grained morphology and syntax. In this setting, simple word-level vocabularies look appealing—high-frequency function words and common inflected forms quickly boost coverage—but the underlying demands are different: accurate POS tags, dependency arcs, and morphological features hinge on context-sensitive cues that a surface word list can’t encode.
+
+
+Let's move onto the solid numbers in the below figure. The success curves flatten hard after roughly 75% train coverage: keeping more of the word list does not lift POS, LAS, or Morph F1, which stall near ≈60/19/12—far below character-level baselines (≈91/65/96). This isn’t a coverage problem; it’s a representation problem. In BOUN’s morphology-heavy setting, rich inflection splits lemmas into many sparse surface types, creating a long tail that a word inventory can’t generalize over. The coverage plots underscore a train–test mismatch, too: token mass accumulated on train doesn’t reflect what’s needed at test time. Practically, this argues against word-level vocabularies for POS/DEP/Morph on BOUN: character or subword models, ideally with explicit morphological supervision, are required to capture inflectional variation and reach competitive accuracy.
+
+
+<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
+  <div style="flex:1 1 0; min-width:280px;">
+    <img src="{{ 'assets/images/blog/subwords/word/word-pos-success.png' | relative_url }}" alt="Coverage" style="width:auto; height:50%;">
+  </div>
+  <div style="flex:1 1 0; min-width:280px;">
+    <img src="{{ 'assets/images/blog/subwords/word/word-pos-vocab.png' | relative_url }}" alt="Success" style="width:auto; height:50%;">
+  </div>
+</div>
+<div style="margin-top:12px; text-align:center;">
+  <img src="{{ 'assets/images/blog/subwords/word/word-pos-explain.png' | relative_url }}" alt="Explainability" style="width:auto; max-width:900px; height:auto;">
+</div>
+
+On BOUN, coverage accumulates unevenly across splits: as K/|V| grows, train token coverage rises only gradually, while test follows a different trajectory, signaling a mismatch between the ranked word list and the test distribution. Mapping train coverage to performance, POS, LAS, and Morph F1 all plateau by roughly 75% coverage—around 60, 19, and 12 respectively—and stay flat thereafter, showing that retaining larger fractions of the word list doesn’t yield gains. The explainability view reinforces this: at top-80% vocab, attributions cluster on in-vocab function words (“Bir,” “yandan,” “da”) while OOV content words receive flat, low weights, revealing limited morphological awareness. Altogether, the curves and saliency patterns point to distribution shift and the inefficiency of word-level vocabularies on this morphologically rich dataset: higher token coverage demands large K yet fails to improve POS, dependency, or morphology performance.
 
 
 
