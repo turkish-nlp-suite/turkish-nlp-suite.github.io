@@ -119,12 +119,12 @@ The below image offers coverage and success-coverage graphics for CoLA and SST-2
 
 <table>
   <tr>
-    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-cola-success.png' | relative_url }}" alt="Formula 1" width="50%"></td>
-    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-cola-vocab.png' | relative_url }}" alt="Formula 2" width="50%"></td>
+    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-cola-success.png' | relative_url }}" alt="Formula 1" width="80%"></td>
+    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-cola-vocab.png' | relative_url }}" alt="Formula 2" width="80%"></td>
   </tr>
   <tr>
-    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-sst2-success.png' | relative_url }}" alt="Formula 3" width="50%"></td>
-    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-sst2-vocab.png' | relative_url }}" alt="Formula 4" width="50%"></td>
+    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-sst2-success.png' | relative_url }}" alt="Formula 3" width="80%"></td>
+    <td align="center"><img src="{{ 'assets/images/blog/subwords/word/word-sst2-vocab.png' | relative_url }}" alt="Formula 4" width="80%"></td>
   </tr>
 </table>
 
