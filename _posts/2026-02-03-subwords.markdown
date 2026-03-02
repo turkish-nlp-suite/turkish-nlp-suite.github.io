@@ -145,10 +145,10 @@ Now the accuracy curve. Performance jumps early—about 69% accuracy at 50% trai
 
 <div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
   <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/subwords/word/word-sst2-success.png' | relative_url }}" alt="Coverage" style="width:80%; height:auto;">
+    <img src="{{ 'assets/images/blog/subwords/word/word-sst2-success.png' | relative_url }}" alt="Coverage" style="width:auto; height:80%;">
   </div>
   <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/subwords/word/word-sst2-vocab.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
+    <img src="{{ 'assets/images/blog/subwords/word/word-sst2-vocab.png' | relative_url }}" alt="Success" style="width:auto; height:80%;">
   </div>
 </div>
 <div style="margin-top:12px; text-align:center;">
