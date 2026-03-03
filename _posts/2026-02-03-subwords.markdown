@@ -259,7 +259,29 @@ Coming to TrGLUE results, the picture is quite different than word-level results
   </tr>
 </table>
 
+Across CoLA, MNLI, and SST‑2, morphology‑aware subwords punch way above their weight. The coverage curves climb fast—almost vertical for MNLI and SST‑2—and with only a small slice of the morpheme inventory we’re already brushing up against full train/test coverage. In plain terms, a compact set of productive stems and suffixes explains most of the tokens that actually show up. That’s the big advantage over word‑level tokenization: to get similar coverage with full words you need a much larger lexicon, and you still get dinged by derivations and inflections that spill into OOV territory. The morph inventory stays small, coverage saturates, and you don’t pay the vocabulary‑bloat tax.
 
+Performance mirrors this story. As we add morphemes in order of coverage, MNLI and SST‑2 level off quickly—the core set buys you most of the gains, and after that it’s diminishing returns. CoLA is steadier and a little flatter, which makes sense for a task that’s sensitive to agreement and case rather than raw lexical variety. The task‑specific intuition checks out: in SST‑2, polarity often hinges on a few markers like -ma/-me, so it saturates early; in MNLI, getting negation, modality, and case markers right stabilizes contradiction vs. neutral decisions; and in CoLA, person/number/case morphology helps localize acceptability issues, so progress is slower but consistent.
+
+Zooming out, the takeaway is simple: compared to word‑level tokenization, morphology‑aware subwords deliver near‑complete coverage with a fraction of the vocabulary, cut down OOV‑driven variance, and hit comparable or better accuracy. It’s a cleaner efficiency–performance trade‑off for Turkish. The same pattern shows up on STS‑B and MRPC, too—fast coverage saturation, early performance plateaus—with our morph‑subword BiLSTM landing around 0.45 on STS‑B and 0.62 on MRPC. Morphology smooths out lexical variation; what’s left on the table is mostly semantics and pretraining scale.
+
+With coverage and downstream trends in place, we next ask what the model is actually using: the explainability analyses below trace decisions back to specific morphemes, showing which stems and affixes drive predictions and how their importance shifts across tasks.
+
+<table style="width:100%; border-collapse:collapse;">
+  <tr>
+    <td align="center" style="width:50%; padding:6px;">
+      <img src="{{ 'assets/images/blog/subwords/subwords/subwords-cola-explain.png' | relative_url }}" alt="Explainability Figure A" style="width:100%; height:auto;">
+      <div style="margin-top:6px; font-size:0.95em; color:#555;">(a) Morph-level attributions on sample inputs</div>
+    </td>
+    <td align="center" style="width:50%; padding:6px;">
+      <img src="{{ 'assets/images/blog/subwords/subwords/subwords-sst2-explain.png' | relative_url }}" alt="Explainability Figure B" style="width:100%; height:auto;">
+      <div style="margin-top:6px; font-size:0.95em; color:#555;">(b) Aggregate importance vs. frequency</div>
+    </td>
+  </tr>
+</table>
+
+
+Figure above shows the same story from the inside. In both TrGLUE examples, the strongest positive attribution lands on morphologically salient pieces that actually move the label: negation morphemes, derivational markers that flip part‑of‑speech, and clause‑level connectives. Low‑content function words stay quiet. We also see complementary evidence: stems carry the broad semantics, while suffixes nudge the decision—polarity, modality, entailment—over the line. In other words, the model is composing meaning from morph‑subwords rather than keying on whole‑word surface forms.
 
 
 ### POS-Dep-Morph
