@@ -112,6 +112,8 @@ As a result we define 3 notions:
 - the relationship between coverage (or K) and final task scores.
 
 
+As one can imagine, per task first we created corpus words and count files, then make coverage calculations, finally created vocab files that correpond to the coverage percentages. One can see the code for vocab creation under the [project Github repo](https://github.com/turkish-nlp-suite/Turkish-subwords-research/tree/main/benchmarking/pre-transformer/word/glue/make_vocabs) and some example vocab files under [the same repo](https://github.com/turkish-nlp-suite/Turkish-subwords-research/tree/main/benchmarking/pre-transformer/word/glue/training/vocab_files). 
+
 Let's quickly go into the tasks and see what is net effect of choosing top-K words to form our vocabs. 
 
 ### TrGLUE tasks
@@ -166,23 +168,25 @@ Shifting from TRGLUE’s sentence-level tasks to token-level POS/DEP/MORPH chang
 Let's move onto the solid numbers in the below figure. The success curves flatten hard after roughly 75% train coverage: keeping more of the word list does not lift POS, LAS, or Morph F1, which stall near ≈60/19/12—far below character-level baselines (≈91/65/96). This isn’t a coverage problem; it’s a representation problem. In BOUN’s morphology-heavy setting, rich inflection splits lemmas into many sparse surface types, creating a long tail that a word inventory can’t generalize over. The coverage plots underscore a train–test mismatch, too: token mass accumulated on train doesn’t reflect what’s needed at test time. Practically, this argues against word-level vocabularies for POS/DEP/Morph on BOUN: character or subword models, ideally with explicit morphological supervision, are required to capture inflectional variation and reach competitive accuracy.
 
 
+
 <div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
   <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/subwords/word/word-pos-success.png' | relative_url }}" alt="Coverage" style="width:auto; height:50%;">
+    <img src="{{ 'assets/images/blog/subwords/word/word-pos-success.png' | relative_url }}" alt="Coverage" style="width:80%; height:auto;">
   </div>
   <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/subwords/word/word-pos-vocab.png' | relative_url }}" alt="Success" style="width:auto; height:50%;">
+    <img src="{{ 'assets/images/blog/subwords/word/word-pos-vocab.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
   </div>
 </div>
 <div style="margin-top:12px; text-align:center;">
-  <img src="{{ 'assets/images/blog/subwords/word/word-pos-explain.png' | relative_url }}" alt="Explainability" style="width:auto; max-width:900px; height:auto;">
+  <img src="{{ 'assets/images/blog/subwords/word/word-pos-explain.png' | relative_url }}" alt="Explainability" style="width:70%; max-width:900px; height:auto">
 </div>
 
-On BOUN, coverage accumulates unevenly across splits: as K/|V| grows, train token coverage rises only gradually, while test follows a different trajectory, signaling a mismatch between the ranked word list and the test distribution. Mapping train coverage to performance, POS, LAS, and Morph F1 all plateau by roughly 75% coverage—around 60, 19, and 12 respectively—and stay flat thereafter, showing that retaining larger fractions of the word list doesn’t yield gains. The explainability view reinforces this: at top-80% vocab, attributions cluster on in-vocab function words (“Bir,” “yandan,” “da”) while OOV content words receive flat, low weights, revealing limited morphological awareness. Altogether, the curves and saliency patterns point to distribution shift and the inefficiency of word-level vocabularies on this morphologically rich dataset: higher token coverage demands large K yet fails to improve POS, dependency, or morphology performance.
+On BOUN, coverage accumulates unevenly across splits: as `K/|V|` grows, train token coverage rises only gradually, while test follows a different trajectory, signaling a mismatch between the ranked word list and the test distribution. Mapping train coverage to performance, POS, LAS, and Morph F1 all plateau by roughly 75% coverage—around 60, 19, and 12 respectively—and stay flat thereafter, showing that retaining larger fractions of the word list doesn’t yield gains. The explainability view reinforces this: at top-80% vocab, attributions cluster on in-vocab function words (“Bir,” “yandan,” “da”) while OOV content words receive flat, low weights, revealing limited morphological awareness. Altogether, the curves and saliency patterns point to distribution shift and the inefficiency of word-level vocabularies on this morphologically rich dataset: higher token coverage demands large K yet fails to improve POS, dependency, or morphology performance. This is all expected, there is no way a pure word vocab can comprehend moprhemes of Turkish. This is all expected, there is no way a pure word vocab can comprehend morphemes of Turkish.
 
 
 
 ## Morpho-subwords
+Now comes our rock-star section, morpho-subwords of Turkish. For this part, we needed some more data preparation steps. Before all, let's start easy and see how coverage works:
 
 ```
 gitmedim
@@ -222,8 +226,43 @@ bit
 ```
 If we take `K=1` , `##me` alone won't cover any vocab words. However if we take `K=8`, it'll cover the words `gitmek, gitmemek, gitmedim, gittim`. With `K=9` we move onto the next lemma `gel` and cover 4 more words.  Continuing in this fashion, we can advance `K` a bit, that might result in covering quite many vocab words.
 
+Coming to the practical side, we decomposed words into moprhemes by Turkish morphological tooks including [Turkish spaCy models](https://github.com/turkish-nlp-suite/turkish-spacy-models) and [Zeyrek](https://github.com/obulat/zeyrek). Decomposing words take some time, hence we created cache files of word decompositions, like [this example](https://github.com/turkish-nlp-suite/Turkish-subwords-research/tree/main/benchmarking/pre-transformer/morpho-subwords/POS/training/vocab_files). This way we the morpho-tokenizer can look up word decompositions during training time as well as in the coverage calculations. The coverage calculator is similar to word-level's, but this time we cover with subwords. After vocab work, we are ready to explore modelling results in the next subsection.
+
+
 ### TrGLUE results
-Now we start with TrGLUE
+Coming to TrGLUE results, the picture is quite different than word-level results. The below figure explains task success vs task coverage for CoLA, MNLI and SST-2:
+
+<table style="width:100%; border-collapse:collapse;">
+  <tr>
+    <!-- Row 1: Coverage (CoLA | SST-2 | MNLI) -->
+    <td align="center" style="width:33.33%; padding:6px;">
+      <img src="{{ 'assets/images/blog/subwords/subwords/subwords-cola-vocab.png' | relative_url }}" alt="CoLA Coverage" style="width:100%; height:auto;">
+    </td>
+    <td align="center" style="width:33.33%; padding:6px;">
+      <img src="{{ 'assets/images/blog/subwords/subwords/subwords-mnli-vocab.png' | relative_url }}" alt="SST-2 Coverage" style="width:100%; height:auto;">
+    </td>
+    <td align="center" style="width:33.33%; padding:6px;">
+      <img src="{{ 'assets/images/blog/subwords/subwords/subwords-sst2-vocab.png' | relative_url }}" alt="MNLI Coverage" style="width:100%; height:auto;">
+    </td>
+  </tr>
+  <tr>
+    <!-- Row 2: Success or Explainability (CoLA | SST-2 | MNLI) -->
+    <td align="center" style="width:33.33%; padding:6px;">
+      <img src="{{ 'assets/images/blog/subwords/subwords/subwords-cola-success.png' | relative_url }}" alt="CoLA Success" style="width:100%; height:auto;">
+    </td>
+    <td align="center" style="width:33.33%; padding:6px;">
+      <img src="{{ 'assets/images/blog/subwords/subwords/subwords-mnli-success.png' | relative_url }}" alt="SST-2 Success" style="width:100%; height:auto;">
+    </td>
+    <td align="center" style="width:33.33%; padding:6px;">
+      <img src="{{ 'assets/images/blog/subwords/subwords/subwords-sst2-success.png' | relative_url }}" alt="MNLI Success" style="width:100%; height:auto;">
+    </td>
+  </tr>
+</table>
+
+
+
+
+### POS-Dep-Morph
 
 
 
