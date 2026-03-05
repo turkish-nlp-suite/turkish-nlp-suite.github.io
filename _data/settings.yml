@@ -160,6 +160,9 @@ portfolio-items:
 
 # Resources Home Section
 resources-home-items:
+  - image: "assets/images/resources/large.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/large-scale-turkish-corpora"
+
   - image: "assets/images/resources/havadis.png"
     url: "https://huggingface.co/datasets/turkish-nlp-suite/Havadis"
 
@@ -177,6 +180,9 @@ resources-home-items:
 
   - image: "assets/images/resources/temiz-mc4.png"
     url: "huggingface.co/datasets/turkish-nlp-suite/temiz-mC4"
+
+  - image: "assets/images/resources/trglue.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/TrGLUE"
 
   - image: "assets/images/resources/sentiturca.png"
     url: "https://huggingface.co/datasets/turkish-nlp-suite/SentiTurca"
