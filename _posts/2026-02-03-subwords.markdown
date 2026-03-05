@@ -2,8 +2,8 @@
 layout: post
 title:  Optimal Turkish Subword Strategies I: Morphology Decides, Subwords Deliver
 date:   2026-03-02 13:25:55 +0300
-image:  /assets/images/blog/pile.png
-additional_image:  /assets/images/blog/merged.png
+image:  /assets/images/blog/subwords/subwords//subword_embeds.png
+additional_image:  /assets/images/blog/subwords/word/word_embeds.png
 author: Duygu
 tags:   Subwords, Morphology, Research
 ---
@@ -139,6 +139,8 @@ First we have a glance at CoLA's coverage and success-coverage graphics, togethe
 First, the coverage plot: as you keep more of the word list (move right on `K/|V|`), test coverage shoots up quickly and flattens around the mid‑90% range, while train coverage climbs more slowly. Translation: plenty of tokens seen in training don’t transfer cleanly to the test set, so you need to keep a large chunk of the vocabulary just to cover train, even though test looks “covered” much earlier.
 
 Now the success plot: when we line up train token coverage against CoLA score (MCC), every point is below zero—and the curve gently slides downward as coverage grows. Rough numbers: around −10 MCC at 50% coverage and drifting to about −36 at full coverage. So, even with near‑complete coverage, the word‑level model still can’t judge acceptability well; the roadblock is representation, not how many words we keep.
+
+Befor explainability, i.e. the bottom plot we go to word embeddings. Looking at the word embeddings figure (the first figure up this page), the embeddings set up the core limitation that our analyses will unpack: in the 2D projections, POS colors are thoroughly intermingled and the mutual k-NN graph links cut across categories. In other words, whole-word embeddings fail to organize Turkish by syntactic role. This is not a coverage artifact—the plots aggregate thousands of tokens—but a representation issue: rich inflection explodes surface forms, so a word-level space mostly groups by frequency and topical co-occurrence rather than by morphology or part of speech. The visual takeaway is simple and intentional: at the word level, Turkish syntax does not “fall out” of the geometry.
 
 Finally, the explainability view (top‑80% vocab): the attributions are faint and blurry: out‑of‑vocabulary items barely register, and even forms like biçimbirime/biçimbirimler only get mild highlights. There’s no crisp morphosyntactic pattern—another hint that this setup is leaning on surface frequency and label priors rather than the grammatical cues CoLA requires.
 
