@@ -88,6 +88,15 @@ portfolio-home-items:
   - image: "assets/images/portfolio/instruct.png"
     url: "https://medium.com/google-developer-experts/instructurca-an-open-source-instruction-tuning-dataset-for-turkish-18c37b0e99b9"
 
+  - image: "assets/images/portfolio/trglue-arxiv.png"
+    url: "https://arxiv.org/abs/2512.22100"
+
+  - image: "assets/images/portfolio/trglue-medium.png"
+    url: "https://medium.com/google-developer-experts/introducing-trglue-first-non-translate-turkish-nlu-benchmark-ever-5d37b75f91ad"
+
+  - image: "assets/images/portfolio/subwords-arxiv.png"
+    url: "https://arxiv.org/abs/2602.06942"
+
 # Publications Page
 portfolio-label:
   - { title: "Model", type: "model" }
@@ -153,6 +162,21 @@ portfolio-items:
     portfolio-type:
       - type: "medium"
 
+  - image: "assets/images/portfolio/trglue-arxiv.png"
+    url: "https://arxiv.org/abs/2512.22100"
+    portfolio-type:
+      - type: "research"
+
+
+  - image: "assets/images/portfolio/trglue-medium.png"
+    url: "https://medium.com/google-developer-experts/introducing-trglue-first-non-translate-turkish-nlu-benchmark-ever-5d37b75f91ad"
+    portfolio-type:
+      - type: "medium"
+
+  - image: "assets/images/portfolio/subwords-arxiv.png"
+    url: "https://arxiv.org/abs/2602.06942"
+    portfolio-type:
+      - type: "research"
 
 
 #-------------------------------
