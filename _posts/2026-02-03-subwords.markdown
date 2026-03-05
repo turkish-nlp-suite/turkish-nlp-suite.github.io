@@ -15,14 +15,17 @@ Turkish is an agglutinative language: new words are formed by attaching multiple
 Our recent work, “Optimal Turkish Subword Strategies at Scale: Systematic Evaluation of Data–Vocabulary–Morphology Interplay,” offers a principled way to dissect Turkish into tokens and to build optimal vocabularies. We examine two broad eras:
 
 - Pre-transformer tokenization approaches
-- Transformer-era tokenization with WordPiece-style vocabularies
-This post focuses on the pre-transformer era. If you’re interested in WordPiece + Turkish, see Part 2 of the blog [link to be added]. We proceed from lower to higher compute: character-level and word-level vocabularies, then morphology-aware subword vocabularies.
+- Transformer-era tokenization with WordPiece-style vocabularies  
+
+This post focuses on the pre-transformer era. If you’re interested in WordPiece + Turkish, see [Part 2 of the blog](). We proceed from lower to higher compute: character-level and word-level vocabularies, then morphology-aware subword vocabularies.
 
 We evaluate across three tracks: our new TrGLUE benchmark, Named Entity Recognition (NER), and POS–Dependency–Morphology tagging on a treebank.
 
-- TrGLUE tasks selected: CoLA (acceptability), MRPC (semantic equivalence), MNLI (entailment), SST-2 (sentiment analysis), and STS-B (semantic similarity).
-- NER: WikiNER (Turkish).
-- Treebank: BOUN treebank for POS, dependency, and morphological tagging.
+- TrGLUE tasks selected: CoLA (acceptability - Matthews Correlation Coefficient), MRPC (semantic equivalence - accuracy), MNLI (entailment - accuracy), SST-2 (sentiment analysis - accuracy), and STS-B (semantic similarity - Pearson correlation coefficient).
+- NER: WikiNER (Turkish) i, evlauated with F1 over entity spans.
+- Treebank: BOUN treebank for POS, dependency, and morphological tagging; all evaluated with token based accuracy roughly.
+
+In this post we'll focus on TrGLUE and POS-Dep-Morph tasks to reveal subword power in the most distinguished way.
 
 ## Pre-Tranformer Tokenization
 To ground the discussion, consider how different vocabularies segment the Turkish word “gittim” (“I went”):
@@ -64,7 +67,7 @@ Surprisingly, TrGLUE performance is not bad at all. We can summarize the TrGLUE 
 
 - Strong on surface sentiment: SST-2 lands around 84% accuracy—polarity and intensifiers are well captured by local character n-grams.
 - Serviceable on inference: MNLI reaches ~67%—morphology signals help, but lack of longer context caps performance.
-- Weak on fine-grained structure/semantics: CoLA (MCC ~0.08) and STS-B (ρ ~0.12) remain challenging due to limited compositional depth and lexical grounding* Paraphrase (MRPC) sits in the middle at ~62% accuracy.
+- Weak on fine-grained structure/semantics: CoLA (MCC ~0.08) and STS-B (ρ ~0.12) remain challenging due to limited compositional depth and lexical grounding. Paraphrase (MRPC) sits in the middle at ~62% accuracy.
 
 Coming to NER task, char-level vocab
 
@@ -117,7 +120,7 @@ As one can imagine, per task first we created corpus words and count files, then
 Let's quickly go into the tasks and see what is net effect of choosing top-K words to form our vocabs. 
 
 ### TrGLUE tasks
-First we have a glance at CoLA's coverage and success-coverage graphics, together with explainability of an example sentence. On CoLA, cranking up word coverage doesn’t help. Even as we keep more words, the model’s MCC stays below chance and actually slips downward. The issue isn’t “do we have the words?”—it’s “what do those words let the model represent?” A big, sparse word list can’t capture the grammar signals CoLA cares about (long-distance rules, subcategorization, function words in context). As we add more entries, we mostly add rare, morphologically busy variants, which spreads the data thin and nudges the model to memorize surface quirks instead of learning structure.
+First we have a glance at CoLA's coverage and success-coverage graphics, together with explainability of an example sentence. On CoLA, cranking up word coverage doesn’t help. Even as we keep more words, the model’s MCC stays below chance (0 MCC means random guess) and actually slips downward. The issue isn’t “do we have the words?”—it’s “what do those words let the model represent?” A big, sparse word list can’t capture the grammar signals CoLA cares about (long-distance rules, subcategorization, function words in context). As we add more entries, we mostly add rare, morphologically busy variants, which spreads the data thin and nudges the model to memorize surface quirks instead of learning structure.
 
 
 <div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
@@ -133,11 +136,11 @@ First we have a glance at CoLA's coverage and success-coverage graphics, togethe
 </div>
 
 
-First, the coverage plot. As you keep more of the word list (move right on `K/|V|`), test coverage shoots up quickly and flattens around the mid‑90% range, while train coverage climbs more slowly. Translation: plenty of tokens seen in training don’t transfer cleanly to the test set, so you need to keep a large chunk of the vocabulary just to cover train, even though test looks “covered” much earlier.
+First, the coverage plot: as you keep more of the word list (move right on `K/|V|`), test coverage shoots up quickly and flattens around the mid‑90% range, while train coverage climbs more slowly. Translation: plenty of tokens seen in training don’t transfer cleanly to the test set, so you need to keep a large chunk of the vocabulary just to cover train, even though test looks “covered” much earlier.
 
-Now the success plot. When we line up train token coverage against CoLA score (MCC), every point is below zero—and the curve gently slides downward as coverage grows. Rough numbers: around −10 MCC at 50% coverage and drifting to about −36 at full coverage. So, even with near‑complete coverage, the word‑level model still can’t judge acceptability well; the roadblock is representation, not how many words we keep.
+Now the success plot: when we line up train token coverage against CoLA score (MCC), every point is below zero—and the curve gently slides downward as coverage grows. Rough numbers: around −10 MCC at 50% coverage and drifting to about −36 at full coverage. So, even with near‑complete coverage, the word‑level model still can’t judge acceptability well; the roadblock is representation, not how many words we keep.
 
-Finally, the explainability view (top‑80% vocab). The attributions are faint and blurry: out‑of‑vocabulary items barely register, and even forms like biçimbirime/biçimbirimler only get mild highlights. There’s no crisp morphosyntactic pattern—another hint that this setup is leaning on surface frequency and label priors rather than the grammatical cues CoLA requires.
+Finally, the explainability view (top‑80% vocab): the attributions are faint and blurry: out‑of‑vocabulary items barely register, and even forms like biçimbirime/biçimbirimler only get mild highlights. There’s no crisp morphosyntactic pattern—another hint that this setup is leaning on surface frequency and label priors rather than the grammatical cues CoLA requires.
 
 
 Next comes, SST-2, a completely different picture. In the below picture, we start with coverage. As you keep more of the word list (increase `K/|V|`), test coverage spikes quickly and levels off around 93–95%, while train coverage climbs more slowly. So the test set “looks covered” with a relatively small vocabulary, even though train still needs a larger slice to catch up.
@@ -162,10 +165,10 @@ Looking at the explainability snapshot (top-80% vocab), attributions cluster on 
 Across MNLI, MRPC, and STS-B, test coverage saturates earlier than train, and performance shows an early elbow followed by a plateau: MNLI hovers around 0.70 accuracy, MRPC around 0.60, and STS-B around 0.25 (Pearson/Spearman). In contrast, SST-2 reaches its ceiling once a compact polarity lexicon is included. Overall, expanding word-level coverage doesn’t improve generalization on the non-sentiment tasks, pointing to the need for richer contextual representations.
 
 ### POS-Dep-Morph
-Shifting from TRGLUE’s sentence-level tasks to token-level POS/DEP/MORPH changes the game: instead of judging sentence meaning or acceptability, the model has to label words and their relations, often relying on fine-grained morphology and syntax. In this setting, simple word-level vocabularies look appealing—high-frequency function words and common inflected forms quickly boost coverage—but the underlying demands are different: accurate POS tags, dependency arcs, and morphological features hinge on context-sensitive cues that a surface word list can’t encode.
+Shifting from TRGLUE’s sentence-level tasks to token-level POS-Dep-Morph changes the game: instead of judging sentence meaning or acceptability, the model has to label words and their relations, often relying on fine-grained morphology and syntax. In this setting, simple word-level vocabularies might look appealing at first glance—high-frequency function words and common inflected forms quickly boost coverage—but the underlying demands are different: accurate POS tags, dependency arcs, and morphological features hinge on context-sensitive cues that a surface word list can’t encode.
 
 
-Let's move onto the solid numbers in the below figure. The success curves flatten hard after roughly 75% train coverage: keeping more of the word list does not lift POS, LAS, or Morph F1, which stall near ≈60/19/12—far below character-level baselines (≈91/65/96). This isn’t a coverage problem; it’s a representation problem. In BOUN’s morphology-heavy setting, rich inflection splits lemmas into many sparse surface types, creating a long tail that a word inventory can’t generalize over. The coverage plots underscore a train–test mismatch, too: token mass accumulated on train doesn’t reflect what’s needed at test time. Practically, this argues against word-level vocabularies for POS/DEP/Morph on BOUN: character or subword models, ideally with explicit morphological supervision, are required to capture inflectional variation and reach competitive accuracy.
+Let's move onto the solid numbers in the below figure. The success curves flatten hard after roughly 75% train coverage: keeping more of the word list does not lift POS, LAS, or Morph F1, which stall near ≈60/19/12—far below character-level baselines (≈91/65/96). This isn’t a coverage problem; it’s a representation problem. In BOUN’s morphology-heavy setting, rich inflection splits lemmas into many sparse surface types, creating a long tail that a word inventory can’t generalize over. The coverage plots underscore a train–test mismatch, too: token mass accumulated on train doesn’t reflect what’s needed at test time. Practically, this argues against word-level vocabularies for POS-Dep-Morph on BOUN: character or subword models, ideally with explicit morphological supervision, are required to capture inflectional variation and reach competitive accuracy.
 
 
 
@@ -186,7 +189,7 @@ On BOUN, coverage accumulates unevenly across splits: as `K/|V|` grows, train to
 
 
 ## Morpho-subwords
-Now comes our rock-star section, morpho-subwords of Turkish. For this part, we needed some more data preparation steps. Before all, let's start easy and see how coverage works:
+Now comes our rock-star section, morpho-subwords of Turkish. For this part, we needed some more data preparation steps. Before all, let's start easy and see how coverage works. Say this is our vcorpus words:
 
 ```
 gitmedim
@@ -207,7 +210,7 @@ ghostluyorum
 .
 ```
 
-Let's say we decomposed all the words and sorted the resulting morphs by frequency:
+Then  we decompose all the words and sorted the resulting morphs by frequency, let's say this is the result:
 
 ```
 ##mek
@@ -271,11 +274,11 @@ With coverage and downstream trends in place, we next ask what the model is actu
   <tr>
     <td align="center" style="width:50%; padding:6px;">
       <img src="{{ 'assets/images/blog/subwords/subwords/subwords-cola-explain.png' | relative_url }}" alt="Explainability Figure A" style="width:100%; height:auto;">
-      <div style="margin-top:6px; font-size:0.95em; color:#555;">(a) Morph-level attributions on sample inputs</div>
+      <div style="margin-top:6px; font-size:0.95em; color:#555;">(a) Morph-level attributions on sample CoLA sentence</div>
     </td>
     <td align="center" style="width:50%; padding:6px;">
       <img src="{{ 'assets/images/blog/subwords/subwords/subwords-sst2-explain.png' | relative_url }}" alt="Explainability Figure B" style="width:100%; height:auto;">
-      <div style="margin-top:6px; font-size:0.95em; color:#555;">(b) Aggregate importance vs. frequency</div>
+      <div style="margin-top:6px; font-size:0.95em; color:#555;">Morph-level attributions on sample SST-2 sentence</div>
     </td>
   </tr>
 </table>
@@ -283,8 +286,30 @@ With coverage and downstream trends in place, we next ask what the model is actu
 
 Figure above shows the same story from the inside. In both TrGLUE examples, the strongest positive attribution lands on morphologically salient pieces that actually move the label: negation morphemes, derivational markers that flip part‑of‑speech, and clause‑level connectives. Low‑content function words stay quiet. We also see complementary evidence: stems carry the broad semantics, while suffixes nudge the decision—polarity, modality, entailment—over the line. In other words, the model is composing meaning from morph‑subwords rather than keying on whole‑word surface forms.
 
+Building on that, the next section zooms out from task labels to token‑level structure, where suffixes really shine: we’ll see how morph‑subwords line up with POS tags, dependency edges, and fine‑grained morphological features—and how those suffix cues consistently carry the heaviest lift.
+
 
 ### POS-Dep-Morph
+
+So far we’ve looked at coverage, accuracy, and why the model’s attributions cluster on meaningful morphemes. Now we turn to the token‑level scaffolding of Turkish: parts of speech, dependency arcs, and morphological features. This section asks a simple question with big consequences—how well do morph‑subwords align with the linguistic signals that syntax and morphology annotate? We’ll show that stems anchor broad semantics, but suffixes are the precision tools: they encode agreement, case, tense/aspect/modality, and clause structure, and they light up exactly where POS and dependency decisions hinge.
+
+
+<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
+  <div style="flex:1 1 0; min-width:280px;">
+    <img src="{{ 'assets/images/blog/subwords/subwords/subwords-POS-vocab.png' | relative_url }}" alt="Coverage" style="width:80%; height:auto;">
+  </div>
+  <div style="flex:1 1 0; min-width:280px;">
+    <img src="{{ 'assets/images/blog/subwords/subwords/subwords-POS-success.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
+  </div>
+</div>
+<div style="margin-top:12px; text-align:center;">
+  <img src="{{ 'assets/images/blog/subwords/subwords/subwords-pos-explain.png' | relative_url }}" alt="Explainability" style="width:70%; max-width:900px; height:auto">
+</div>
+
+
+Looking at the figure above, as coverage increases, the morph‑subword models improve quickly and then settle. POS and Morph F1 rise steeply from low coverage and flatten around the 80–85% mark, essentially reaching their ceilings. LAS is flatter overall once the basics are in place: as soon as the key case and possessive cues are retained, head selection stabilizes and extra vocabulary buys little. What’s striking is how compact the inventory can be while doing this. On the test split, you’re near full coverage with roughly three‑quarters of the morpheme set; the train split tops out at about 83–85%. That efficiency is exactly what we don’t get with word‑level tokenization, which needs a much larger lexicon to approach the same scores and still struggles with OOVs.
+
+Looking inside the attributions clarifies why the curves behave this way. The model consistently leans on inflectional endings—number, case, tense/aspect—more than on stems, especially for nouns and verbs whose bases are ambiguous. Suffixes like -ler (plural), -de/-da (locative), -yor (progressive), and -du (past) dominate the signal that determines POS and supports dependency decisions. Stems set the broad semantics, but these endings are the precision tools that disambiguate category and structure, which is why performance plateaus once those high‑value morphemes are included.
 
 
 
