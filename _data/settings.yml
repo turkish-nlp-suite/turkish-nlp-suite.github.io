@@ -207,6 +207,10 @@ resource-label:
   - { title: "Dataset", type: "dataset" }
 
 resource-items:
+  - image: "assets/images/resources/large.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/large-scale-turkish-corpora"
+    resource-type:
+      - type: "corpus"
   - image: "assets/images/resources/havadis.png"
     url: "https://huggingface.co/datasets/turkish-nlp-suite/Havadis"
     resource-type:
@@ -229,6 +233,10 @@ resource-items:
       - type: "corpus"
   - image: "assets/images/resources/temiz-mc4.png"
     url: "huggingface.co/datasets/turkish-nlp-suite/temiz-mC4"
+    resource-type:
+      - type: "corpus"
+  - image: "assets/images/resources/trglue.png"
+    url: "https://huggingface.co/datasets/turkish-nlp-suite/TrGLUE"
     resource-type:
       - type: "corpus"
   - image: "assets/images/resources/sentiturca.png"
