@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Optimal Turkish Subword Strategies I: Morphology Decides, Subwords Deliver
+title:  Optimal Turkish Subword Strategies I / Morphology Decides, Subwords Deliver
 date:   2026-03-02 13:25:55 +0300
 image:  /assets/images/blog/subwords/subwords/subword_embeds.png
 additional_image:  /assets/images/blog/subwords/word/word_embeds.png
