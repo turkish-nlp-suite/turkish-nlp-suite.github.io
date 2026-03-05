@@ -314,12 +314,21 @@ Looking inside the attributions clarifies why the curves behave this way. The mo
 
 
 ## Resources
+Here are your readings if you wanna explore the topic further:
 
 ### Research paper
+Preprint available at [Arxiv](https://arxiv.org/pdf/2602.06942).
 
 ### Github
 
+Github repo for all the related computations: [Github for subwords](https://github.com/turkish-nlp-suite/Turkish-subwords-research)
+
+
+### Second part of the blog 
+is dedicated to how Turkish vocabs interact with WordPiece tokenizer. The post is [on Medium]().
+
 ### Hugging Face
+We host WordPiece tokenizers and corresponding BERT models in our HF repo: [Turkish NLP suite HF repo](https://huggingface.co/collections/turkish-nlp-suite/turkish-subwords-research).
 
 ## Special Thanks
-
+goes to Google Cloud TPU program as always, where we made all the Transformer training; without them this work wouldn't be possible at all
