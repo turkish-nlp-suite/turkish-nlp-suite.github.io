@@ -96,39 +96,21 @@ Verisetinin yazi dilini anladigimiza gore artik verisetinin icinde ne oldugunu a
 ----
 
 ### Veriseti Karaketristikleri
-Veriseti ne olursa olsun, konu ne olursa olsun bir verisetini olcup bicmenin ilk adimi tabi ki kendisini olusturan en atomik parcalara - yani yani sozcuklere bakmaktir. 
+Veriseti ne olursa olsun, konu ne olursa olsun bir verisetini olcup bicmenin ilk adimi tabi ki kendisini olusturan en atomik parcalara - yani yani sozcuklere bakmaktir. Sozcuklere bakarken en cok anlmi tasiyan 3 gruba, isim, sifat ve fiillere bakariz, Turkce bir sete bakiyorsak da mutlaka sozcuklerin kokleriyle bu islemi yapariz. Aksi takdirde asagudaki sekilde koleksiyon, koleksiyonlar, koleksiyonlara vb ayni sozcugun farkli cekim ekleriyle cekimlenmis hallerini goruruz, bu hem okunakliliga olanak birakmaz hem de anlamsal kutleyi bolmus ve dagitmis oluruz.
 
 
 
-<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap; align-items:flex-start;">
-  <figure style="flex:1 1 280px; margin:0;">
-    <img
-      src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}"
-      alt="Wordcloud (nouns)"
-      style="width:100%; height:auto; display:block;"
-      loading="lazy"
-    >
-  </figure>
+<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
+  <div style="flex:1 1 0; min-width:280px;">
+    <img src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}" alt="Coverage" style="width:80%; height:auto;">
 
-  <figure style="flex:1 1 280px; margin:0;">
-    <img
-      src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}"
-      alt="Wordcloud (adjectives)"
-      style="width:100%; height:auto; display:block;"
-      loading="lazy"
-    >
-  </figure>
+  </div>
+  <div style="flex:1 1 0; min-width:280px;">
+   <img src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
+  </div>
 
-  <figure style="flex:1 1 280px; margin:0;">
-    <img
-      src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}"
-      alt="Wordcloud (verbs)"
-      style="width:100%; height:auto; display:block;"
-      loading="lazy"
-    >
-  </figure>
+  <div style="flex:1 1 0; min-width:280px;">
+    <img src="{{ 'assets/images/blog/8mart/wordcloud_verb.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
+  </div>
+
 </div>
-
-
-
-
