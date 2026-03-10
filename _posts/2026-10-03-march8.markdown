@@ -110,7 +110,7 @@ Veriseti ne olursa olsun, konu ne olursa olsun bir verisetini olcup bicmenin ilk
   </div>
 
   <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/8mart/wordcloud_verb.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
+    <img src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
   </div>
 
 </div>
