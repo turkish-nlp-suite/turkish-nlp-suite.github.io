@@ -2,8 +2,8 @@
 layout: post
 title:  Ruj, Blazer ve Cesaret: Bir "Biz" Hikâyesi
 date:   2026-03-02 13:25:55 +0300
-image:  /assets/images/blog/subwords/subwords/subword_embeds.png
-additional_image:  /assets/images/blog/subwords/word/word_embeds.png
+image:  /assets/images/blog/8mart/8mart-poster.png
+additional_image:  /assets/images/blog/8mart/8mart-poster.png
 author: Duygu
 tags:   Blog
 ---
@@ -33,3 +33,40 @@ Sevilen oyuncu Serenay Sarıkaya ile gerçekleştirdiğimiz moda çekiminde, zam
 .......
 
 ```   
+Verisetimizi tanidigimiza gore artik ilk konumuza gecebiliriz, "biz"li dil nerede basliyor, nerede bitiyor? 
+
+## “Biz” Nerede Başlıyor? (Özne, Zamir ve Kişi Ekleriyle Küçük Bir Harita)
+Biz dilinin kullanimini anlamak icin verisetinde gecen tum kisi zamirlerini topladim ve saydim. "Biz"in kac kez gectigini bulmak icin spaCy Turkce paketinden yararlandim, bulmak istedigim zamirleri de ifade eslectirici Matcherla topladim. Daha once spaCy kodu veya Matcher kodu yapmadiysaniz korkmayin:), kod su sekilde:
+
+```
+import spacy
+from spacy.matcher import Matcher
+
+nlp = spacy.load("tr_core_news_trf")
+
+matcher = Matcher(nlp.vocab)
+
+# "biz" zamiri: lemma=biz ve kişisel zamir olduğuna dair tag ipucu (varsa)
+pattern_biz = [
+    {
+        "LEMMA": "biz",
+        "TAG": "Pers",
+    }
+]
+matcher.add("BIZ_PRON", [pattern_biz])
+
+text = "Biz bugün bize iyi gelecek şeyi seçiyoruz. Bizim için küçük bir adım."
+doc = nlp(text)
+
+for match_id, start, end in matcher(doc):
+    span = doc[start:end]
+    print(nlp.vocab.strings[match_id], span.text, span.lemma_)
+```
+
+Bu ornekte koku "biz" olan butun kisi zamirlerini topladim. Matcher'a verdigim desende LEMMA:biz koku biz olan tum sozcukler demektir, TAG:pers yaparsaniz bu socuklerden kizi zamiri olanlar secilir. Biz icin 2.sinin pek bir anlami yoktur, biz sadece kisi zamiri olarak kullanilir ama bu patterni "o" ve "onlar" icin kullanirsaniz isler degisir, malum bu 2 sozcuk hem gosterme zamiri hem de kisisel zamir olarak kullanilir, unutmayin biz kisi zamislerini ariyoruz. Zamir diyince akla bir de "kendi" gelir ama kendi kisilerden bahsetse de teknik olarak bir kisi zamiri degildir, donuslu zamirdir. spaCy Turkce paketinde TAG:Reflex (reflexive pronoun) olarak aramaniz gerekir.
+
+"Biz" (ve de diger kisi zamirleri) ozne oldugu zaman acikca yazilmaz (bu durumu ortaokulda gizli ozne olarak gormussunuzdur), bu durumda da kisileri saymak icin cumlenin fiilinin 
+1.cogul kisi ozneleri bulmanin bir baska
+
+Haydi o zaman sayilara geciyoruz. Iste sayilarin grafigi:
+
