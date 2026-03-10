@@ -13,16 +13,23 @@ tags:   Blog
 
 Ruj sürmeden önce, çoğu sabah bir cümle kuruyoruz. Kimi zaman aynaya dönük, kimi zaman kalabalığa; kimi zaman sadece kendimize, kimi zaman başka bir kadına. “Bugün kendim için.” “Bugün işim var.” “Bugün hiç hâlim yok ama yine de çıkacağım.” Bu cümlelerin bazıları fısıltı gibi; bazıları net ve yüksek. Ve nedense en güçlü olanları çoğu zaman tekil değil: “Ben” diye başlamıyor, “Biz” diye başlıyor.
 
-Ben bu “biz”in peşine düştüm. Çünkü Türkiye’de kadınların kadınlara yazdığı güzellik–stil metinlerinde, yüzeyde parıltı var: ruj tonları, blazer kalıpları, kombin önerileri, “şunu yap” listeleri. Ama metnin alt katmanında başka bir şey daha akıyor: birbirimize tutunma biçimlerimiz. Bir gün “kendine güvenen kadın” diye çağıran, başka bir gün “yorgunsan yavaşla” diye izin veren; bazen cesareti büyüten, bazen de fark etmeden ölçü koyan bir dil.
+Bu yazımda, ben bu “biz”in peşine düştüm. Çünkü Türkiye’de kadınların kadınlara yazdığı güzellik–stil metinlerinde, yüzeyde parıltı var: ruj tonları, blazer kalıpları, kombin önerileri, “şunu yap” listeleri. Ama metnin alt katmanında başka bir şey daha akıyor: birbirimize tutunma biçimlerimiz. Bir gün “kendine güvenen kadın” diye çağıran, başka bir gün “yorgunsan yavaşla” diye izin veren; bazen cesareti büyüten, bazen de fark etmeden ölçü koyan bir dil.
 
 Bu yazı bir değerlendirme yazısı değil; bir 8 Mart etiketi de değil. Daha çok, yıllardır gözümüzün önünde duran gündelik cümlelere yakından bakma denemesi. “Şehirli kadın” dediğimizde kimi hayal ediyoruz? “Güçlü kadın” derken yükü kime bırakıyoruz? Ve en önemlisi: birbirimize konuşurken, dayanışmayı sadece sloganlarda mı kuruyoruz, yoksa küçük kelime seçimlerinde de mi?
 
 Ruj, blazer ve cesaret… Üçü de gündelik, üçü de sembol. Ruj, kendine dönük bir şefkat anı olabiliyor; bazen de “hazır ol” diye dayatılan bir tempo. Blazer, toplantı odasında “ciddiye alın” deme biçimi; bazen de sadece sevdiğin bir kesim, omuzlarında iyi duran bir hat. Cesaret ise aralarından en sessizi: çoğu zaman gözle görünmüyor, ama her cümlede iz bırakıyor—özellikle “biz” dediğimiz yerde.
 
-Bir araştırmacı olarak metinleri okumayı seviyorum; ama bu sefer okumak, ölçmekten çok anlamak için. Suslutrendler’de biriken yazılardan küçük izler toplayıp, onları bir hikâyeye çevireceğim: en sık dönen temalar, en çok tekrar eden kelimeler, ve bazı kalıpların nasıl hem güç verdiğini hem sınır çizdiğini… Sonunda amaç tek bir sonuç çıkarmak değil; daha kapsayıcı, daha nazik, daha dayanışmacı bir “biz”e yaklaşmak.
+Bir araştırmacı olarak metinleri okumayı severim, işleyeceğim her metine önce kendi gözlerimle bakarım; ama bu sefer okumak, ölçmekten çok anlamak için. Bu blogta SüslüTrendler’de biriken yazılardan küçük izler toplayıp, onları bir hikâyeye çevireceğim: en sık dönen temalar, en çok tekrar eden kelimeler, ve bazı kalıpların nasıl hem güç verdiğini hem sınır çizdiğini… Sonunda amaç tek bir sonuç çıkarmak değil; daha kapsayıcı, daha nazik, daha dayanışmacı bir “biz”e yaklaşmak.
 
-Hazırsan, önce bir cümleyi seçelim: Bugün “biz” ne demek? Bugün “biz”, birbirimize nasıl iyi gelir? Ve bugün, rujun altında hangi kelimeyi büyütmek isteriz?
-
-
+Hazırsak, önce bir cümleyi seçelim: Bugün “biz” ne demek? Bugün “biz”, birbirimize nasıl iyi gelir? Ve bugün, rujun altında hangi kelimeyi büyütmek isteriz?
 
 
+
+## Veriseti
+Bugünkü verisetimiz Süslütrendler, kendisi ÖzenliDerlemin moda ve stil konularındaki alt seti oluyor. Bu verisetinde online dergi, blog yazıları ve diğer kaynaklardan oluşan yazılar yer alıyor, adı üstünde tüm kaynaklar özenle seçildi ve içerik kalitesine göre elemedne geçti. Bu veriseti toplamda 8.993 yazı ve 3 milyon ladar sözcük içeriyor ve 32MBlık bir büyüklüğe erişiyor.Yazı türlerini dediğim gibi makale olarak düşünebilirsiniz. Verisetindne bizlere hemen bir örnek gelsin:
+
+```
+Sevilen oyuncu Serenay Sarıkaya ile gerçekleştirdiğimiz moda çekiminde, zamansız şıklığı ve ışıltıyı bir araya getirdik. 2024'ü #MagnificentWonders kampanyasıyla mucizeler ve harikalar diyarında karşılayan Bulgari'nin çok özel mücevherlerini sezonun heykelimsi formlarıyla buluşturduk ve Serenay'ın varlığını senenin yıldızı siyah-beyaz dengesiyle ikonikleştirmek istedik. Aralık sayımızda ayrıca, TikTok'un makyaj devrimi, sekiz şık Fransız moda markasının başarı dolu hikayeleri, Teknoloji ve Gelecek Danışmanı Elif Çetin'den, sektörlerden kişisel görüşlere, sizi şaşırtacak detaylarla 2024 beklentilerini bulabilirsiniz..
+.......
+
+```   
