@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Ruj, Blazer ve Cesaret: Bir "Biz" Hikâyesi
+title:  Ruj, Blazer ve Cesaret / Bir "Biz" Hikâyesi
 date:   2026-03-02 13:25:55 +0300
 image:  /assets/images/blog/8mart/8mart-poster.png
 additional_image:  /assets/images/blog/8mart/8mart-poster.png
@@ -65,8 +65,32 @@ for match_id, start, end in matcher(doc):
 
 Bu ornekte koku "biz" olan butun kisi zamirlerini topladim. Matcher'a verdigim desende LEMMA:biz koku biz olan tum sozcukler demektir, TAG:pers yaparsaniz bu socuklerden kizi zamiri olanlar secilir. Biz icin 2.sinin pek bir anlami yoktur, biz sadece kisi zamiri olarak kullanilir ama bu patterni "o" ve "onlar" icin kullanirsaniz isler degisir, malum bu 2 sozcuk hem gosterme zamiri hem de kisisel zamir olarak kullanilir, unutmayin biz kisi zamislerini ariyoruz. Zamir diyince akla bir de "kendi" gelir ama kendi kisilerden bahsetse de teknik olarak bir kisi zamiri degildir, donuslu zamirdir. spaCy Turkce paketinde TAG:Reflex (reflexive pronoun) olarak aramaniz gerekir.
 
-"Biz" (ve de diger kisi zamirleri) ozne oldugu zaman acikca yazilmaz (bu durumu ortaokulda gizli ozne olarak gormussunuzdur), bu durumda da kisileri saymak icin cumlenin fiilinin 
-1.cogul kisi ozneleri bulmanin bir baska
+"Biz" (ve de diger kisi zamirleri) ozne oldugu zaman acikca yazilmaz (bu durumu ortaokulda gizli ozne olarak gormussunuzdur), bu durumda da kisileri saymak icin cumlenin fiil cekimine bakariz, (yine ortaokulda ogrendiginiz sekilde) birinci/ikinci/ucuncu ve tekil/cogul kisileri cekimlemek fiil kisi ekleriyle olur : gidiyor**um**, gidiyor**uz**, gidiyor**sun** ..
+Bu sekilde de cumledeki tum fiilleri toplayip sonra da kisi eklerine bakmamiz gerekiyor. Hemen ufak bir ornek yapalim:
+
+```
+>>> sentence = "Biz de gidiyoruz"
+>>> doc=nlp(sentence)
+>>> for ent in doc:
+  print(ent, ent.pos_, ent.tag_, ent.morph)
+
+Biz PRON Pers Case=Nom|Number=Plur|Person=1
+de CCONJ Conj 
+gidiyoruz VERB Verb Aspect=Prog|Number=Plur|Person=1|Polarity=Pos|Tense=Pres
+```
+
+Yukardaki ufak ornege baktigimizda fiili VERB goreviyle taniyabiliriz, bicimbilimsel ozelliklerine bakarsak da 2. ve 3. yerlerde `Number=Plur|Person=1` goruruz, takdir edersiniz ki bu da cogul birinci kisidir. Bir onceki kodda oldugu gibi Matcherla fiilleri topladim, sonra da kisi eklerine baktim ve hepsini saydim.
+
 
 Haydi o zaman sayilara geciyoruz. Iste sayilarin grafigi:
+
+
+Sol tarafa bakarsak, metnin anlatıcı konumunun “ben” merkezli bir günlükten çok **kolektif ve okur-odaklı** bir sese kaydığını gösteriyor: **“biz”** en yüksek etiket olarak öne çıkarken **“siz”** ve **“ben”** ikinci bir katman oluşturuyor. Bu kombinasyon genelde “birlikte yapıyoruz / birlikte düşünüyoruz” çerçevesi (biz) ile “okura rehberlik eden” hitap (siz) arasında gidip gelen bir üsluba işaret eder; buna karşılık **“sen”**in belirgin biçimde düşük kalması, samimi tekil muhatap yerine daha **genel-kitleye dönük, mesafeli-nazik** bir adresleme tercih edildiğini düşündürüyor. **“onlar”**ın varlığı metnin yer yer üçüncü şahıs üzerinden genelleme/karşılaştırma kurduğunu (gruplar, örnekler) ima ediyor.
+
+Sag tarafa bakarsak da, bu pasta grafiği zamirlerin **oransal dağılımını** gösteriyor: en büyük pay **“o” (%38)**, yani metinlerin önemli bir kısmı üçüncü şahıs referansları üzerinden akıyor. **“biz” (%23)** ve **“ben” (%18)** birlikte düşünüldüğünde anlatıda hem kolektif bir çerçeve hem de kişisel bir ses güçlü. **“siz” (%12)** okura dönük hitabın belirgin olduğunu, **“sen” (%5)** ve **“onlar” (%4)** ise tekil samimi muhatap ve “dış grup” kurmanın daha sınırlı kaldığını ima ediyor.
+
+Bu iki görseli yan yana koyunca iki tamamlayıcı şey okunuyor: çubuk grafikte ham frekans açısından “biz”in tepe yapması, metnin söylemsel olarak sık sık kolektif bir “biz” kurduğunu (birlikte yapma/aitlik/ortak konum alma) gösteriyor; pasta grafikte ise oranlar bu tabloyu dengeliyor ve özellikle “o”nun %38 ile en büyük payı alması, anlatının önemli bir bölümünün üçüncü şahıs/üçüncü referans üzerinden aktığını (kişiler, örnek vakalar, genel “o”, ya da metin içi anafor) ima ediyor. Aynı anda “ben” (%18) ve “siz” (%12) hatırı sayılır düzeyde kaldığı için, üslup tek bir perspektife kilitli değil: bir yandan kişisel deneyim/öz-anlatı (“ben”), bir yandan okura yönelen didaktik/rehber ton (“siz”), bir yandan da kapsayıcı/kollektif çerçeve (“biz”). “Sen” (%5) ve “onlar” (%4) görece düşük; bu da samimi tekil muhataptan (“sen”) ziyade daha kamusal/nazik adresleme (“siz”) ve sınırlı ölçüde dış grup kurma (“onlar”) eğilimiyle uyumlu.
+
+
+
 
