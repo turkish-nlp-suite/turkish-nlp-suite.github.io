@@ -98,16 +98,34 @@ Verisetinin yazi dilini anladigimiza gore artik verisetinin icinde ne oldugunu a
 ### Veriseti Karaketristikleri
 
 
-<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
-  <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}" alt="Coverage" style="width:80%; height:auto;">
-  </div>
-  <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
-  </div>
-</div>
-<div style="margin-top:12px; text-align:center;">
-  <img src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}" alt="Explainability" style="width:70%; max-width:900px; height:auto">
+
+<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap; align-items:flex-start;">
+  <figure style="flex:1 1 280px; margin:0;">
+    <img
+      src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}"
+      alt="Wordcloud (nouns)"
+      style="width:100%; height:auto; display:block;"
+      loading="lazy"
+    >
+  </figure>
+
+  <figure style="flex:1 1 280px; margin:0;">
+    <img
+      src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}"
+      alt="Wordcloud (adjectives)"
+      style="width:100%; height:auto; display:block;"
+      loading="lazy"
+    >
+  </figure>
+
+  <figure style="flex:1 1 280px; margin:0;">
+    <img
+      src="{{ 'assets/images/blog/8mart/wordcloud_verb.png' | relative_url }}"
+      alt="Wordcloud (verbs)"
+      style="width:100%; height:auto; display:block;"
+      loading="lazy"
+    >
+  </figure>
 </div>
 
 
