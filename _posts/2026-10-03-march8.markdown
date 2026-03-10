@@ -115,11 +115,13 @@ Veriseti ne olursa olsun, konu ne olursa olsun bir verisetini olcup bicmenin ilk
            style="width:100%; height:auto; display:block;">
     </div>
     <div style="flex:1 1 320px;">
-      <img src="{{ 'assets/images/blog/8mart/wordcloud_verb.png' | relative_url }}"
+      <img src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}"
            alt="Wordcloud (verbs)"
            style="width:100%; height:auto; display:block;">
     </div>
   </div>
 </div>
 
-Soldan saga gidersek, once isimleri goruyoruz, belirgin isimlerde koleksiyon, iliski ve tasarimci var, daha ufak boylarda ise marka, hediye, koku, deneyim, dunya, sac, parca, urun, saglik, yemek, moda, hayat ve duygu sozcuklerini goruyorum.
+Soldan saga gidersek, once isimleri goruyoruz, belirgin isimlerde koleksiyon, iliski ve tasarimci var, daha ufak boylarda ise marka, hediye, koku, deneyim, dunya, sac, parca, urun, saglik, yemek, moda, hayat, is ve duygu sozcuklerini goruyorum. Moda dergileri icin gauet uygun duruyor, moda, tasarimcilar, kolesiyonlar, benim de severek okdugum iliskiler bolumunde kadin-erkek iliskileri, parfum, sac, makyaj sayfalari, hediye onerileri saglik ve yemek sayfalari, karoyer tanitim sayfalari .. Ortada ise sifatlar var goze carpan kadin var (mukmmel), sonrasinda, sik,sosyal, kisiel, parlak, altin sozcukleri gozume carpti, sosyal ortamlar icin sik kiyafetler, kisisel tarz ve parlak stiller, altin takilarla suslu, ne dersiniz? Fiil koklerinde ise tabi ki en basta yasamak, yaratmak, hazirlamak, kazanmak var, ama yasamaktan once sunmak var, kadinlara sunulan oneriler ve olanaklar var tabi, toplumlarin artik sadece erkeklere degil kadinlara da bir seyler sunulan bicime donusmesi var. Yine de en basta yasamak ve dahi yaratmak var, ne de olsa sifirdan yaratmak dogada sadece kadinlara sunulmus bir ayricaliktir. Kazanmak ise artik kadinlara da dusuyor, hicbir kadin rekabetten cekilmek zorunda degil.   
+
+Son olarak setteki
