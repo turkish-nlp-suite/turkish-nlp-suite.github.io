@@ -91,8 +91,24 @@ Sag tarafa bakarsak da, bu pasta grafiği zamirlerin oransal dağılımını gö
 
 Bu iki görseli yan yana koyunca iki tamamlayıcı şey okunuyor: çubuk grafikte ham frekans açısından “biz”in tepe yapması, metnin söylemsel olarak sık sık kolektif bir “biz” kurduğunu (birlikte yapma/aitlik/ortak konum alma) gösteriyor; pasta grafikte ise oranlar bu tabloyu dengeliyor ve özellikle “o”nun %38 ile en büyük payı alması, anlatının önemli bir bölümünün üçüncü şahıs/üçüncü referans üzerinden aktığını (kişiler, örnek vakalar, genel “o”, ya da metin içi anafor) ima ediyor. Aynı anda “ben” (%18) ve “siz” (%12) hatırı sayılır düzeyde kaldığı için, üslup tek bir perspektife kilitli değil: bir yandan kişisel deneyim/öz-anlatı (“ben”), bir yandan okura yönelen didaktik/rehber ton (“siz”), bir yandan da kapsayıcı/kollektif çerçeve (“biz”). “Sen” (%5) ve “onlar” (%4) görece düşük; bu da samimi tekil muhataptan (“sen”) ziyade daha kamusal/nazik adresleme (“siz”) ve sınırlı ölçüde dış grup kurma (“onlar”) eğilimiyle uyumlu.
 
+Verisetinin yazi dilini anladigimiza gore artik verisetinin icinde ne oldugunu anlamaya daha cok yonelebiliriz. Verisetinin neyden bahsettigini anlamak icin sozcuklere dalicaz.
 
 ----
+
+### Veriseti Karaketristikleri
+
+
+<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
+  <div style="flex:1 1 0; min-width:280px;">
+    <img src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}" alt="Coverage" style="width:80%; height:auto;">
+  </div>
+  <div style="flex:1 1 0; min-width:280px;">
+    <img src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
+  </div>
+</div>
+<div style="margin-top:12px; text-align:center;">
+  <img src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}" alt="Explainability" style="width:70%; max-width:900px; height:auto">
+</div>
 
 
 
