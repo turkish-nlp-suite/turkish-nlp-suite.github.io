@@ -96,6 +96,7 @@ Verisetinin yazi dilini anladigimiza gore artik verisetinin icinde ne oldugunu a
 ----
 
 ### Veriseti Karaketristikleri
+Veriseti ne olursa olsun, konu ne olursa olsun bir verisetini olcup bicmenin ilk adimi tabi ki kendisini olusturan en atomik parcalara - yani yani sozcuklere bakmaktir. 
 
 
 
@@ -120,7 +121,7 @@ Verisetinin yazi dilini anladigimiza gore artik verisetinin icinde ne oldugunu a
 
   <figure style="flex:1 1 280px; margin:0;">
     <img
-      src="{{ 'assets/images/blog/8mart/wordcloud_verb.png' | relative_url }}"
+      src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}"
       alt="Wordcloud (verbs)"
       style="width:100%; height:auto; display:block;"
       loading="lazy"
