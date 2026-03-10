@@ -102,17 +102,22 @@ Veriseti ne olursa olsun, konu ne olursa olsun bir verisetini olcup bicmenin ilk
 
 
 
-<div style="display:flex; gap:16px; width:100%; overflow-x:auto; padding-bottom:8px;">
-  <img src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}"
-       alt="Wordcloud (nouns)"
-       style="flex:0 0 33.33%; width:33.33%; height:auto; display:block;"
-       loading="lazy">
-  <img src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}"
-       alt="Wordcloud (adjectives)"
-       style="flex:0 0 33.33%; width:33.33%; height:auto; display:block;"
-       loading="lazy">
-  <img src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}"
-       alt="Wordcloud (verbs)"
-       style="flex:0 0 33.33%; width:33.33%; height:auto; display:block;"
-       loading="lazy">
+<div style="width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);">
+  <div style="display:flex; gap:16px; padding:0 16px; flex-wrap:wrap;">
+    <div style="flex:1 1 320px;">
+      <img src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}"
+           alt="Wordcloud (nouns)"
+           style="width:100%; height:auto; display:block;">
+    </div>
+    <div style="flex:1 1 320px;">
+      <img src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}"
+           alt="Wordcloud (adjectives)"
+           style="width:100%; height:auto; display:block;">
+    </div>
+    <div style="flex:1 1 320px;">
+      <img src="{{ 'assets/images/blog/8mart/wordcloud_verb.png' | relative_url }}"
+           alt="Wordcloud (verbs)"
+           style="width:100%; height:auto; display:block;">
+    </div>
+  </div>
 </div>
