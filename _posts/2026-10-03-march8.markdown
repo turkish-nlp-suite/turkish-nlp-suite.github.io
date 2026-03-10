@@ -96,21 +96,23 @@ Verisetinin yazi dilini anladigimiza gore artik verisetinin icinde ne oldugunu a
 ----
 
 ### Veriseti Karaketristikleri
-Veriseti ne olursa olsun, konu ne olursa olsun bir verisetini olcup bicmenin ilk adimi tabi ki kendisini olusturan en atomik parcalara - yani yani sozcuklere bakmaktir. Sozcuklere bakarken en cok anlmi tasiyan 3 gruba, isim, sifat ve fiillere bakariz, Turkce bir sete bakiyorsak da mutlaka sozcuklerin kokleriyle bu islemi yapariz. Aksi takdirde asagudaki sekilde koleksiyon, koleksiyonlar, koleksiyonlara vb ayni sozcugun farkli cekim ekleriyle cekimlenmis hallerini goruruz, bu hem okunakliliga olanak birakmaz hem de anlamsal kutleyi bolmus ve dagitmis oluruz.
+Veriseti ne olursa olsun, konu ne olursa olsun bir verisetini olcup bicmenin ilk adimi tabi ki kendisini olusturan en atomik parcalara - yani yani sozcuklere bakmaktir. Sozcuklere bakarken en cok anlmi tasiyan 3 gruba, isim, sifat ve fiillere bakariz, Turkce bir sete bakiyorsak da mutlaka sozcuklerin kokleriyle bu islemi yapariz. Aksi takdirde asagudaki sekilde koleksiyon, koleksiyonlar, koleksiyonlara vb ayni sozcugun farkli cekim ekleriyle cekimlenmis hallerini goruruz, bu hem okunakliliga olanak birakmaz hem de anlamsal kutleyi bolmus ve dagitmis oluruz. Kokleri yine spaCy paketi lemma_ ile topladim, verisetindeki her makalenin ustundne gittim, kokleri topladim ve toplami saydim. iste sonuclariniz:
 
 
 
-<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap;">
-  <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}" alt="Coverage" style="width:80%; height:auto;">
 
-  </div>
-  <div style="flex:1 1 0; min-width:280px;">
-   <img src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
-  </div>
 
-  <div style="flex:1 1 0; min-width:280px;">
-    <img src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}" alt="Success" style="width:80%; height:auto;">
-  </div>
-
+<div style="display:flex; gap:16px; width:100%; overflow-x:auto; padding-bottom:8px;">
+  <img src="{{ 'assets/images/blog/8mart/wordcloud_nouns.png' | relative_url }}"
+       alt="Wordcloud (nouns)"
+       style="flex:0 0 33.33%; width:33.33%; height:auto; display:block;"
+       loading="lazy">
+  <img src="{{ 'assets/images/blog/8mart/wordcloud_adj.png' | relative_url }}"
+       alt="Wordcloud (adjectives)"
+       style="flex:0 0 33.33%; width:33.33%; height:auto; display:block;"
+       loading="lazy">
+  <img src="{{ 'assets/images/blog/8mart/wordcloud_verbs.png' | relative_url }}"
+       alt="Wordcloud (verbs)"
+       style="flex:0 0 33.33%; width:33.33%; height:auto; display:block;"
+       loading="lazy">
 </div>
