@@ -26,7 +26,7 @@ Hazırsak, önce bir cümleyi seçelim: Bugün “biz” ne demek? Bugün “biz
 
 
 ### Veriseti
-Bugün kullandığımız veriseti SüslüTrendler: ÖzenliDerlem içinde yer alan, moda–stil–yaşam eksenindeki alt derlem. İçeriği; çevrimiçi dergilerden, blog yazılarından ve benzeri dijital kaynaklardan derlenen metinlerden oluşuyor. Adından da anlaşılacağı gibi, kaynaklar rastgele toplanmış değil: seçkiden geçerek, metin kalitesine göre özenle derlenmiş bir koleksiyon.
+Bugün kullandığımız veriseti [SüslüTrendler](https://huggingface.co/datasets/turkish-nlp-suite/OzenliDerlem/viewer/SusluTrendler), [ÖzenliDerlem](https://huggingface.co/datasets/turkish-nlp-suite/OzenliDerlem) içinde yer alan, moda–stil–yaşam eksenindeki alt derlem. İçeriği; çevrimiçi dergilerden, blog yazılarından ve benzeri dijital kaynaklardan derlenen metinlerden oluşuyor. Adından da anlaşılacağı gibi, kaynaklar rastgele toplanmış değil: seçkiden geçerek, metin kalitesine göre özenle derlenmiş bir koleksiyon.
 
 Derlem toplamda 8.993 yazı içeriyor; yaklaşık 3 milyon sözcük ve ~32 MB büyüklüğe ulaşıyor. Buradaki “yazı”yı, pratikte birer makale / içerik metni gibi düşünebilirsiniz.
 
@@ -40,7 +40,7 @@ Sevilen oyuncu Serenay Sarıkaya ile gerçekleştirdiğimiz moda çekiminde, zam
 Verisetimizi tanidigimiza gore artik ilk konumuza gecebiliriz, "biz"li dil nerede basliyor, nerede bitiyor? 
 
 ## “Biz” Nerede Başlıyor? (Özne, Zamir ve Kişi Ekleriyle Küçük Bir Harita)
-Biz dilinin kullanımını anlamak icin verisetinde gecen tüm kişi zamirlerini topladım ve saydım. "Biz"in kac kez gectiğini bulmak icin spaCy Türkçe paketinden yararlandım, bulmak istediğim zamirleri de ifade eşleştiricisi Matcher'la topladım. Daha önce spaCy kodu veya Matcher kodu yapmadıysanız korkmayın:), kod şu şekilde:
+Biz dilinin kullanımını anlamak icin verisetinde gecen tüm kişi zamirlerini topladım ve saydım. "Biz"in kac kez gectiğini bulmak icin bir [spaCy Türkçe paketinden](https://huggingface.co/collections/turkish-nlp-suite/turkish-spacy-models) yararlandım, bulmak istediğim zamirleri de ifade eşleştiricisi [Matcher'la](https://spacy.io/api/matcher) topladım. Daha önce spaCy kodu veya Matcher kodu yapmadıysanız korkmayın:), kod şu şekilde:
 
 ```
 import spacy
@@ -155,7 +155,7 @@ Ruj ve blazer’i bulduğumuza göre artık gücü ve cesareti aramaya geçebili
 
 ![topics]({{ 'assets/images/blog/8mart/topics.png' | relative_url }})
 
-Burada her makaleyi 1 nokta olarak görün; her makalenin semantik düzlemde kendi yeri vardır ve benzer konulara sahip makaleler gruplar oluşturur. Her grubun merkezine de 1 numaralı anahtar sözcüğünü yerleştirdim. Aklınıza gelen ilk soru sanırsam bir metnin tek bir vektöre nasıl çevrildiğidir: daha önce sentence vector/embedding kavramlarını gördüyseniz tamı tamına bu konudur; sözcükleri ve sonrasındaki sözcüklerin oluşturduğu metni vektöre dönüştürmek. Bu işlemi yapmak için çok sayıda metin görmüş modelleri kullanırız; bu yazı için ben sentence-transformers paketinden bir model kullandım; bu güzel model metinleri tek vektör olarak kodlar.
+Burada her makaleyi 1 nokta olarak görün; her makalenin semantik düzlemde kendi yeri vardır ve benzer konulara sahip makaleler gruplar oluşturur. Her grubun merkezine de 1 numaralı anahtar sözcüğünü yerleştirdim. Aklınıza gelen ilk soru sanırsam bir metnin tek bir vektöre nasıl çevrildiğidir: daha önce sentence vector/embedding kavramlarını gördüyseniz tamı tamına bu konudur; sözcükleri ve sonrasındaki sözcüklerin oluşturduğu metni vektöre dönüştürmek. Bu işlemi yapmak için çok sayıda metin görmüş modelleri kullanırız; bu yazı için ben [sentence-transformers](https://sbert.net) paketinden [bir model](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) kullandım; bu güzel model metinleri tek vektör olarak kodlar.
 
 Figure’a tekrar bakarsak merkezde modayı görüyoruz; etrafında cilt, makyaj, favori (sanırsam sezon favorileri–alışveriş rehberi) gibi stil sahibi sözcükler var. Tüm konular bunlarla kısıtlı değil tabii: sağlık var, spor var, seyahat var, mekân rehberleri var; ama en önemlisi sol üstte kariyer var. Size söylemiştim, moda dergileri artık kariyersiz olmuyor; konu hayat stiliyse kariyer de bunun büyük bir parçası. Güç ve cesaret bunun neresinde derseniz; topluma da işyerine her adım attığımızda bir nevi var olma savaşı veriyoruz, çoğumuz önyargılarla savaşıyor.
 
