@@ -91,10 +91,10 @@ Haydi o zaman sayılara geçiyoruz. İşte sayıların grafiği:
 <table>
   <tr>
     <td style="text-align:center; vertical-align:top;">
-      <img src="assets/images/blog/8mart/biz-siz-dagilim.png" alt="t-SNE topics" style="max-width:100%; height:auto;">
+      <img src="{{ 'assets/images/blog/8mart/biz-siz-dagilim.png' | relative_url }}" alt="t-SNE topics" style="max-width:100%; height:auto;">
     </td>
     <td style="text-align:center; vertical-align:top;">
-      <img src="assets/images/blog/8mart/kisi-ekleri.png" alt="Cluster keywords" style="max-width:100%; height:auto;">
+      <img src="{{ 'assets/images/blog/8mart/kisi-ekleri.png' | relative_url }}" alt="Cluster keywords" style="max-width:100%; height:auto;">
     </td>
   </tr>
 </table>
@@ -153,7 +153,7 @@ Toplum neye dönüşürse dönüşsün en başta yaşamak ve dahi yaratmak var; 
 ### Güç, Cesaret ve Harita
 Ruj ve blazer’i bulduğumuza göre artık gücü ve cesareti aramaya geçebiliriz. Veriseti sözcüklerinden hemen anlaşılmasa da, moda dergileri uzunca bir süredir kariyer sayfaları da içeriyor. Benim okuduklarımda başarılı iş kadınlarını tanıtan sayfalar, değişik iş alanlarını ve bu alanların profesyonellerini tanıtan sayfalar mutlaka oluyor. Modanın yanında spor dalı tanıtımları, otel–mekân–restoran tanıtımları, tatil destinasyonları, keşif rehberleri… Hayatın her alanından çeşit çeşit içerik oluyor; çoğu moda dergisi artık sadece kıyafet değil, hayat stili de sunuyor. Benim yaptığım işte metinden konuları bulmak istiyorsanız çeşitli yöntemler vardır: sözcüklere ait vektörleri gruplarız, sonra da grupların merkezlerinden yola çıkıp her grubu özetleyen en iyi sözcükleri buluruz.
 
-![topics](assets/images/blog/8mart/topics.png)
+![topics]({{ 'assets/images/blog/8mart/topics.png' | relative_url }})
 
 Burada her makaleyi 1 nokta olarak görün; her makalenin semantik düzlemde kendi yeri vardır ve benzer konulara sahip makaleler gruplar oluşturur. Her grubun merkezine de 1 numaralı anahtar sözcüğünü yerleştirdim. Aklınıza gelen ilk soru sanırsam bir metnin tek bir vektöre nasıl çevrildiğidir: daha önce sentence vector/embedding kavramlarını gördüyseniz tamı tamına bu konudur; sözcükleri ve sonrasındaki sözcüklerin oluşturduğu metni vektöre dönüştürmek. Bu işlemi yapmak için çok sayıda metin görmüş modelleri kullanırız; bu yazı için ben sentence-transformers paketinden bir model kullandım; bu güzel model metinleri tek vektör olarak kodlar.
 
